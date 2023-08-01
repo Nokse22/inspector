@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=command-test
+Exec=command-test
+Icon=io.github.nokse22.inspector
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true

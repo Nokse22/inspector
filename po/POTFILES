@@ -1,0 +1,6 @@
+data/io.github.nokse22.inspector.desktop.in
+data/io.github.nokse22.inspector.appdata.xml.in
+data/io.github.nokse22.inspector.gschema.xml
+src/main.py
+src/window.py
+src/window.ui
