@@ -1,4 +1,0 @@
-[Application]
-name=io.github.nokse22.inspector
-runtime=org.gnome.Platform/x86_64/master
-sdk=org.gnome.Sdk/x86_64/master
