@@ -1,1 +1,1 @@
-i18n.gettext('command-test', preset: 'glib')
+i18n.gettext('inspector', preset: 'glib')

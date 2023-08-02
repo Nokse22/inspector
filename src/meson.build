@@ -2,8 +2,8 @@ pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.proje
 moduledir = join_paths(pkgdatadir, 'command_test')
 gnome = import('gnome')
 
-gnome.compile_resources('command-test',
-  'command-test.gresource.xml',
+gnome.compile_resources('inspector',
+  'inspector.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
@@ -18,8 +18,8 @@ conf.set('localedir', join_paths(get_option('prefix'), get_option('localedir')))
 conf.set('pkgdatadir', pkgdatadir)
 
 configure_file(
-  input: 'command-test.in',
-  output: 'command-test',
+  input: 'inspector.in',
+  output: 'inspector',
   configuration: conf,
   install: true,
   install_dir: get_option('bindir'),
