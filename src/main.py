@@ -36,6 +36,36 @@ class CommandTestApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
+        self.create_action('reload', self.reload_page)
+
+    def reload_page(self, widget, _):
+        print("reload")
+        page = self.win.get_visible_page().get_title()
+        match page:
+            case "Disk":
+                for child in self.win.disk_page_children:
+                    self.win.disks_content.remove(child)
+                self.win.update_disk_page()
+            case "Memory":
+                for child in self.win.memory_page_children:
+                    self.win.memory_content.remove(child)
+                self.win.update_memory_page()
+            case "PCI":
+                for child in self.win.pci_page_children:
+                    self.win.pci_content.remove(child)
+                self.win.update_pci_page()
+            case "Usb":
+                for child in self.win.usb_page_children:
+                    self.win.usb_content.remove(child)
+                self.win.update_usb_page()
+            case "Network":
+                for child in self.win.network_page_children:
+                    self.win.network_content.remove(child)
+                self.win.update_network_page()
+            case "Hardware":
+                for child in self.win.hardware_page_children:
+                    self.win.hardware_content.remove(child)
+                self.win.update_hardware_page()
 
     def do_activate(self):
         """Called when the application is activated.
@@ -43,17 +73,19 @@ class CommandTestApplication(Adw.Application):
         We raise the application's main window, creating it if
         necessary.
         """
-        win = self.props.active_window
-        if not win:
-            win = CommandTestWindow(application=self)
-        win.present()
+        self.win = self.props.active_window
+        if not self.win:
+            self.win = CommandTestWindow(application=self)
+        self.win.present()
 
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name='command-test',
+                                application_name='Inspector',
                                 application_icon='io.github.nokse22.inspector',
                                 developer_name='Nokse',
+                                issue_url='https://github.com/Nokse22/inspector/issues',
+                                website='https://github.com/Nokse22/inspector',
                                 version='0.1.0',
                                 developers=['Nokse'],
                                 copyright='© 2023 Nokse')

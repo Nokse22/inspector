@@ -3,7 +3,7 @@
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
-    "command" : "command-test",
+    "command" : "inspector",
     "finish-args" : [
         "--share=network",
         "--share=ipc",
@@ -25,13 +25,13 @@
     ],
     "modules" : [
         {
-            "name" : "command-test",
+            "name" : "inspector",
             "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [
                 {
-                    "type" : "git",
-                    "url" : "file:///home/lorenzoubaldi/Projects"
+                    "type" : "dir",
+                    "url" : "."
                 }
             ]
         }
