@@ -7,7 +7,7 @@ project('inspector',
 i18n = import('i18n')
 gnome = import('gnome')
 
-
+dependency('libadwaita-1', version: '>= 1.4.alpha')
 
 subdir('data')
 subdir('src')

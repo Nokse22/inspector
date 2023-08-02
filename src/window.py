@@ -30,7 +30,10 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.set_default_size(1000, 900)
         self.set_title("Inspector")
         self.set_modal(False)
-        hd = self.get_content().get_child().get_visible_child().get_visible_page().get_child().get_child().get_last_child().get_prev_sibling().get_child().get_child().get_first_child()
+        hd = self.get_content().get_child().get_visible_child().get_last_child().get_last_child().get_last_child().get_last_child().get_prev_sibling().get_child().get_child().get_first_child()
+
+        # hd = self.get_content().get_child().get_visible_child().get_first_child() #.get_child().get_child().get_last_child().get_prev_sibling().get_child().get_child().get_first_child()
+        # print(hd)
 
         menu_button = Gtk.MenuButton()
         menu_button.set_icon_name("open-menu-symbolic")
@@ -329,11 +332,11 @@ class CommandTestWindow(Adw.PreferencesWindow):
             self.hardware_content.add(group2)
             self.hardware_page_children.append(group2)
             for line in data:
-                expander_row = Adw.ExpanderRow(title=line['id'][0].upper() + line['id'][1:])
-                expander_row.add_suffix(Gtk.Label(label=line['product'], xalign=1, wrap=True, hexpand=True, justify=1))
+                expander_row = Adw.ExpanderRow(title=line['product'])
+                # expander_row.add_suffix(Gtk.Label(label=line['product'], xalign=1, wrap=True, hexpand=True, justify=1))
                 group2.add(expander_row)
                 for key, value in line.items():
-                    if key not in ["id", "product"]:
+                    if key not in ["product", "class"]:
                         row = Adw.ActionRow(title=key[0].upper() + key[1:])
                         row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
                         expander_row.add_row(row)
@@ -352,8 +355,6 @@ class CommandTestWindow(Adw.PreferencesWindow):
                         #     row = Adw.ActionRow(title=val)
                         #     expander_row.add_row(row)
                         #     row.add_suffix(Gtk.Label(label="", xalign=1, wrap=True))
-                        pass
-                    elif key not in ["id"]:
                         pass
 
 
@@ -414,3 +415,4 @@ class CommandTestWindow(Adw.PreferencesWindow):
         #             row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True))
         #             group2.add(row)
         
+
