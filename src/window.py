@@ -30,9 +30,9 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.set_default_size(1000, 900)
         self.set_title("Inspector")
         self.set_modal(False)
-        hd = self.get_content().get_child().get_visible_child().get_last_child().get_last_child().get_last_child().get_last_child().get_prev_sibling().get_child().get_child().get_first_child()
+        # hd = self.get_content().get_child().get_visible_child().get_last_child().get_last_child().get_last_child().get_last_child().get_prev_sibling().get_child().get_child().get_first_child()
 
-        # hd = self.get_content().get_child().get_visible_child().get_first_child() #.get_child().get_child().get_last_child().get_prev_sibling().get_child().get_child().get_first_child()
+        hd = self.get_content().get_child().get_visible_child().get_first_child() #.get_child().get_child().get_last_child().get_prev_sibling().get_child().get_child().get_first_child()
         # print(hd)
 
         menu_button = Gtk.MenuButton()
@@ -44,7 +44,10 @@ class CommandTestWindow(Adw.PreferencesWindow):
 
         menu_button.set_menu_model(menu)
 
-        hd.pack_end(menu_button)
+        #hd.pack_start(menu_button)
+        about_button = Gtk.Button(icon_name="help-about-symbolic", valign=3, action_name='app.about')
+        #about_button.connect("clicked", "app.about")
+        hd.pack_start(about_button)
 
         self.disks_content = Adw.PreferencesPage(title="Disk", icon_name="drive-harddisk-symbolic")
         self.disks_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
@@ -96,24 +99,31 @@ class CommandTestWindow(Adw.PreferencesWindow):
             pass
         return out
 
-    def empty_command_page(self, command, page):
+    def empty_command_page(self, command):
         group = Adw.PreferencesGroup()
         empty_command_status_page = Adw.StatusPage(title="The command is not supported",
                 icon_name="computer-fail-symbolic", hexpand=True, vexpand=True,
                 description="The command " + command + " returned empty.")
-        page.add(group)
         group.add(empty_command_status_page)
+        return group
 
-    def update_disk_page(self):
+    def update_disk_page(self, btn=None):
+        for child in self.disk_page_children:
+            self.disks_content.remove(child)
         self.disk_page_children = []
         out = self.execute_terminal_command("lsblk -J")
         if out == "":
-            self.empty_command_page("lsblk", self.disks_content)
+            page = self.empty_command_page("lsblk")
+            self.disks_content.add(page)
+            self.disks_content.append(page)
         else:
             data = json.loads(out)
             for device in data["blockdevices"]:
                 text = f"Name: {device['name']}, Size: {device['size']}"
                 group = Adw.PreferencesGroup(title=device['name'], description="command: lsblk")
+                refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+                refresh_button.connect("clicked", self.update_disk_page)
+                group.set_header_suffix(refresh_button)
                 self.disks_content.add(group)
                 self.disk_page_children.append(group)
                 row = Adw.ActionRow(title="Total size")
@@ -133,6 +143,9 @@ class CommandTestWindow(Adw.PreferencesWindow):
                 data = json.loads(out)
                 for line in data:
                     group2 = Adw.PreferencesGroup(title=line['description'], description="command: lshw -c storage")
+                    refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+                    refresh_button.connect("clicked", self.update_disk_page)
+                    group2.set_header_suffix(refresh_button)
                     self.disks_content.add(group2)
                     self.disk_page_children.append(group2)
                     for key, value in line.items():
@@ -150,14 +163,21 @@ class CommandTestWindow(Adw.PreferencesWindow):
                             row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
                             group2.add(row)
 
-    def update_memory_page(self):
+    def update_memory_page(self, btn=None):
+        for child in self.memory_page_children:
+            self.memory_content.remove(child)
         self.memory_page_children = []
         out = self.execute_terminal_command("lsmem -J")
         if out == "":
-            self.empty_command_page("lsmem", self.memory_content)
+            page = self.empty_command_page("lsmem")
+            self.memory_content.add(page)
+            self.memory_page_children.append(page)
         else:
             data = json.loads(out)
             group2 = Adw.PreferencesGroup(title="Ranges", description="command: lsmem")
+            refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+            refresh_button.connect("clicked", self.update_memory_page)
+            group2.set_header_suffix(refresh_button)
             self.memory_content.add(group2)
             self.memory_page_children.append(group2)
             # total = 0
@@ -177,6 +197,9 @@ class CommandTestWindow(Adw.PreferencesWindow):
                 data = json.loads(out)
                 for line in data:
                     group2 = Adw.PreferencesGroup(title=line['description'], description="command: lshw -c memory") #
+                    refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+                    refresh_button.connect("clicked", self.update_memory_page)
+                    group2.set_header_suffix(refresh_button)
                     self.memory_content.add(group2)
                     self.memory_page_children.append(group2)
                     for key, value in line.items():
@@ -198,16 +221,23 @@ class CommandTestWindow(Adw.PreferencesWindow):
                             row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
                             group2.add(row)
 
-    def update_pci_page(self):
+    def update_pci_page(self, btn=None):
+        for child in self.pci_page_children:
+            self.pci_content.remove(child)
         self.pci_page_children = []
         out = self.execute_terminal_command("lspci")
         if out == "":
-            self.empty_command_page("lspci", self.pci_content)
+            page = self.empty_command_page("lspci")
+            self.pci_content.add(page)
+            self.pci_content.append(page)
         else:
             out = out.splitlines()
             text = "range "
             pattern = r'(\S+)\s(.*?):\s(.*)'
             group2 = Adw.PreferencesGroup(title="PCIs", description="command: lspci")
+            refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+            refresh_button.connect("clicked", self.update_pci_page)
+            group2.set_header_suffix(refresh_button)
             self.pci_content.add(group2)
             self.pci_page_children.append(group2)
             for line in out:
@@ -220,14 +250,21 @@ class CommandTestWindow(Adw.PreferencesWindow):
                     action_row = Adw.ActionRow(title=third_part, subtitle=second_part)
                     group2.add(action_row)
 
-    def update_usb_page(self):
+    def update_usb_page(self, btn=None):
+        for child in self.usb_page_children:
+            self.usb_content.remove(child)
         self.usb_page_children = []
         out = self.execute_terminal_command("lsusb")
         if out == "":
-            self.empty_command_page("lsusb", self.usb_content)
+            page = self.empty_command_page("lsusb")
+            self.usb_content.add(page)
+            self.usb_content.append(page)
         else:
             out = out.splitlines()
             group2 = Adw.PreferencesGroup(title="Usb", description="command: lsusb")
+            refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+            refresh_button.connect("clicked", self.update_usb_page)
+            group2.set_header_suffix(refresh_button)
             self.usb_content.add(group2)
             self.usb_page_children.append(group2)
             for line in out:
@@ -253,15 +290,22 @@ class CommandTestWindow(Adw.PreferencesWindow):
                 action_row.add_suffix(Gtk.Label(label=result[0], wrap=True,hexpand=True, xalign=1, justify=1))
                 expander_row.add_row(action_row)
 
-    def update_network_page(self):
+    def update_network_page(self, btn=None):
+        for child in self.network_page_children:
+            self.network_content.remove(child)
         self.network_page_children = []
         out = self.execute_terminal_command("lshw -json -c network")
         if out == "":
-            self.empty_command_page("lshw -c network", self.network_content)
+            page = self.empty_command_page("lshw -c network")
+            self.network_content.add(page)
+            self.network_content.append(page)
         else:
             data = json.loads(out)
             for line in data:
-                group2 = Adw.PreferencesGroup(title=line['description'], margin_bottom=20)
+                group2 = Adw.PreferencesGroup(title=line['description'], description="command: lshw -c network", margin_bottom=20)
+                refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+                refresh_button.connect("clicked", self.update_network_page)
+                group2.set_header_suffix(refresh_button)
                 self.network_content.add(group2)
                 self.network_page_children.append(group2)
                 for key, value in line.items():
@@ -279,13 +323,22 @@ class CommandTestWindow(Adw.PreferencesWindow):
                         row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
                         group2.add(row)
 
-    def update_hardware_page(self):
+    def update_hardware_page(self, btn=None):
+        for child in self.hardware_page_children:
+            self.hardware_content.remove(child)
         self.hardware_page_children = []
         out = self.execute_terminal_command("lshw -json -c cpu")
-        if out != "":
+        if out == "":
+            page = self.empty_command_page("lshw")
+            self.hardware_content.add(page)
+            self.hardware_content.append(page)
+        else:
             data = json.loads(out)
             for line in data:
-                group2 = Adw.PreferencesGroup(title="CPU")
+                group2 = Adw.PreferencesGroup(title="CPU", description="command: lshw -c cpu")
+                refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+                refresh_button.connect("clicked", self.update_hardware_page)
+                group2.set_header_suffix(refresh_button)
                 self.hardware_content.add(group2)
                 self.hardware_page_children.append(group2)
                 for key, value in line.items():
@@ -307,7 +360,10 @@ class CommandTestWindow(Adw.PreferencesWindow):
         if out != "":
             data = json.loads(out)
             for line in data:
-                group2 = Adw.PreferencesGroup(title="Display")
+                group2 = Adw.PreferencesGroup(title="Display", description="command: lshw -c display")
+                refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+                refresh_button.connect("clicked", self.update_hardware_page)
+                group2.set_header_suffix(refresh_button)
                 self.hardware_content.add(group2)
                 self.hardware_page_children.append(group2)
                 for key, value in line.items():
@@ -328,7 +384,10 @@ class CommandTestWindow(Adw.PreferencesWindow):
         out = self.execute_terminal_command("lshw -json -c input")
         if out != "":
             data = json.loads(out)
-            group2 = Adw.PreferencesGroup(title="Inputs")
+            group2 = Adw.PreferencesGroup(title="Inputs", description="command: lshw -c input")
+            refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+            refresh_button.connect("clicked", self.update_hardware_page)
+            group2.set_header_suffix(refresh_button)
             self.hardware_content.add(group2)
             self.hardware_page_children.append(group2)
             for line in data:
@@ -340,7 +399,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
                         row = Adw.ActionRow(title=key[0].upper() + key[1:])
                         row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
                         expander_row.add_row(row)
-                    if isinstance(value, dict):
+                    # if isinstance(value, dict):
                         # for key2, value2 in value.items():
                         #     row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
                         #     expander_row.add_row(row)
@@ -362,7 +421,10 @@ class CommandTestWindow(Adw.PreferencesWindow):
         if out != "":
             data = json.loads(out)
             for line in data:
-                group2 = Adw.PreferencesGroup(title=line['description'])
+                group2 = Adw.PreferencesGroup(title=line['description'], description="command: lshw -c bus")
+                refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+                refresh_button.connect("clicked", self.update_hardware_page)
+                group2.set_header_suffix(refresh_button)
                 self.hardware_content.add(group2)
                 self.hardware_page_children.append(group2)
                 for key, value in line.items():

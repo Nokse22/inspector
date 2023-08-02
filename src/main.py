@@ -36,36 +36,24 @@ class CommandTestApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
         self.create_action('preferences', self.on_preferences_action)
-        self.create_action('reload', self.reload_page)
+        # self.create_action('reload', self.reload_page)
 
-    def reload_page(self, widget, _):
-        print("reload")
-        page = self.win.get_visible_page().get_title()
-        match page:
-            case "Disk":
-                for child in self.win.disk_page_children:
-                    self.win.disks_content.remove(child)
-                self.win.update_disk_page()
-            case "Memory":
-                for child in self.win.memory_page_children:
-                    self.win.memory_content.remove(child)
-                self.win.update_memory_page()
-            case "PCI":
-                for child in self.win.pci_page_children:
-                    self.win.pci_content.remove(child)
-                self.win.update_pci_page()
-            case "Usb":
-                for child in self.win.usb_page_children:
-                    self.win.usb_content.remove(child)
-                self.win.update_usb_page()
-            case "Network":
-                for child in self.win.network_page_children:
-                    self.win.network_content.remove(child)
-                self.win.update_network_page()
-            case "Hardware":
-                for child in self.win.hardware_page_children:
-                    self.win.hardware_content.remove(child)
-                self.win.update_hardware_page()
+    # def reload_page(self, widget, _):
+    #     print("reload")
+    #     page = self.win.get_visible_page().get_title()
+    #     match page:
+    #         case "Disk":
+    #             self.win.update_disk_page()
+    #         case "Memory":
+    #             self.win.update_memory_page()
+    #         case "PCI":
+    #             self.win.update_pci_page()
+    #         case "Usb":
+    #             self.win.update_usb_page()
+    #         case "Network":
+    #             self.win.update_network_page()
+    #         case "Hardware":
+    #             self.win.update_hardware_page()
 
     def do_activate(self):
         """Called when the application is activated.
