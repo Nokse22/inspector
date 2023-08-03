@@ -46,8 +46,11 @@ class CommandTestWindow(Adw.PreferencesWindow):
 
         #hd.pack_start(menu_button)
         about_button = Gtk.Button(icon_name="help-about-symbolic", valign=3, action_name='app.about')
-        #about_button.connect("clicked", "app.about")
         hd.pack_start(about_button)
+
+        self.usb_content = Adw.PreferencesPage(title="Usb", icon_name="media-removable-symbolic")
+        self.usb_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
+        self.add(self.usb_content)
 
         self.disks_content = Adw.PreferencesPage(title="Disk", icon_name="drive-harddisk-symbolic")
         self.disks_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
@@ -61,9 +64,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.pci_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
         self.add(self.pci_content)
 
-        self.usb_content = Adw.PreferencesPage(title="Usb", icon_name="media-removable-symbolic")
-        self.usb_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
-        self.add(self.usb_content)
+
 
         self.network_content = Adw.PreferencesPage(title="Network", icon_name="network-transmit-receive-symbolic")
         self.network_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
@@ -103,7 +104,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         group = Adw.PreferencesGroup()
         empty_command_status_page = Adw.StatusPage(title="The command is not supported",
                 icon_name="computer-fail-symbolic", hexpand=True, vexpand=True,
-                description="The command " + command + " returned empty.")
+                description="The command " + command + " returned empty. \n Try running it on your terminal, it should prompt you to install the package on your system.")
         group.add(empty_command_status_page)
         return group
 
@@ -115,7 +116,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         if out == "":
             page = self.empty_command_page("lsblk")
             self.disks_content.add(page)
-            self.disks_content.append(page)
+            self.disk_page_children.append(page)
         else:
             data = json.loads(out)
             for device in data["blockdevices"]:
@@ -229,7 +230,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         if out == "":
             page = self.empty_command_page("lspci")
             self.pci_content.add(page)
-            self.pci_content.append(page)
+            self.pci_page_children.append(page)
         else:
             out = out.splitlines()
             text = "range "
@@ -258,7 +259,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         if out == "":
             page = self.empty_command_page("lsusb")
             self.usb_content.add(page)
-            self.usb_content.append(page)
+            self.usb_page_children.append(page)
         else:
             out = out.splitlines()
             group2 = Adw.PreferencesGroup(title="Usb", description="command: lsusb")
@@ -298,7 +299,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         if out == "":
             page = self.empty_command_page("lshw -c network")
             self.network_content.add(page)
-            self.network_content.append(page)
+            self.network_page_children.append(page)
         else:
             data = json.loads(out)
             for line in data:
@@ -331,7 +332,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         if out == "":
             page = self.empty_command_page("lshw")
             self.hardware_content.add(page)
-            self.hardware_content.append(page)
+            self.hardware_page_children.append(page)
         else:
             data = json.loads(out)
             for line in data:

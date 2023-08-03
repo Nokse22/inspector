@@ -35,7 +35,7 @@ class CommandTestApplication(Adw.Application):
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
-        self.create_action('preferences', self.on_preferences_action)
+        # self.create_action('preferences', self.on_preferences_action)
         # self.create_action('reload', self.reload_page)
 
     # def reload_page(self, widget, _):
