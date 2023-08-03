@@ -295,160 +295,245 @@ class CommandTestWindow(Adw.PreferencesWindow):
         for child in self.network_page_children:
             self.network_content.remove(child)
         self.network_page_children = []
-        out = self.execute_terminal_command("lshw -json -c network")
-        if out == "":
+        out = self.execute_terminal_command("ip -j address")
+        if out == "s":
             page = self.empty_command_page("lshw -c network")
             self.network_content.add(page)
             self.network_page_children.append(page)
         else:
             data = json.loads(out)
             for line in data:
-                group2 = Adw.PreferencesGroup(title=line['description'], description="command: lshw -c network", margin_bottom=20)
+                group2 = Adw.PreferencesGroup(title=line['ifname'], description="command: ip address", margin_bottom=20)
                 refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
                 refresh_button.connect("clicked", self.update_network_page)
                 group2.set_header_suffix(refresh_button)
                 self.network_content.add(group2)
                 self.network_page_children.append(group2)
                 for key, value in line.items():
-                    if isinstance(value, dict):
-                        expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
-                        group2.add(expander_row)
-                        for key2, value2 in value.items():
-                            row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
-                            expander_row.add_row(row)
-                            box = Gtk.Box(homogeneous=True, hexpand=True)
-                            box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
-                            row.add_suffix(box)
-                    elif key not in ["ifname","ifindex", "addr_info", "id", "class", "description"]:
+
+                    if isinstance(value, list):
+                        for val in value:
+                            if isinstance(val, dict):
+                                if key == "addr_info":
+                                    expander_row = Adw.ExpanderRow(title="Address info, ip")
+                                else:
+                                    expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
+                                group2.add(expander_row)
+                                for key2, value2 in val.items():
+                                    row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
+                                    expander_row.add_row(row)
+                                    box = Gtk.Box(homogeneous=True, hexpand=True)
+                                    box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
+                                    row.add_suffix(box)
+                        try:
+                            value[0]
+                        except:
+                            pass
+                        else:
+                            if not isinstance(value[0], dict):
+                                expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
+                                group2.add(expander_row)
+                                text = ""
+                                for val in value:
+                                    text += val + ", "
+                                row = Adw.ActionRow(title=text)#val[0].upper() + val[1:])
+                                expander_row.add_row(row)
+                            # box = Gtk.Box(homogeneous=True, hexpand=True)
+                            # box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
+                            # row.add_suffix(box)
+                    elif key not in ["ifname","ifindex", "addr_info"]:
                         row = Adw.ActionRow(title=key[0].upper() + key[1:] )
                         row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
                         group2.add(row)
+
+        # for child in self.network_page_children:
+        #     self.network_content.remove(child)
+        # self.network_page_children = []
+        # out = self.execute_terminal_command("lshw -json -c network")
+        # if out == "":
+        #     page = self.empty_command_page("lshw -c network")
+        #     self.network_content.add(page)
+        #     self.network_page_children.append(page)
+        # else:
+        #     data = json.loads(out)
+        #     for line in data:
+        #         group2 = Adw.PreferencesGroup(title=line['description'], description="command: lshw -c network", margin_bottom=20)
+        #         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+        #         refresh_button.connect("clicked", self.update_network_page)
+        #         group2.set_header_suffix(refresh_button)
+        #         self.network_content.add(group2)
+        #         self.network_page_children.append(group2)
+        #         for key, value in line.items():
+        #             if isinstance(value, dict):
+        #                 expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
+        #                 group2.add(expander_row)
+        #                 for key2, value2 in value.items():
+        #                     row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
+        #                     expander_row.add_row(row)
+        #                     box = Gtk.Box(homogeneous=True, hexpand=True)
+        #                     box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
+        #                     row.add_suffix(box)
+        #             elif key not in ["ifname","ifindex", "addr_info", "id", "class", "description"]:
+        #                 row = Adw.ActionRow(title=key[0].upper() + key[1:] )
+        #                 row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
+        #                 group2.add(row)
 
     def update_hardware_page(self, btn=None):
         for child in self.hardware_page_children:
             self.hardware_content.remove(child)
         self.hardware_page_children = []
-        out = self.execute_terminal_command("lshw -json -c cpu")
+        out = self.execute_terminal_command("lscpu -J")
         if out == "":
-            page = self.empty_command_page("lshw")
+            page = self.empty_command_page("lscpu")
             self.hardware_content.add(page)
             self.hardware_page_children.append(page)
         else:
             data = json.loads(out)
-            for line in data:
-                group2 = Adw.PreferencesGroup(title="CPU", description="command: lshw -c cpu")
-                refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-                refresh_button.connect("clicked", self.update_hardware_page)
-                group2.set_header_suffix(refresh_button)
-                self.hardware_content.add(group2)
-                self.hardware_page_children.append(group2)
-                for key, value in line.items():
-                    if isinstance(value, dict):
-                        expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
-                        group2.add(expander_row)
-                        for key2, value2 in value.items():
-                            row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
-                            expander_row.add_row(row)
-                            box = Gtk.Box(homogeneous=True, hexpand=True)
-                            box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
-                            row.add_suffix(box)
-                    elif key not in ["id", "class", "description"]:
-                        row = Adw.ActionRow(title=key[0].upper() + key[1:])
-                        row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
-                        group2.add(row)
-
-        out = self.execute_terminal_command("lshw -json -c display")
-        if out != "":
-            data = json.loads(out)
-            for line in data:
-                group2 = Adw.PreferencesGroup(title="Display", description="command: lshw -c display")
-                refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-                refresh_button.connect("clicked", self.update_hardware_page)
-                group2.set_header_suffix(refresh_button)
-                self.hardware_content.add(group2)
-                self.hardware_page_children.append(group2)
-                for key, value in line.items():
-                    if isinstance(value, dict):
-                        expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
-                        group2.add(expander_row)
-                        for key2, value2 in value.items():
-                            row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
-                            expander_row.add_row(row)
-                            box = Gtk.Box(homogeneous=True, hexpand=True)
-                            box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
-                            row.add_suffix(box)
-                    elif key not in ["id", "class", "description"]:
-                        row = Adw.ActionRow(title=key[0].upper() + key[1:])
-                        row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
-                        group2.add(row)
-
-        out = self.execute_terminal_command("lshw -json -c input")
-        if out != "":
-            data = json.loads(out)
-            group2 = Adw.PreferencesGroup(title="Inputs", description="command: lshw -c input")
+            group2 = Adw.PreferencesGroup(title="CPU", description="command: lshw -c cpu")
             refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
             refresh_button.connect("clicked", self.update_hardware_page)
             group2.set_header_suffix(refresh_button)
             self.hardware_content.add(group2)
             self.hardware_page_children.append(group2)
-            for line in data:
-                expander_row = Adw.ExpanderRow(title=line['product'])
-                # expander_row.add_suffix(Gtk.Label(label=line['product'], xalign=1, wrap=True, hexpand=True, justify=1))
-                group2.add(expander_row)
+            add_flags = False
+            for line in data['lscpu']:
+                row = Adw.ActionRow()
                 for key, value in line.items():
-                    if key not in ["product", "class"]:
-                        row = Adw.ActionRow(title=key[0].upper() + key[1:])
-                        row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
-                        expander_row.add_row(row)
-                    # if isinstance(value, dict):
-                        # for key2, value2 in value.items():
-                        #     row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
-                        #     expander_row.add_row(row)
-                        #     box = Gtk.Box(homogeneous=True, hexpand=True)
-                        #     box.append(Gtk.Label(label=value2, xalign=1, wrap=True))
-                        #     row.add_suffix(box)
-                        pass
-                    elif isinstance(value, list):
-                        # expander_row = Adw.ExpanderRow(title=key)
-                        # group2.add(expander_row)
-                        # for val in value:
-                        #     row = Adw.ActionRow(title=val)
-                        #     expander_row.add_row(row)
-                        #     row.add_suffix(Gtk.Label(label="", xalign=1, wrap=True))
-                        pass
-
-
-        out = self.execute_terminal_command("lshw -json -c bus")
-        if out != "":
-            data = json.loads(out)
-            for line in data:
-                group2 = Adw.PreferencesGroup(title=line['description'], description="command: lshw -c bus")
-                refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-                refresh_button.connect("clicked", self.update_hardware_page)
-                group2.set_header_suffix(refresh_button)
-                self.hardware_content.add(group2)
-                self.hardware_page_children.append(group2)
-                for key, value in line.items():
-                    if isinstance(value, dict):
-                        expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
-                        group2.add(expander_row)
-                        for key2, value2 in value.items():
-                            row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
-                            expander_row.add_row(row)
-                            box = Gtk.Box(homogeneous=True, hexpand=True)
-                            box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
-                            row.add_suffix(box)
-                    elif isinstance(value, list):
-                        expander_row = Adw.ExpanderRow(title=key)
-                        group2.add(expander_row)
-                        for val in value:
-                            row = Adw.ActionRow(title=val)
-                            expander_row.add_row(row)
-                            row.add_suffix(Gtk.Label(label="", xalign=1, wrap=True, justify=1))
-                    elif key not in ["id"]:
-                        row = Adw.ActionRow(title=key[0].upper() + key[1:])
-                        row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
+                    if value == "Flags:":
+                        row = Adw.ExpanderRow(title=value[0].upper() + value[1:])
                         group2.add(row)
+                        add_flags = True
+                    elif add_flags:
+                        row2 = Adw.ActionRow(title=value)
+                        row.add_row(row2)
+                        add_flags = False
+                    elif key == "field":
+                        row = Adw.ActionRow(title=value[0].upper() + value[1:])
+                    elif key == "data":
+                        row.add_suffix(Gtk.Label(label=value[0].upper() + value[1:], xalign=1, wrap=True, hexpand=True, justify=1))
+                        group2.add(row)
+                    # if isinstance(value, dict):
+                    #     expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
+                    #     group2.add(expander_row)
+                    #     for key2, value2 in value.items():
+                    #         row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
+                    #         expander_row.add_row(row)
+                    #         box = Gtk.Box(homogeneous=True, hexpand=True)
+                    #         box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
+                    #         row.add_suffix(box)
+                    # elif key not in ["id", "class", "description"]:
+
+
+
+        # for child in self.hardware_page_children:
+        #     self.hardware_content.remove(child)
+        # self.hardware_page_children = []
+        # out = self.execute_terminal_command("lshw -json -c cpu")
+        # if out == "":
+        #     page = self.empty_command_page("lshw")
+        #     self.hardware_content.add(page)
+        #     self.hardware_page_children.append(page)
+        # else:
+        #     data = json.loads(out)
+        #     for line in data:
+        #         group2 = Adw.PreferencesGroup(title="CPU", description="command: lshw -c cpu")
+        #         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+        #         refresh_button.connect("clicked", self.update_hardware_page)
+        #         group2.set_header_suffix(refresh_button)
+        #         self.hardware_content.add(group2)
+        #         self.hardware_page_children.append(group2)
+        #         for key, value in line.items():
+        #             if isinstance(value, dict):
+        #                 expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
+        #                 group2.add(expander_row)
+        #                 for key2, value2 in value.items():
+        #                     row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
+        #                     expander_row.add_row(row)
+        #                     box = Gtk.Box(homogeneous=True, hexpand=True)
+        #                     box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
+        #                     row.add_suffix(box)
+        #             elif key not in ["id", "class", "description"]:
+        #                 row = Adw.ActionRow(title=key[0].upper() + key[1:])
+        #                 row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
+        #                 group2.add(row)
+
+        # out = self.execute_terminal_command("lshw -json -c display")
+        # if out != "":
+        #     data = json.loads(out)
+        #     for line in data:
+        #         group2 = Adw.PreferencesGroup(title="Display", description="command: lshw -c display")
+        #         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+        #         refresh_button.connect("clicked", self.update_hardware_page)
+        #         group2.set_header_suffix(refresh_button)
+        #         self.hardware_content.add(group2)
+        #         self.hardware_page_children.append(group2)
+        #         for key, value in line.items():
+        #             if isinstance(value, dict):
+        #                 expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
+        #                 group2.add(expander_row)
+        #                 for key2, value2 in value.items():
+        #                     row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
+        #                     expander_row.add_row(row)
+        #                     box = Gtk.Box(homogeneous=True, hexpand=True)
+        #                     box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
+        #                     row.add_suffix(box)
+        #             elif key not in ["id", "class", "description"]:
+        #                 row = Adw.ActionRow(title=key[0].upper() + key[1:])
+        #                 row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
+        #                 group2.add(row)
+
+        # out = self.execute_terminal_command("lshw -json -c input")
+        # if out != "":
+        #     data = json.loads(out)
+        #     group2 = Adw.PreferencesGroup(title="Inputs", description="command: lshw -c input")
+        #     refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+        #     refresh_button.connect("clicked", self.update_hardware_page)
+        #     group2.set_header_suffix(refresh_button)
+        #     self.hardware_content.add(group2)
+        #     self.hardware_page_children.append(group2)
+        #     for line in data:
+        #         expander_row = Adw.ExpanderRow(title=line['product'])
+                # expander_row.add_suffix(Gtk.Label(label=line['product'], xalign=1, wrap=True, hexpand=True, justify=1))
+        #         group2.add(expander_row)
+        #         for key, value in line.items():
+        #             if key not in ["product", "class"]:
+        #                 row = Adw.ActionRow(title=key[0].upper() + key[1:])
+        #                 row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
+        #                 expander_row.add_row(row)
+        #                 pass
+
+
+        # out = self.execute_terminal_command("lshw -json -c bus")
+        # if out != "":
+        #     data = json.loads(out)
+        #     for line in data:
+        #         group2 = Adw.PreferencesGroup(title=line['description'], description="command: lshw -c bus")
+        #         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+        #         refresh_button.connect("clicked", self.update_hardware_page)
+        #         group2.set_header_suffix(refresh_button)
+        #         self.hardware_content.add(group2)
+        #         self.hardware_page_children.append(group2)
+        #         for key, value in line.items():
+        #             if isinstance(value, dict):
+        #                 expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
+        #                 group2.add(expander_row)
+        #                 for key2, value2 in value.items():
+        #                     row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
+        #                     expander_row.add_row(row)
+        #                     box = Gtk.Box(homogeneous=True, hexpand=True)
+        #                     box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
+        #                     row.add_suffix(box)
+        #             elif isinstance(value, list):
+        #                 expander_row = Adw.ExpanderRow(title=key)
+        #                 group2.add(expander_row)
+        #                 for val in value:
+        #                     row = Adw.ActionRow(title=val)
+        #                     expander_row.add_row(row)
+        #                     row.add_suffix(Gtk.Label(label="", xalign=1, wrap=True, justify=1))
+        #             elif key not in ["id"]:
+        #                 row = Adw.ActionRow(title=key[0].upper() + key[1:])
+        #                 row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
+        #                 group2.add(row)
 
         # out = self.execute_terminal_command("lshw -json -c system")
         # data = json.loads(out)
