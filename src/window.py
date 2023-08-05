@@ -64,15 +64,17 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.pci_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
         self.add(self.pci_content)
 
-
-
         self.network_content = Adw.PreferencesPage(title="Network", icon_name="network-transmit-receive-symbolic")
         self.network_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
         self.add(self.network_content)
 
-        self.hardware_content = Adw.PreferencesPage(title="Hardware", icon_name="video-display-symbolic")
+        self.hardware_content = Adw.PreferencesPage(title="CPU", icon_name="system-run-symbolic")
         self.hardware_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
         self.add(self.hardware_content)
+
+        self.system_content = Adw.PreferencesPage(title="System", icon_name="preferences-desktop-display-symbolic")
+        self.system_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
+        self.add(self.system_content)
 
         self.disk_page_children = []
         self.memory_page_children = []
@@ -80,6 +82,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.usb_page_children = []
         self.network_page_children = []
         self.hardware_page_children = []
+        self.system_page_children = []
 
         self.update_disk_page()
         self.update_memory_page()
@@ -87,6 +90,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.update_usb_page()
         self.update_network_page()
         self.update_hardware_page()
+        self.update_system_page()
 
     def execute_terminal_command(self, command):
         console_permissions = "flatpak-spawn --host"
@@ -107,6 +111,91 @@ class CommandTestWindow(Adw.PreferencesWindow):
                 description="The command " + command + " returned empty. \n Try running it on your terminal, it should prompt you to install the package on your system.")
         group.add(empty_command_status_page)
         return group
+
+    def update_system_page(self, btn=None):
+        for child in self.system_page_children:
+            self.system_content.remove(child)
+        self.system_page_children = []
+        out = self.execute_terminal_command("uname -a")
+        if out == "":
+            page = self.empty_command_page("uname")
+            self.system_content.add(page)
+            self.system_page_children.append(page)
+        group = Adw.PreferencesGroup(title="System", description="command: uname")
+        refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+        refresh_button.connect("clicked", self.update_system_page)
+        group.set_header_suffix(refresh_button)
+        self.system_content.add(group)
+        self.system_page_children.append(group)
+
+        out = self.execute_terminal_command("uname -s")
+        row = Adw.ActionRow(title="Kernel Name")
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, hexpand=True, xalign=1, justify=1))
+        group.add(row)
+
+        out = self.execute_terminal_command("uname -n")
+        row = Adw.ActionRow(title="Network Node Hostname")
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, hexpand=True, xalign=1, justify=1))
+        group.add(row)
+
+        out = self.execute_terminal_command("uname -r")
+        row = Adw.ActionRow(title="Kernel Release")
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, hexpand=True, xalign=1, justify=1))
+        group.add(row)
+
+        out = self.execute_terminal_command("uname -v")
+        row = Adw.ActionRow(title="Kernel Version")
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, hexpand=True, xalign=1, justify=1))
+        group.add(row)
+
+        out = self.execute_terminal_command("uname -m")
+        row = Adw.ActionRow(title="Machine Hardware Name")
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, hexpand=True, xalign=1, justify=1))
+        group.add(row)
+
+        out = self.execute_terminal_command("uname -p")
+        row = Adw.ActionRow(title="Processor Type")
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, hexpand=True, xalign=1, justify=1))
+        group.add(row)
+
+        out = self.execute_terminal_command("uname -i")
+        row = Adw.ActionRow(title="hardware platform")
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, hexpand=True, xalign=1, justify=1))
+        group.add(row)
+
+        out = self.execute_terminal_command("uname -o")
+        row = Adw.ActionRow(title="Operating System")
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, hexpand=True, xalign=1, justify=1))
+        group.add(row)
+
+        # cat /etc/os-release
+
+        group = Adw.PreferencesGroup(title="Distro", description="command: cat /etc/os-release")
+        refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+        refresh_button.connect("clicked", self.update_system_page)
+        group.set_header_suffix(refresh_button)
+        self.system_content.add(group)
+        self.system_page_children.append(group)
+
+        out = self.execute_terminal_command("cat /etc/os-release")
+        out = out.splitlines()
+
+        for line in out:
+            key, value = line.split('=')
+            key = key.replace('_', ' ').title()
+            row = Adw.ActionRow(title=key)
+            if "Url" in key:
+                link = Gtk.LinkButton(uri=value.replace('"', ''), label=value.replace('"', ''), hexpand=True)
+                label = link.get_child()
+                label.set_wrap(True)
+                label.set_xalign(1)
+                label.set_justify(1)
+                row.add_suffix(link)
+            else:
+                row.add_suffix(Gtk.Label(label=value.replace('"', ''), wrap=True, hexpand=True, xalign=1, justify=1))
+            group.add(row)
+
+
 
     def update_disk_page(self, btn=None):
         for child in self.disk_page_children:
@@ -139,30 +228,30 @@ class CommandTestWindow(Adw.PreferencesWindow):
                         row.add_suffix(Gtk.Label(label=partition['size'], wrap=True, xalign=1))
                         group.add(row)
 
-            out = self.execute_terminal_command("lshw -json -c storage")
-            if out != "":
-                data = json.loads(out)
-                for line in data:
-                    group2 = Adw.PreferencesGroup(title=line['description'], description="command: lshw -c storage")
-                    refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-                    refresh_button.connect("clicked", self.update_disk_page)
-                    group2.set_header_suffix(refresh_button)
-                    self.disks_content.add(group2)
-                    self.disk_page_children.append(group2)
-                    for key, value in line.items():
-                        if isinstance(value, dict):
-                            expander_row = Adw.ExpanderRow(title=key)
-                            group2.add(expander_row)
-                            for key2, value2 in value.items():
-                                row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
-                                expander_row.add_row(row)
-                                box = Gtk.Box(homogeneous=True, hexpand=True)
-                                box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
-                                row.add_suffix(box)
-                        elif key not in ["id", "class", "description"]:
-                            row = Adw.ActionRow(title=key[0].upper() + key[1:])
-                            row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
-                            group2.add(row)
+            # out = self.execute_terminal_command("lshw -json -c storage")
+            # if out != "":
+            #     data = json.loads(out)
+            #     for line in data:
+            #         group2 = Adw.PreferencesGroup(title=line['description'], description="command: lshw -c storage")
+            #         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+            #         refresh_button.connect("clicked", self.update_disk_page)
+            #         group2.set_header_suffix(refresh_button)
+            #         self.disks_content.add(group2)
+            #         self.disk_page_children.append(group2)
+            #         for key, value in line.items():
+            #             if isinstance(value, dict):
+            #                 expander_row = Adw.ExpanderRow(title=key)
+            #                 group2.add(expander_row)
+            #                 for key2, value2 in value.items():
+            #                     row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
+            #                     expander_row.add_row(row)
+            #                     box = Gtk.Box(homogeneous=True, hexpand=True)
+            #                     box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
+            #                     row.add_suffix(box)
+            #             elif key not in ["id", "class", "description"]:
+            #                 row = Adw.ActionRow(title=key[0].upper() + key[1:])
+            #                 row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
+            #                 group2.add(row)
 
     def update_memory_page(self, btn=None):
         for child in self.memory_page_children:
@@ -193,34 +282,34 @@ class CommandTestWindow(Adw.PreferencesWindow):
                 group2.add(row)
             text = "range " + device['block']
 
-            out = self.execute_terminal_command("lshw -json -c memory")
-            if out != "":
-                data = json.loads(out)
-                for line in data:
-                    group2 = Adw.PreferencesGroup(title=line['description'], description="command: lshw -c memory") #
-                    refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-                    refresh_button.connect("clicked", self.update_memory_page)
-                    group2.set_header_suffix(refresh_button)
-                    self.memory_content.add(group2)
-                    self.memory_page_children.append(group2)
-                    for key, value in line.items():
-                        if isinstance(value, dict):
-                            expander_row = Adw.ExpanderRow(title=key)
-                            group2.add(expander_row)
-                            for key2, value2 in value.items():
-                                row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
-                                expander_row.add_row(row)
-                                box = Gtk.Box(homogeneous=True, hexpand=True)
-                                box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
-                                row.add_suffix(box)
-                        elif key == "size":
-                            row = Adw.ActionRow(title=key[0].upper() + key[1:])
-                            row.add_suffix(Gtk.Label(label=str(round(float(value)/(1024 ** 3), 2)) + " Gb", xalign=1, wrap=True, hexpand=True, justify=1))
-                            group2.add(row)
-                        elif key not in ["id", "class", "description"]:
-                            row = Adw.ActionRow(title=key[0].upper() + key[1:])
-                            row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
-                            group2.add(row)
+            # out = self.execute_terminal_command("lshw -json -c memory")
+            # if out != "":
+            #     data = json.loads(out)
+            #     for line in data:
+            #         group2 = Adw.PreferencesGroup(title=line['description'], description="command: lshw -c memory") #
+            #         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+            #         refresh_button.connect("clicked", self.update_memory_page)
+            #         group2.set_header_suffix(refresh_button)
+            #         self.memory_content.add(group2)
+            #         self.memory_page_children.append(group2)
+            #         for key, value in line.items():
+            #             if isinstance(value, dict):
+            #                 expander_row = Adw.ExpanderRow(title=key)
+            #                 group2.add(expander_row)
+            #                 for key2, value2 in value.items():
+            #                     row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
+            #                     expander_row.add_row(row)
+            #                     box = Gtk.Box(homogeneous=True, hexpand=True)
+            #                     box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
+            #                     row.add_suffix(box)
+            #             elif key == "size":
+            #                 row = Adw.ActionRow(title=key[0].upper() + key[1:])
+            #                 row.add_suffix(Gtk.Label(label=str(round(float(value)/(1024 ** 3), 2)) + " Gb", xalign=1, wrap=True, hexpand=True, justify=1))
+            #                 group2.add(row)
+            #             elif key not in ["id", "class", "description"]:
+            #                 row = Adw.ActionRow(title=key[0].upper() + key[1:])
+            #                 row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
+            #                 group2.add(row)
 
     def update_pci_page(self, btn=None):
         for child in self.pci_page_children:
@@ -297,7 +386,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.network_page_children = []
         out = self.execute_terminal_command("ip -j address")
         if out == "s":
-            page = self.empty_command_page("lshw -c network")
+            page = self.empty_command_page("ip address")
             self.network_content.add(page)
             self.network_page_children.append(page)
         else:
