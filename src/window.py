@@ -125,6 +125,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
             page = self.empty_command_page("uname")
             self.system_content.add(page)
             self.system_page_children.append(page)
+            return
         group = Adw.PreferencesGroup(title="System", description="command: uname")
         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
         refresh_button.connect("clicked", self.update_system_page)
@@ -389,7 +390,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
             self.network_content.remove(child)
         self.network_page_children = []
         out = self.execute_terminal_command("ip -j address")
-        if out == "s":
+        if out == "":
             page = self.empty_command_page("ip address")
             self.network_content.add(page)
             self.network_page_children.append(page)
