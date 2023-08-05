@@ -13,13 +13,13 @@ The commands are already installed on any system usually.
 
   <details><summary><h2>Click here for screenshots 🖼️</h2></summary>
   <div align="center">
-  <img src="data/resources/Screenshot 1.png"/>
-  <img src="data/resources/Screenshot 2.png"/>
-  <img src="data/resources/Screenshot 3.png"/>
-  <img src="data/resources/Screenshot 4.png"/>
-  <img src="data/resources/Screenshot 5.png"/>
-  <img src="data/resources/Screenshot 6.png"/>
-  <img src="data/resources/Screenshot 7.png"/>
+  <img src="data/resources/screenshot 1.png" height="300"/>
+  <img src="data/resources/screenshot 2.png" height="300"/>
+  <img src="data/resources/screenshot 3.png" height="300"/>
+  <img src="data/resources/screenshot 4.png" height="300"/>
+  <img src="data/resources/screenshot 5.png" height="300"/>
+  <img src="data/resources/screenshot 6.png" height="300"/>
+  <img src="data/resources/screenshot 7.png" height="300"/>
   </div>
   </details>
 
