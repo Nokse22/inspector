@@ -4,6 +4,53 @@
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
 	<description>
-	  <p>No description</p>
+	  <p>View information about your system</p>
 	</description>
+	<summary>View information about your system</summary>
+</component>
+
+	<content_rating type="oars-1.0">
+  </content_rating>
+
+  <launchable type="desktop-id">io.github.nokse22.inspector.desktop</launchable>
+
+  <url type="homepage">https://github.com/Nokse22/inspector</url>
+  <url type="bugtracker">https://github.com/Nokse22/inspector/issues</url>
+
+  <releases>
+  	<release version="0.1.0" date="2023-08-05">
+    		<description>
+			<p>First release</p>
+		</description>
+  	</release>
+  </releases>
+
+  <categories>
+    <category>Utility</category>
+  </categories>
+
+	<screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%201.png</image>
+    </screenshot>
+	  <screenshot>
+	    <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%202.png</image>
+	  </screenshot>
+	  <screenshot>
+	    <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%203.png</image>
+	  </screenshot>
+	  <screenshot>
+	    <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%204.png</image>
+	  </screenshot>
+	  <screenshot>
+	    <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%205.png</image>
+	  </screenshot>
+	  <screenshot>
+	    <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%206.png</image>
+	  </screenshot>
+	  <screenshot>
+	    <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%207.png</image>
+	  </screenshot>
+  </screenshots>
+
 </component>
