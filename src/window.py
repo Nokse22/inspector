@@ -26,8 +26,12 @@ class CommandTestWindow(Adw.PreferencesWindow):
     __gtype_name__ = 'CommandTestWindow'
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.settings = Gio.Settings.new('io.github.nokse22.inspector')
 
-        self.set_default_size(1000, 900)
+        # self.set_default_size(600, 820)
+        self.settings.bind("window-width", self, "default-width", Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind("window-height", self, "default-height", Gio.SettingsBindFlags.DEFAULT)
+
         self.set_title("Inspector")
         self.set_modal(False)
         # hd = self.get_content().get_child().get_visible_child().get_last_child().get_last_child().get_last_child().get_last_child().get_prev_sibling().get_child().get_child().get_first_child()
