@@ -19,9 +19,9 @@ The app creates a GUI for commands like lsusb, lscpu, lspci, uname and more.</p>
   <url type="bugtracker">https://github.com/Nokse22/inspector/issues</url>
 
   <releases>
-  	<release version="0.1.0" date="2023-08-05">
+  	<release version="0.1.4" date="2023-08-07">
     		<description>
-			<p>First release</p>
+			<p>Latest release</p>
 		</description>
   	</release>
   </releases>
