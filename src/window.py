@@ -97,7 +97,9 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.update_system_page()
 
     def execute_terminal_command(self, command):
+        if 'SNAP' not in os.environ:
         console_permissions = "flatpak-spawn --host"
+
         txt = console_permissions + " " + command
         process = subprocess.Popen(txt, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, shell=True)
@@ -656,5 +658,3 @@ class CommandTestWindow(Adw.PreferencesWindow):
         #             row = Adw.ActionRow(title=key)
         #             row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True))
         #             group2.add(row)
-        
-
