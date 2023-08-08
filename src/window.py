@@ -98,10 +98,10 @@ class CommandTestWindow(Adw.PreferencesWindow):
 
     def execute_terminal_command(self, command):
         if 'SNAP' not in os.environ:
-            console_permissions = "flatpak-spawn --host"
+            console_permissions = "flatpak-spawn --host "
         else:
-            console_permissions = " "
-        txt = console_permissions + " " + command
+            console_permissions = ""
+        txt = console_permissions + command
         process = subprocess.Popen(txt, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, shell=True)
         try:
@@ -223,14 +223,14 @@ class CommandTestWindow(Adw.PreferencesWindow):
                 if not fnmatch.fnmatch(device['name'], 'loop*'):
                     text = f"Name: {device['name']}, Size: {device['size']}"
                     group = Adw.PreferencesGroup(title=device['name'], description="command: lsblk")
-                refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-                refresh_button.connect("clicked", self.update_disk_page)
-                group.set_header_suffix(refresh_button)
-                self.disks_content.add(group)
-                self.disk_page_children.append(group)
-                row = Adw.ActionRow(title="Total size")
-                row.add_suffix(Gtk.Label(label=device['size'], wrap=True))
-                group.add(row)
+                    refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+                    refresh_button.connect("clicked", self.update_disk_page)
+                    group.set_header_suffix(refresh_button)
+                    self.disks_content.add(group)
+                    self.disk_page_children.append(group)
+                    row = Adw.ActionRow(title="Total size")
+                    row.add_suffix(Gtk.Label(label=device['size'], wrap=True))
+                    group.add(row)
                 if "children" in device:
                     group = Adw.PreferencesGroup()
                     self.disks_content.add(group)
