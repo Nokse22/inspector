@@ -222,7 +222,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
             for device in data["blockdevices"]:
                 if not fnmatch.fnmatch(device['name'], 'loop*'):
                     text = f"Name: {device['name']}, Size: {device['size']}"
-                group = Adw.PreferencesGroup(title=device['name'], description="command: lsblk")
+                    group = Adw.PreferencesGroup(title=device['name'], description="command: lsblk")
                 refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
                 refresh_button.connect("clicked", self.update_disk_page)
                 group.set_header_suffix(refresh_button)
