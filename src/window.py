@@ -97,10 +97,10 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.update_system_page()
 
     def execute_terminal_command(self, command):
-    if 'SNAP' not in os.environ:
-        console_permissions = "flatpak-spawn --host"
-    else:
-        console_permissions = " "
+        if 'SNAP' not in os.environ:
+            console_permissions = "flatpak-spawn --host"
+        else:
+            console_permissions = " "
         txt = console_permissions + " " + command
         process = subprocess.Popen(txt, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, shell=True)
@@ -217,7 +217,8 @@ class CommandTestWindow(Adw.PreferencesWindow):
         else:
             data = json.loads(out)
             for device in data["blockdevices"]:
-                text = f"Name: {device['name']}, Size: {device['size']}"
+                if 'loop' not in {device['name']}:
+                    text = f"Name: {device['name']}, Size: {device['size']}"
                 group = Adw.PreferencesGroup(title=device['name'], description="command: lsblk")
                 refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
                 refresh_button.connect("clicked", self.update_disk_page)
