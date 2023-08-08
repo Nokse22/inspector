@@ -97,9 +97,10 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.update_system_page()
 
     def execute_terminal_command(self, command):
-        if 'SNAP' not in os.environ:
+    if 'SNAP' not in os.environ:
         console_permissions = "flatpak-spawn --host"
-
+    else:
+        console_permissions = " "
         txt = console_permissions + " " + command
         process = subprocess.Popen(txt, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, shell=True)
