@@ -184,8 +184,11 @@ class CommandTestWindow(Adw.PreferencesWindow):
         group.set_header_suffix(refresh_button)
         self.system_content.add(group)
         self.system_page_children.append(group)
-
-        out = self.execute_terminal_command("cat /etc/os-release")
+        
+        if 'SNAP' in os.environ:
+            out = self.execute_terminal_command("cat /var/lib/snapd/hostfs/etc/os-release")
+        else:
+            out = self.execute_terminal_command("cat /etc/os-release")
         out = out.splitlines()
 
         for line in out:
