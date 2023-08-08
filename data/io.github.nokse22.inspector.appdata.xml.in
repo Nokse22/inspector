@@ -5,7 +5,8 @@
 	<project_license>GPL-3.0-or-later</project_license>
  	<name>Inspector</name>
 	<description>
-	  <p>View information about your system</p>
+	  <p>View information about your system.
+The app creates a GUI for commands like lsusb, lscpu, lspci, uname and more.</p>
 	</description>
 	<summary>View information about your system</summary>
 
