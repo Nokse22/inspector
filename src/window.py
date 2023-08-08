@@ -20,7 +20,7 @@
 from gi.repository import Adw
 from gi.repository import Gtk
 from gi.repository import Gio
-import gi, os, subprocess, threading, time, json, re
+import gi, os, subprocess, threading, time, json, re, fnmatch
 
 class CommandTestWindow(Adw.PreferencesWindow):
     __gtype_name__ = 'CommandTestWindow'
@@ -220,7 +220,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         else:
             data = json.loads(out)
             for device in data["blockdevices"]:
-                if 'loop' not in {device['name']}:
+                if not fnmatch.fnmatch(device['name'], 'loop*'):
                     text = f"Name: {device['name']}, Size: {device['size']}"
                 group = Adw.PreferencesGroup(title=device['name'], description="command: lsblk")
                 refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
