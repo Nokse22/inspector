@@ -49,23 +49,6 @@ class CommandTestApplication(Adw.Application):
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
 
-    # def reload_page(self, widget, _):
-    #     print("reload")
-    #     page = self.win.get_visible_page().get_title()
-    #     match page:
-    #         case "Disk":
-    #             self.win.update_disk_page()
-    #         case "Memory":
-    #             self.win.update_memory_page()
-    #         case "PCI":
-    #             self.win.update_pci_page()
-    #         case "Usb":
-    #             self.win.update_usb_page()
-    #         case "Network":
-    #             self.win.update_network_page()
-    #         case "Hardware":
-    #             self.win.update_hardware_page()
-
     def do_activate(self):
         """Called when the application is activated.
 
