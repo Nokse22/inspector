@@ -20,7 +20,7 @@
 from gi.repository import Adw
 from gi.repository import Gtk
 from gi.repository import Gio
-import gi, os, subprocess, threading, time, json, re
+import gi, os, subprocess, threading, time, json, re, fnmatch
 
 class CommandTestWindow(Adw.PreferencesWindow):
     __gtype_name__ = 'CommandTestWindow'
@@ -97,8 +97,11 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.update_system_page()
 
     def execute_terminal_command(self, command):
-        console_permissions = "flatpak-spawn --host"
-        txt = console_permissions + " " + command
+        if 'SNAP' not in os.environ:
+            console_permissions = "flatpak-spawn --host "
+        else:
+            console_permissions = ""
+        txt = console_permissions + command
         process = subprocess.Popen(txt, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, shell=True)
         try:
@@ -181,8 +184,11 @@ class CommandTestWindow(Adw.PreferencesWindow):
         group.set_header_suffix(refresh_button)
         self.system_content.add(group)
         self.system_page_children.append(group)
-
-        out = self.execute_terminal_command("cat /etc/os-release")
+        
+        if 'SNAP' in os.environ:
+            out = self.execute_terminal_command("cat /var/lib/snapd/hostfs/etc/os-release")
+        else:
+            out = self.execute_terminal_command("cat /etc/os-release")
         out = out.splitlines()
 
         for line in out:
@@ -214,16 +220,17 @@ class CommandTestWindow(Adw.PreferencesWindow):
         else:
             data = json.loads(out)
             for device in data["blockdevices"]:
-                text = f"Name: {device['name']}, Size: {device['size']}"
-                group = Adw.PreferencesGroup(title=device['name'], description="command: lsblk")
-                refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-                refresh_button.connect("clicked", self.update_disk_page)
-                group.set_header_suffix(refresh_button)
-                self.disks_content.add(group)
-                self.disk_page_children.append(group)
-                row = Adw.ActionRow(title="Total size")
-                row.add_suffix(Gtk.Label(label=device['size'], wrap=True))
-                group.add(row)
+                if not fnmatch.fnmatch(device['name'], 'loop*'):
+                    text = f"Name: {device['name']}, Size: {device['size']}"
+                    group = Adw.PreferencesGroup(title=device['name'], description="command: lsblk")
+                    refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+                    refresh_button.connect("clicked", self.update_disk_page)
+                    group.set_header_suffix(refresh_button)
+                    self.disks_content.add(group)
+                    self.disk_page_children.append(group)
+                    row = Adw.ActionRow(title="Total size")
+                    row.add_suffix(Gtk.Label(label=device['size'], wrap=True))
+                    group.add(row)
                 if "children" in device:
                     group = Adw.PreferencesGroup()
                     self.disks_content.add(group)
@@ -656,5 +663,3 @@ class CommandTestWindow(Adw.PreferencesWindow):
         #             row = Adw.ActionRow(title=key)
         #             row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True))
         #             group2.add(row)
-        
-
