@@ -76,6 +76,10 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.hardware_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
         self.add(self.hardware_content)
 
+        self.motherboard_content = Adw.PreferencesPage(title="Motherbaord", icon_name="video-display-symbolic")
+        self.motherboard_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
+        self.add(self.motherboard_content)
+
         self.system_content = Adw.PreferencesPage(title="System", icon_name="preferences-desktop-display-symbolic")
         self.system_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
         self.add(self.system_content)
@@ -86,6 +90,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.usb_page_children = []
         self.network_page_children = []
         self.hardware_page_children = []
+        self.motherboard_page_children = []
         self.system_page_children = []
 
         self.update_disk_page()
@@ -93,6 +98,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.update_pci_page()
         self.update_usb_page()
         self.update_network_page()
+        self.update_motherboard_page()
         self.update_hardware_page()
         self.update_system_page()
 
@@ -167,7 +173,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         group.add(row)
 
         out = self.execute_terminal_command("uname -i")
-        row = Adw.ActionRow(title="hardware platform")
+        row = Adw.ActionRow(title="Hardware Platform")
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, hexpand=True, xalign=1, justify=1))
         group.add(row)
 
@@ -427,3 +433,57 @@ class CommandTestWindow(Adw.PreferencesWindow):
                     elif key == "data":
                         row.add_suffix(Gtk.Label(label=value[0].upper() + value[1:], xalign=1, wrap=True, hexpand=True, justify=1))
                         group2.add(row)
+
+    def update_motherboard_page(self, btn=None):
+        # Clear the previous content
+        for child in self.motherboard_page_children:
+            self.motherboard_content.remove(child)
+        self.motherboard_page_children = []
+
+        dmi_path = "/sys/devices/virtual/dmi/id/"
+        dmi_keys = [
+            ("bios_date", "BIOS Date"),
+            ("bios_release", "BIOS Release"),
+            ("bios_vendor", "BIOS Vendor"),
+            ("bios_version", "BIOS Version"),
+            ("board_asset_tag", "Board Asset Tag"),
+            ("board_name", "Board Name"),
+            ("board_serial", "Board Serial Number"),
+            ("board_vendor", "Board Vendor"),
+            ("board_version", "Board Version"),
+            ("chassis_asset_tag", "Chassis Asset Tag"),
+            ("chassis_serial", "Chassis Serial Number"),
+            ("chassis_type", "Chassis Type"),
+            ("chassis_vendor", "Chassis Vendor"),
+            ("chassis_version", "Chassis Version"),
+            ("product_family", "Product Family"),
+            ("product_name", "Product Name"),
+            ("product_serial", "Product Serial Number"),
+            ("product_sku", "Product SKU"),
+            ("product_uuid", "Product UUID"),
+            ("product_version", "Product Version"),
+            ("power", "Power"),
+            ("subsystem", "Subsystem"),
+            ("sys_vendor", "System Vendor"),
+        ]
+
+        # Create and set the main preferences group for motherboard info
+        group = Adw.PreferencesGroup(title="Motherboard", description="Details from /sys/devices/virtual/dmi/id")
+        refresh_button = Gtk.Button(icon_name="view-refresh-symbolic", valign=3, css_classes=["flat"])
+        refresh_button.connect("clicked", self.update_motherboard_page)
+        group.set_header_suffix(refresh_button)
+        self.motherboard_content.add(group)
+        self.motherboard_page_children.append(group)
+
+        # Populate the group with DMI details
+        for key, label in dmi_keys:
+            try:
+                with open(os.path.join(dmi_path, key), 'r') as f:
+                    value = f.read().strip() or "N/A"
+            except:
+                value = "N/A"  # Or any default value if you cannot access a file
+
+            row = Adw.ActionRow(title=label)
+            row.add_suffix(Gtk.Label(label=value, wrap=True, hexpand=True, xalign=1, justify=1))
+            group.add(row)
+
