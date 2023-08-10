@@ -218,12 +218,10 @@ class CommandTestWindow(Adw.PreferencesWindow):
             self.disks_content.add(page)
             self.disk_page_children.append(page)
         else:
-            adding_loop = False
             loop_group = None
             data = json.loads(out)
             for device in data["blockdevices"]:
                 if not fnmatch.fnmatch(device['name'], 'loop*'):
-                    adding_loop = False
                     text = f"Name: {device['name']}, Size: {device['size']}"
                     group = Adw.PreferencesGroup(title=device['name'], description="command: lsblk")
                     refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
@@ -235,7 +233,6 @@ class CommandTestWindow(Adw.PreferencesWindow):
                     row.add_suffix(Gtk.Label(label=device['size'], wrap=True))
                     group.add(row)
                 else:
-                    adding_loop = True
                     if loop_group == None:
                         loop_group = Adw.PreferencesGroup(title="Loop devices", description="command: lsblk")
                         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
