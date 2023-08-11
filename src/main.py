@@ -66,10 +66,10 @@ class CommandTestApplication(Adw.Application):
                                 application_name='Inspector',
                                 application_icon='io.github.nokse22.inspector',
                                 developer_name='Nokse',
+                                developers=["Nokse22 https://github.com/Nokse22","David Stephenson https://github.com/David-Stephenson"],
                                 issue_url='https://github.com/Nokse22/inspector/issues',
                                 website='https://github.com/Nokse22/inspector',
                                 version='0.1.4',
-                                developers=['Nokse'],
                                 copyright='© 2023 Nokse')
         about.present()
 

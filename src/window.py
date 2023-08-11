@@ -80,7 +80,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.motherboard_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
         self.add(self.motherboard_content)
 
-        self.system_content = Adw.PreferencesPage(title="System", icon_name="preferences-desktop-display-symbolic")
+        self.system_content = Adw.PreferencesPage(title="System", icon_name="preferences-desktop-remote-desktop-symbolic")
         self.system_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
         self.add(self.system_content)
 
@@ -452,7 +452,11 @@ class CommandTestWindow(Adw.PreferencesWindow):
             self.motherboard_content.remove(child)
         self.motherboard_page_children = []
 
-        dmi_path = "/sys/devices/virtual/dmi/id/"
+        if 'SNAP' in os.environ:
+            dmi_path = "/var/lib/snapd/hostfs/sys/devices/virtual/dmi/id/"
+        else:
+            dmi_path = "/sys/devices/virtual/dmi/id/"
+
         dmi_keys = [
             ("bios_date", "BIOS Date"),
             ("bios_release", "BIOS Release"),
@@ -475,8 +479,15 @@ class CommandTestWindow(Adw.PreferencesWindow):
             ("product_uuid", "Product UUID"),
             ("product_version", "Product Version"),
             ("power", "Power"),
-            ("subsystem", "Subsystem"),
+            # ("subsystem", "Subsystem"),
             ("sys_vendor", "System Vendor"),
+        ]
+
+        power_keys = [
+            ("control", "Control"),
+            ("runtime_active_time", "Runtime Active Time"),
+            ("runtime_status", "Runtime Status"),
+            ("runtime_suspended_time", "Runtime Suspended Time")
         ]
 
         # Create and set the main preferences group for motherboard info
@@ -489,6 +500,19 @@ class CommandTestWindow(Adw.PreferencesWindow):
 
         # Populate the group with DMI details
         for key, label in dmi_keys:
+            if key == "power":
+                expander_row = Adw.ExpanderRow(title=label)
+                group.add(expander_row)
+                for key2, label2 in power_keys:
+                    row = Adw.ActionRow(title=label2)
+                    try:
+                        with open(os.path.join(dmi_path + "power/", key2), 'r') as f:
+                            value2 = f.read().strip() or "N/A"
+                    except:
+                        value2 = "N/A"  # Or any default value if you cannot access a file
+                    row.add_suffix(Gtk.Label(label=value2, wrap=True, hexpand=True, xalign=1, justify=1))
+                    expander_row.add_row(row)
+                continue
             try:
                 with open(os.path.join(dmi_path, key), 'r') as f:
                     value = f.read().strip() or "N/A"
