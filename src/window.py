@@ -226,17 +226,29 @@ class CommandTestWindow(Adw.PreferencesWindow):
         else:
             loop_group = None
             data = json.loads(out)
-            for device in data["blockdevices"]:
-                if not fnmatch.fnmatch(device['name'], 'loop*'):
-                    text = f"Name: {device['name']}, Size: {device['size']}"
-                    group = Adw.PreferencesGroup(title=device['name'], description="command: lsblk")
+            try:
+                devices = data["blockdevices"]
+            except:
+                devices = []
+            for device in devices:
+                try:
+                    name = device['name']
+                except:
+                    name = "N/A"
+                if not fnmatch.fnmatch(name, 'loop*'):
+                    try:
+                        size = device['size']
+                    except:
+                        size = ""
+                    text = f"Name: {name}, Size: {size}"
+                    group = Adw.PreferencesGroup(title=name, description="command: lsblk")
                     refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
                     refresh_button.connect("clicked", self.update_disk_page)
                     group.set_header_suffix(refresh_button)
                     self.disks_content.add(group)
                     self.disk_page_children.append(group)
                     row = Adw.ActionRow(title="Total size")
-                    row.add_suffix(Gtk.Label(label=device['size'], wrap=True))
+                    row.add_suffix(Gtk.Label(label=size, wrap=True))
                     group.add(row)
                 else:
                     if loop_group == None:
@@ -246,16 +258,46 @@ class CommandTestWindow(Adw.PreferencesWindow):
                         loop_group.set_header_suffix(refresh_button)
                         self.disks_content.add(loop_group)
                         self.disk_page_children.append(loop_group)
-                    row = Adw.ActionRow(title=device['name'], subtitle=device['mountpoints'][0])
-                    row.add_suffix(Gtk.Label(label=device['size'], wrap=True))
+                    try:
+                        subtitle = device['mountpoints'][0]
+                    except:
+                        try:
+                            subtitle = device['mountpoint']
+                        except:
+                            subtitle = ""
+                    row = Adw.ActionRow(title=name, subtitle=subtitle)
+                    try:
+                        size = device['size']
+                    except:
+                        size = "N/A"
+                    row.add_suffix(Gtk.Label(label=size, wrap=True))
                     loop_group.add(row)
                 if "children" in device:
                     group = Adw.PreferencesGroup()
                     self.disks_content.add(group)
                     self.disk_page_children.append(group)
-                    for partition in device["children"]:
-                        row = Adw.ActionRow(title=partition['name'], subtitle=partition['mountpoints'][0])
-                        row.add_suffix(Gtk.Label(label=partition['size'], wrap=True, xalign=1))
+                    try:
+                        partitions = device["children"]
+                    except:
+                        partitions = []
+                    for partition in partitions:
+                        try:
+                            subtitle = partition['mountpoints'][0]
+                        except:
+                            try:
+                                subtitle = partition['mountpoint']
+                            except:
+                                subtitle = ""
+                        try:
+                            name = partition['name']
+                        except:
+                            name = "Name"
+                        row = Adw.ActionRow(title=name, subtitle=subtitle)
+                        try:
+                            size = partition['size']
+                        except:
+                            size = "N/A"
+                        row.add_suffix(Gtk.Label(label=size, wrap=True, xalign=1))
                         group.add(row)
 
     def update_memory_page(self, btn=None):
@@ -276,16 +318,30 @@ class CommandTestWindow(Adw.PreferencesWindow):
             self.memory_content.add(group2)
             self.memory_page_children.append(group2)
             # total = 0
-            for device in data["memory"]:
-                # total += float(re.sub('\D', '', device['size']))
-                text = "range " + device['block']
+            try:
+                memory = data["memory"]
+            except:
+                memory = []
+            for device in memory:
+                try:
+                    block = device['block']
+                except:
+                    block = ""
+                try:
+                    size = device['size']
+                except:
+                    size = ""
+                try:
+                    range_ = device['range']
+                except:
+                    range_ = ""
+                text = "range " + block
                 box = Gtk.Box(homogeneous=True, hexpand=True, width_request=150)
-                box.append(Gtk.Label(label=device['size'], wrap=True, xalign=1))
-                box.append(Gtk.Label(label=device['block'], wrap=True, xalign=1))
-                row = Adw.ActionRow(title="Memory", subtitle=device['range'])
+                box.append(Gtk.Label(label=size, wrap=True, xalign=1))
+                box.append(Gtk.Label(label=block, wrap=True, xalign=1))
+                row = Adw.ActionRow(title="Memory", subtitle=range_)
                 row.add_suffix(box)
                 group2.add(row)
-            text = "range " + device['block']
 
     def update_pci_page(self, btn=None):
         for child in self.pci_page_children:
@@ -368,7 +424,11 @@ class CommandTestWindow(Adw.PreferencesWindow):
         else:
             data = json.loads(out)
             for line in data:
-                group2 = Adw.PreferencesGroup(title=line['ifname'], description="command: ip address", margin_bottom=20)
+                try:
+                    name = line['ifname']
+                except:
+                    name = "N/A"
+                group2 = Adw.PreferencesGroup(title=name, description="command: ip address", margin_bottom=20)
                 refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
                 refresh_button.connect("clicked", self.update_network_page)
                 group2.set_header_suffix(refresh_button)
@@ -401,11 +461,8 @@ class CommandTestWindow(Adw.PreferencesWindow):
                                 text = ""
                                 for val in value:
                                     text += val + ", "
-                                row = Adw.ActionRow(title=text)#val[0].upper() + val[1:])
+                                row = Adw.ActionRow(title=text)
                                 expander_row.add_row(row)
-                            # box = Gtk.Box(homogeneous=True, hexpand=True)
-                            # box.append(Gtk.Label(label=value2, xalign=1, wrap=True, justify=1))
-                            # row.add_suffix(box)
                     elif key not in ["ifname","ifindex", "addr_info"]:
                         row = Adw.ActionRow(title=key[0].upper() + key[1:] )
                         row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, hexpand=True, justify=1))
@@ -429,7 +486,11 @@ class CommandTestWindow(Adw.PreferencesWindow):
             self.hardware_content.add(group2)
             self.hardware_page_children.append(group2)
             add_flags = False
-            for line in data['lscpu']:
+            try:
+                lines = data['lscpu']
+            except:
+                lines = []
+            for line in lines:
                 row = Adw.ActionRow()
                 for key, value in line.items():
                     if value == "Flags:":
