@@ -11,6 +11,18 @@ The commands are already installed on any system usually.
 
 Suggestions are welcome. The idea for the app is to make a graphical user interface for common commands.
   </p>
+  <p>View information like:
+	    <ul>
+			  <li>Usb devices</li>
+	      <li>Disk</li>
+	      <li>Memory</li>
+	      <li>PCI devices</li>
+	      <li>Network</li>
+	      <li>CPU</li>
+	      <li>Motherboard and bios</li>
+	      <li>System and distro</li>
+      </ul>
+	  </p>
 
   <details><summary><h2>Click here for screenshots 🖼️</h2></summary>
   <div align="center">
