@@ -29,8 +29,10 @@ class CommandTestWindow(Adw.Window):
         self.settings = Gio.Settings.new('io.github.nokse22.inspector')
 
         self.set_default_size(800, 820)
-        # self.settings.bind("window-width", self, "default-width", Gio.SettingsBindFlags.DEFAULT)
-        # self.settings.bind("window-height", self, "default-height", Gio.SettingsBindFlags.DEFAULT)
+        self.props.width_request=300
+        self.props.height_request=400
+        self.settings.bind("window-width", self, "default-width", Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind("window-height", self, "default-height", Gio.SettingsBindFlags.DEFAULT)
 
         self.set_title("Inspector")
         # self.set_modal(False)
@@ -45,6 +47,7 @@ class CommandTestWindow(Adw.Window):
         sidebar_button.connect("clicked", self.show_sidebar)
         headerbar.pack_start(sidebar_button)
         reload_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+        reload_button.connect("clicked", self.reload_current)
         headerbar.pack_end(reload_button)
         self.toolbar_view.add_top_bar(headerbar)
 
@@ -121,6 +124,27 @@ class CommandTestWindow(Adw.Window):
         # self.update_cpu_page()
         # self.update_system_page()
 
+    def reload_current(self, btn):
+        name = self.sidebar_list_box.get_selected_row().get_child().get_name()
+        print(name)
+        match name:
+            case "USB":
+                self.update_usb_page()
+            case "DISK":
+                self.update_disk_page()
+            case "PCI":
+                self.update_pci_page()
+            case "MEMORY":
+                self.update_memory_page()
+            case "NETWORK":
+                self.update_network_page()
+            case "CPU":
+                self.update_cpu_page()
+            case "MOBO":
+                self.update_motherboard_page()
+            case "SYSTEM":
+                self.update_system_page()
+
     def on_row_selected(self, list_box, row):
         name = row.get_child().get_name()
         print(name)
@@ -187,7 +211,7 @@ class CommandTestWindow(Adw.Window):
         return group
 
     def update_system_page(self, btn=None):
-        self.usb_content = Gtk.Box()
+        self.system_content = Gtk.Box(orientation=1)
         out = self.execute_terminal_command("uname -a")
         if out == "":
             page = self.empty_command_page("uname")
@@ -241,7 +265,7 @@ class CommandTestWindow(Adw.Window):
 
         # cat /etc/os-release
 
-        group = Adw.PreferencesGroup(margin_bottom=20, title="Distro", description="command: cat /etc/os-release")
+        group = Adw.PreferencesGroup(margin_bottom=20, title="Distro", description="Details from /etc/os-release")
         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
         refresh_button.connect("clicked", self.update_system_page)
         # group.set_header_suffix(refresh_button)
@@ -269,6 +293,7 @@ class CommandTestWindow(Adw.Window):
             group.add(row)
 
     def update_disk_page(self, btn=None):
+        self.disks_content = Gtk.Box(orientation=1)
         out = self.execute_terminal_command("lsblk -J")
         if out == "":
             page = self.empty_command_page("lsblk")
