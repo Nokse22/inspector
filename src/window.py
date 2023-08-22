@@ -76,7 +76,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.hardware_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
         self.add(self.hardware_content)
 
-        self.motherboard_content = Adw.PreferencesPage(title="Motherbaord", icon_name="video-display-symbolic")
+        self.motherboard_content = Adw.PreferencesPage(title="Motherboard", icon_name="video-display-symbolic")
         self.motherboard_content.get_first_child().get_first_child().get_first_child().set_maximum_size(800)
         self.add(self.motherboard_content)
 
