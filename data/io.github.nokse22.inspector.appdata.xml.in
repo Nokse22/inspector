@@ -4,21 +4,12 @@
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
  	<name>Inspector</name>
-	<description>
-    <p>View information about:
-	    <ul>
-			  <li>Usb devices</li>
-	      <li>Disk</li>
-	      <li>Memory</li>
-	      <li>PCI devices</li>
-	      <li>Network</li>
-	      <li>CPU</li>
-	      <li>Motherboard and bios</li>
-	      <li>System and distro</li>
-      </ul>
-	  </p>
-	</description>
+
 	<summary>View information about your system</summary>
+
+  <description>
+    <p>View information about: Usb devices, Disk, Memory, PCI devices, Network, CPU, Motherboard and bios, System and distro</p>
+	</description>
 
 	<content_rating type="oars-1.0"></content_rating>
   <developer_name>Nokse</developer_name>
@@ -28,6 +19,12 @@
   <url type="bugtracker">https://github.com/Nokse22/inspector/issues</url>
 
   <releases>
+    <release version="0.1.7" date="2023-08-22">
+    	<description>
+			  <p>Fixed typo</p>
+    	  <p>Improved metadata</p>
+		  </description>
+  	</release>
     <release version="0.1.6" date="2023-08-12">
     	<description>
     	  <ul>
