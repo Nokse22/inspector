@@ -5,4 +5,5 @@ Icon=io.github.nokse22.inspector
 Terminal=false
 Type=Application
 Categories=GTK;Utility;
+Keywords=Trivia;Quiz;Game;Entertainment;
 StartupNotify=true
