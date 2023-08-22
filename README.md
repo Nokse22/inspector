@@ -37,6 +37,13 @@ Suggestions are welcome. The idea for the app is to make a graphical user interf
   </details>
 
 ## Installation
+### From the stores
+
+Inspector is available to download on Flathub and the Snap Store
+
+<a href='https://flathub.org/apps/io.github.nokse22.inspector'><img height='80' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
+<h>&emsp;</h> <a href="https://snapcraft.io/inspector"><img height='80' alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg"/></a>
+
 
 ### From source
 
