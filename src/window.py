@@ -512,12 +512,8 @@ class CommandTestWindow(Adw.PreferencesWindow):
         for child in self.motherboard_page_children:
             self.motherboard_content.remove(child)
         self.motherboard_page_children = []
-
-        if 'SNAP' in os.environ:
-            dmi_path = "/var/lib/snapd/hostfs/sys/devices/virtual/dmi/id/"
-        else:
-            dmi_path = "/sys/devices/virtual/dmi/id/"
-
+        
+        dmi_path = "/sys/devices/virtual/dmi/id/"
         dmi_keys = [
             ("bios_date", "BIOS Date"),
             ("bios_release", "BIOS Release"),
