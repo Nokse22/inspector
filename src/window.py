@@ -144,42 +144,42 @@ class CommandTestWindow(Adw.PreferencesWindow):
 
         out = self.execute_terminal_command("uname -s")
         row = Adw.ActionRow(title="Kernel Name")
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
         group.add(row)
 
         out = self.execute_terminal_command("uname -n")
         row = Adw.ActionRow(title="Network Node Hostname")
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
         group.add(row)
 
         out = self.execute_terminal_command("uname -r")
         row = Adw.ActionRow(title="Kernel Release")
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
         group.add(row)
 
         out = self.execute_terminal_command("uname -v")
         row = Adw.ActionRow(title="Kernel Version")
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
         group.add(row)
 
         out = self.execute_terminal_command("uname -m")
         row = Adw.ActionRow(title="Machine Hardware Name")
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
         group.add(row)
 
         out = self.execute_terminal_command("uname -p")
         row = Adw.ActionRow(title="Processor Type")
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
         group.add(row)
 
         out = self.execute_terminal_command("uname -i")
         row = Adw.ActionRow(title="Hardware Platform")
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
         group.add(row)
 
         out = self.execute_terminal_command("uname -o")
         row = Adw.ActionRow(title="Operating System")
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
         group.add(row)
 
         # cat /etc/os-release
@@ -209,7 +209,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
                 label.set_justify(1)
                 row.add_suffix(link)
             else:
-                row.add_suffix(Gtk.Label(label=value.replace('"', ''), wrap=True, wrap_mode=1, hexpand=True, xalign=1, justify=1))
+                row.add_suffix(Gtk.Label(label=value.replace('"', ''), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
             group.add(row)
 
 
@@ -248,7 +248,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
                     self.disks_content.add(group)
                     self.disk_page_children.append(group)
                     row = Adw.ActionRow(title="Total size")
-                    row.add_suffix(Gtk.Label(label=size, wrap=True))
+                    row.add_suffix(Gtk.Label(label=size, wrap=True, selectable=True))
                     group.add(row)
                 else:
                     if loop_group == None:
@@ -270,7 +270,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
                         size = device['size']
                     except:
                         size = "N/A"
-                    row.add_suffix(Gtk.Label(label=size, wrap=True))
+                    row.add_suffix(Gtk.Label(label=size, wrap=True, selectable=True))
                     loop_group.add(row)
                 if "children" in device:
                     group = Adw.PreferencesGroup()
@@ -297,7 +297,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
                             size = partition['size']
                         except:
                             size = "N/A"
-                        row.add_suffix(Gtk.Label(label=size, wrap=True, wrap_mode=1, hexpand=True, xalign=1))
+                        row.add_suffix(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
                         group.add(row)
 
     def update_memory_page(self, btn=None):
@@ -337,8 +337,8 @@ class CommandTestWindow(Adw.PreferencesWindow):
                     range_ = ""
                 text = "range " + block
                 box = Gtk.Box(homogeneous=True, hexpand=True, width_request=150)
-                box.append(Gtk.Label(label=size, wrap=True, wrap_mode=1, hexpand=True, xalign=1))
-                box.append(Gtk.Label(label=block, wrap=True, wrap_mode=1, hexpand=True, xalign=1))
+                box.append(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
+                box.append(Gtk.Label(label=block, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
                 row = Adw.ActionRow(title="Memory", subtitle=range_)
                 row.add_suffix(box)
                 group2.add(row)
@@ -405,11 +405,11 @@ class CommandTestWindow(Adw.PreferencesWindow):
                 group2.add(expander_row)
 
                 action_row = Adw.ActionRow(title=name)
-                action_row.add_suffix(Gtk.Label(label=value, xalign=1, justify=1))
+                action_row.add_suffix(Gtk.Label(label=value, xalign=1, justify=1, selectable=True))
                 expander_row.add_row(action_row)
 
                 action_row = Adw.ActionRow(title="Bus")
-                action_row.add_suffix(Gtk.Label(label=result[0], wrap=True, wrap_mode=1,hexpand=True, xalign=1, justify=1))
+                action_row.add_suffix(Gtk.Label(label=result[0], wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
                 expander_row.add_row(action_row)
 
     def update_network_page(self, btn=None):
@@ -448,7 +448,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
                                     row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
                                     expander_row.add_row(row)
                                     box = Gtk.Box(homogeneous=True, hexpand=True)
-                                    box.append(Gtk.Label(label=value2, xalign=1, wrap=True, wrap_mode=1, hexpand=True, justify=1))
+                                    box.append(Gtk.Label(label=value2, xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
                                     row.add_suffix(box)
                         try:
                             value[0]
@@ -465,7 +465,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
                                 expander_row.add_row(row)
                     elif key not in ["ifname","ifindex", "addr_info"]:
                         row = Adw.ActionRow(title=key[0].upper() + key[1:] )
-                        row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, wrap_mode=1, hexpand=True, justify=1))
+                        row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
                         group2.add(row)
 
     def update_hardware_page(self, btn=None):
@@ -504,7 +504,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
                     elif key == "field":
                         row = Adw.ActionRow(title=value[0].upper() + value[1:])
                     elif key == "data":
-                        row.add_suffix(Gtk.Label(label=value[0].upper() + value[1:], xalign=1, wrap=True, wrap_mode=1, hexpand=True, justify=1))
+                        row.add_suffix(Gtk.Label(label=value[0].upper() + value[1:], xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
                         group2.add(row)
 
     def update_motherboard_page(self, btn=None):
@@ -567,7 +567,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
                             value2 = f.read().strip() or "N/A"
                     except:
                         value2 = "N/A"  # Or any default value if you cannot access a file
-                    row.add_suffix(Gtk.Label(label=value2, wrap=True, wrap_mode=1, hexpand=True, xalign=1, justify=1))
+                    row.add_suffix(Gtk.Label(label=value2, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
                     expander_row.add_row(row)
                 continue
             try:
@@ -577,6 +577,6 @@ class CommandTestWindow(Adw.PreferencesWindow):
                 value = "N/A"  # Or any default value if you cannot access a file
 
             row = Adw.ActionRow(title=label)
-            row.add_suffix(Gtk.Label(label=value, wrap=True, wrap_mode=1, hexpand=True, xalign=1, justify=1))
+            row.add_suffix(Gtk.Label(label=value, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
             group.add(row)
 
