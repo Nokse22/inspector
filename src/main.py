@@ -63,7 +63,7 @@ class CommandTestApplication(Adw.Application):
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name='Inspector',
+                                application_name=_("Inspector"),
                                 application_icon='io.github.nokse22.inspector',
                                 developer_name='Nokse',
                                 developers=["Nokse22 https://github.com/Nokse22","David Stephenson https://github.com/David-Stephenson"],
