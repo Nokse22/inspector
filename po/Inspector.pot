@@ -1,0 +1,338 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-09 02:37+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/io.github.nokse22.inspector.desktop.in:3
+#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:66
+#: src/window.py:35
+msgid "Inspector"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.desktop.in:4
+#: data/io.github.nokse22.inspector.appdata.xml.in:8
+msgid "View information about your system"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.desktop.in:10
+msgid ""
+"System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:11
+msgid ""
+"View information about: Usb devices, Disk, Memory, PCI devices, Network, "
+"CPU, Motherboard and bios, System and distro"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:15
+msgid "Nokse"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:24
+msgid "Fixed typo"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:25
+msgid "Improved metadata"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:31
+msgid "Fixed a critical bug if the app was run with older versions of lsblk"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:32
+msgid "Made the app more stable"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:38
+msgid "Added motherboard/bios page"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:43
+msgid "Bug fixes"
+msgstr ""
+
+#. Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL.
+#. One name per line, please do not remove previous names.
+#: src/main.py:76
+msgid "translator-credits"
+msgstr ""
+
+#: src/window.py:45
+msgid "Reload"
+msgstr ""
+
+#: src/window.py:46
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#: src/window.py:47 src/window.py:53
+msgid "About Inspector"
+msgstr ""
+
+#: src/window.py:56 src/window.py:393
+msgid "USB"
+msgstr ""
+
+#: src/window.py:60
+msgid "Disk"
+msgstr ""
+
+#: src/window.py:64 src/window.py:348
+msgid "Memory"
+msgstr ""
+
+#: src/window.py:68
+msgid "PCI"
+msgstr ""
+
+#: src/window.py:72
+msgid "Network"
+msgstr ""
+
+#: src/window.py:76 src/window.py:491
+msgid "CPU"
+msgstr ""
+
+#. Create and set the main preferences group for motherboard info
+#: src/window.py:80 src/window.py:561
+msgid "Motherboard"
+msgstr ""
+
+#: src/window.py:84 src/window.py:141
+msgid "System"
+msgstr ""
+
+#: src/window.py:123
+msgid "The command is not supported"
+msgstr ""
+
+#: src/window.py:125
+#, python-brace-format
+msgid ""
+"The command {0} returned empty.\n"
+"Try running it on your terminal, it should prompt you to install the package "
+"on your system."
+msgstr ""
+
+#: src/window.py:141
+msgid "command: uname"
+msgstr ""
+
+#: src/window.py:149
+msgid "Kernel Name"
+msgstr ""
+
+#: src/window.py:154
+msgid "Network Node Hostname"
+msgstr ""
+
+#: src/window.py:159
+msgid "Kernel Release"
+msgstr ""
+
+#: src/window.py:164
+msgid "Kernel Version"
+msgstr ""
+
+#: src/window.py:169
+msgid "Machine Hardware Name"
+msgstr ""
+
+#: src/window.py:174
+msgid "Processor Type"
+msgstr ""
+
+#: src/window.py:179
+msgid "Hardware Platform"
+msgstr ""
+
+#: src/window.py:184
+msgid "Operating System"
+msgstr ""
+
+#. cat /etc/os-release
+#: src/window.py:190
+msgid "Distro"
+msgstr ""
+
+#: src/window.py:190
+msgid "command: cat /etc/os-release"
+msgstr ""
+
+#: src/window.py:247 src/window.py:259
+msgid "command: lsblk"
+msgstr ""
+
+#: src/window.py:249 src/window.py:261 src/window.py:321 src/window.py:367
+#: src/window.py:395 src/window.py:441 src/window.py:493 src/window.py:563
+msgid "Refresh"
+msgstr ""
+
+#: src/window.py:254
+msgid "Total size"
+msgstr ""
+
+#: src/window.py:259
+msgid "Loop devices"
+msgstr ""
+
+#: src/window.py:319
+msgid "Ranges"
+msgstr ""
+
+#: src/window.py:319
+msgid "command: lsmem"
+msgstr ""
+
+#: src/window.py:365
+msgid "PCIs"
+msgstr ""
+
+#: src/window.py:365
+msgid "command: lspci"
+msgstr ""
+
+#: src/window.py:393
+msgid "command: lsusb"
+msgstr ""
+
+#: src/window.py:419
+msgid "Bus"
+msgstr ""
+
+#: src/window.py:439
+msgid "command: ip address"
+msgstr ""
+
+#: src/window.py:452
+msgid "Address info, ip"
+msgstr ""
+
+#: src/window.py:491
+msgid "command: lshw -c cpu"
+msgstr ""
+
+#: src/window.py:528
+msgid "BIOS Date"
+msgstr ""
+
+#: src/window.py:529
+msgid "BIOS Release"
+msgstr ""
+
+#: src/window.py:530
+msgid "BIOS Vendor"
+msgstr ""
+
+#: src/window.py:531
+msgid "BIOS Version"
+msgstr ""
+
+#: src/window.py:532
+msgid "Board Asset Tag"
+msgstr ""
+
+#: src/window.py:533
+msgid "Board Name"
+msgstr ""
+
+#: src/window.py:534
+msgid "Board Serial Number"
+msgstr ""
+
+#: src/window.py:535
+msgid "Board Vendor"
+msgstr ""
+
+#: src/window.py:536
+msgid "Board Version"
+msgstr ""
+
+#: src/window.py:537
+msgid "Chassis Asset Tag"
+msgstr ""
+
+#: src/window.py:538
+msgid "Chassis Serial Number"
+msgstr ""
+
+#: src/window.py:539
+msgid "Chassis Type"
+msgstr ""
+
+#: src/window.py:540
+msgid "Chassis Vendor"
+msgstr ""
+
+#: src/window.py:541
+msgid "Chassis Version"
+msgstr ""
+
+#: src/window.py:542
+msgid "Product Family"
+msgstr ""
+
+#: src/window.py:543
+msgid "Product Name"
+msgstr ""
+
+#: src/window.py:544
+msgid "Product Serial Number"
+msgstr ""
+
+#: src/window.py:545
+msgid "Product SKU"
+msgstr ""
+
+#: src/window.py:546
+msgid "Product UUID"
+msgstr ""
+
+#: src/window.py:547
+msgid "Product Version"
+msgstr ""
+
+#: src/window.py:548
+msgid "Power"
+msgstr ""
+
+#. ("subsystem", _("Subsystem")),
+#: src/window.py:550
+msgid "System Vendor"
+msgstr ""
+
+#: src/window.py:554
+msgid "Control"
+msgstr ""
+
+#: src/window.py:555
+msgid "Runtime Active Time"
+msgstr ""
+
+#: src/window.py:556
+msgid "Runtime Status"
+msgstr ""
+
+#: src/window.py:557
+msgid "Runtime Suspended Time"
+msgstr ""
+
+#: src/window.py:561
+msgid "Details from /sys/devices/virtual/dmi/id"
+msgstr ""
