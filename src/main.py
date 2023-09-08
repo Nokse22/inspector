@@ -60,7 +60,7 @@ class CommandTestApplication(Adw.Application):
             self.win = CommandTestWindow(application=self)
         self.win.present()
 
-    def on_about_action(self, widget, _):
+    def on_about_action(self, *args):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
                                 application_name=_("Inspector"),
@@ -71,6 +71,9 @@ class CommandTestApplication(Adw.Application):
                                 website='https://github.com/Nokse22/inspector',
                                 version='0.1.7',
                                 copyright='© 2023 Nokse')
+        # Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL. 
+        # One name per line, please do not remove previous names.
+        about.set_translator_credits(_("translator-credits"))        
         about.present()
 
     def on_preferences_action(self, widget, _):
