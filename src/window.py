@@ -96,36 +96,39 @@ class CommandTestWindow(Adw.Window):
         headerbar.pack_end(self.menu_button)
         headerbar.pack_end(reload_button)
 
-        self.usb_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label="Usb", name="USB", xalign=0))
+        self.motherboard_content = Gtk.Box(orientation=1)
+        self.sidebar_list_box.append(Gtk.Label(label="Motherboard", name="MOBO", xalign=0))
 
-        self.disks_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label="Disk", name="DISK", xalign=0))
+        self.cpu_content = Gtk.Box(orientation=1)
+        self.sidebar_list_box.append(Gtk.Label(label="Processor", name="CPU", xalign=0))
 
         self.memory_content = Gtk.Box(orientation=1)
         self.sidebar_list_box.append(Gtk.Label(label="Memory", name="MEMORY", xalign=0))
 
+        self.disks_content = Gtk.Box(orientation=1)
+        self.sidebar_list_box.append(Gtk.Label(label="Disk Drives", name="DISK", xalign=0))
+
         self.pci_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label="PCI", name="PCI", xalign=0))
+        self.sidebar_list_box.append(Gtk.Label(label="PCI Devices", name="PCI", xalign=0))
+
+        self.usb_content = Gtk.Box(orientation=1)
+        self.sidebar_list_box.append(Gtk.Label(label="USB Devices", name="USB", xalign=0))
 
         self.network_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label="Network", name="NETWORK", xalign=0))
+        self.sidebar_list_box.append(Gtk.Label(label="Network Devices", name="NETWORK", xalign=0))
 
-        self.cpu_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label="CPU", name="CPU", xalign=0))
-
-        self.motherboard_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label="Motherboard and BIOS", name="MOBO", xalign=0))
+        self.kernel_content = Gtk.Box(orientation=1)
+        self.sidebar_list_box.append(Gtk.Label(label="Kernel", name="KERNEL", xalign=0))
 
         self.system_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label="System", name="SYSTEM", xalign=0))
+        self.sidebar_list_box.append(Gtk.Label(label="Distribution", name="SYSTEM", xalign=0))
 
         self.sidebar_list_box.select_row( self.sidebar_list_box.get_row_at_index(0))
 
     def toggle_menu_button(self, brkpnt):
         self.menu_button.set_visible(not self.menu_button.get_visible())
 
-    def reload_current(self, btn):
+    def reload_current(self, btn=None):
         name = self.sidebar_list_box.get_selected_row().get_child().get_name()
         match name:
             case "USB":
@@ -144,10 +147,13 @@ class CommandTestWindow(Adw.Window):
                 self.update_motherboard_page()
             case "SYSTEM":
                 self.update_system_page()
+            case "KERNEL":
+                self.update_kernel_page()
 
     def on_row_selected(self, list_box, row):
         name = row.get_child().get_name()
-        self.title_label.set_label(name.capitalize())
+        nice_name = row.get_child().get_label()
+        self.title_label.set_label(nice_name)
         match name:
             case "USB":
                 if self.usb_content.get_first_child() == None:
@@ -181,11 +187,15 @@ class CommandTestWindow(Adw.Window):
                 if self.system_content.get_first_child() == None:
                     self.update_system_page()
                 self.clamp.set_child(self.system_content)
+            case "KERNEL":
+                if self.system_content.get_first_child() == None:
+                    self.update_kernel_page()
+                self.clamp.set_child(self.kernel_content)
         if self.split_view.get_collapsed():
             self.split_view.set_show_sidebar(False)
 
     def show_sidebar(self, btn):
-        self.split_view.set_show_sidebar(not self.split_view.get_show_sidebar() )
+        self.split_view.set_show_sidebar(not self.split_view.get_show_sidebar())
 
     def execute_terminal_command(self, command):
         if 'SNAP' not in os.environ:
@@ -211,17 +221,52 @@ class CommandTestWindow(Adw.Window):
         return group
 
     def update_system_page(self, btn=None):
-        self.system_content = Gtk.Box(orientation=1)
+        self.remove_content(self.system_content)
         out = self.execute_terminal_command("uname -a")
         if out == "":
             page = self.empty_command_page("uname")
             self.system_content.append(page)
             return
-        group = Adw.PreferencesGroup(margin_bottom=20, title="System", description="command: uname")
+
+        group = Adw.PreferencesGroup(margin_bottom=20, title="Distro", description="Details from /etc/os-release")
         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
         refresh_button.connect("clicked", self.update_system_page)
         # group.set_header_suffix(refresh_button)
         self.system_content.append(group)
+
+        if 'SNAP' in os.environ:
+            out = self.execute_terminal_command("cat /var/lib/snapd/hostfs/etc/os-release")
+        else:
+            out = self.execute_terminal_command("cat /etc/os-release")
+        out = out.splitlines()
+
+        for line in out:
+            key, value = line.split('=')
+            key = key.replace('_', ' ').title()
+            row = Adw.ActionRow(title=key)
+            if "Url" in key:
+                link = Gtk.LinkButton(uri=value.replace('"', ''), label=value.replace('"', ''), hexpand=True)
+                label = link.get_child()
+                label.set_wrap(True)
+                label.set_xalign(1)
+                label.set_justify(1)
+                row.add_suffix(link)
+            else:
+                row.add_suffix(Gtk.Label(opacity=0.60 , label=value.replace('"', ''), wrap=True, wrap_mode=2, hexpand=True, xalign=1, justify=1))
+            group.add(row)
+
+    def update_kernel_page(self, btn=None):
+        self.remove_content(self.kernel_content)
+        out = self.execute_terminal_command("uname -a")
+        if out == "":
+            page = self.empty_command_page("uname")
+            self.kernel_content.append(page)
+            return
+        group = Adw.PreferencesGroup(margin_bottom=20, title="System", description="Command: uname")
+        refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+        refresh_button.connect("clicked", self.update_system_page)
+        # group.set_header_suffix(refresh_button)
+        self.kernel_content.append(group)
 
         out = self.execute_terminal_command("uname -s")
         row = Adw.ActionRow(title="Kernel Name")
@@ -263,37 +308,8 @@ class CommandTestWindow(Adw.Window):
         row.add_suffix(Gtk.Label(opacity=0.60 , label=out.replace('\n', ""), wrap=True, wrap_mode=2, hexpand=True, xalign=1, justify=1))
         group.add(row)
 
-        # cat /etc/os-release
-
-        group = Adw.PreferencesGroup(margin_bottom=20, title="Distro", description="Details from /etc/os-release")
-        refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-        refresh_button.connect("clicked", self.update_system_page)
-        # group.set_header_suffix(refresh_button)
-        self.system_content.append(group)
-        
-        if 'SNAP' in os.environ:
-            out = self.execute_terminal_command("cat /var/lib/snapd/hostfs/etc/os-release")
-        else:
-            out = self.execute_terminal_command("cat /etc/os-release")
-        out = out.splitlines()
-
-        for line in out:
-            key, value = line.split('=')
-            key = key.replace('_', ' ').title()
-            row = Adw.ActionRow(title=key)
-            if "Url" in key:
-                link = Gtk.LinkButton(uri=value.replace('"', ''), label=value.replace('"', ''), hexpand=True)
-                label = link.get_child()
-                label.set_wrap(True)
-                label.set_xalign(1)
-                label.set_justify(1)
-                row.add_suffix(link)
-            else:
-                row.add_suffix(Gtk.Label(opacity=0.60 , label=value.replace('"', ''), wrap=True, wrap_mode=2, hexpand=True, xalign=1, justify=1))
-            group.add(row)
-
     def update_disk_page(self, btn=None):
-        self.disks_content = Gtk.Box(orientation=1)
+        self.remove_content(self.disks_content)
         out = self.execute_terminal_command("lsblk -J")
         if out == "":
             page = self.empty_command_page("lsblk")
@@ -316,7 +332,7 @@ class CommandTestWindow(Adw.Window):
                     except:
                         size = ""
                     text = f"Name: {name}, Size: {size}"
-                    group = Adw.PreferencesGroup(margin_bottom=20, title=name, description="command: lsblk")
+                    group = Adw.PreferencesGroup(margin_bottom=20, title=name, description="Command: lsblk")
                     refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
                     refresh_button.connect("clicked", self.update_disk_page)
                     # group.set_header_suffix(refresh_button)
@@ -326,7 +342,7 @@ class CommandTestWindow(Adw.Window):
                     group.add(row)
                 else:
                     if loop_group == None:
-                        loop_group = Adw.PreferencesGroup(margin_bottom=20, title="Loop devices", description="command: lsblk")
+                        loop_group = Adw.PreferencesGroup(margin_bottom=20, title="Loop devices", description="Command: lsblk")
                         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
                         refresh_button.connect("clicked", self.update_disk_page)
                         loop_# group.set_header_suffix(refresh_button)
@@ -373,13 +389,14 @@ class CommandTestWindow(Adw.Window):
                         group.add(row)
 
     def update_memory_page(self, btn=None):
+        self.remove_content(self.memory_content)
         out = self.execute_terminal_command("lsmem -J")
         if out == "":
             page = self.empty_command_page("lsmem")
             self.memory_content.append(page)
         else:
             data = json.loads(out)
-            group2 = Adw.PreferencesGroup(margin_bottom=20, title="Ranges", description="command: lsmem")
+            group2 = Adw.PreferencesGroup(margin_bottom=20, title="Ranges", description="Command: lsmem")
             refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
             refresh_button.connect("clicked", self.update_memory_page)
             # group2.set_header_suffix(refresh_button)
@@ -410,6 +427,7 @@ class CommandTestWindow(Adw.Window):
                 group2.add(row)
 
     def update_pci_page(self, btn=None):
+        self.remove_content(self.pci_content)
         out = self.execute_terminal_command("lspci")
         if out == "":
             page = self.empty_command_page("lspci")
@@ -418,7 +436,7 @@ class CommandTestWindow(Adw.Window):
             out = out.splitlines()
             text = "range "
             pattern = r'(\S+)\s(.*?):\s(.*)'
-            group2 = Adw.PreferencesGroup(margin_bottom=20, title="PCIs", description="command: lspci")
+            group2 = Adw.PreferencesGroup(margin_bottom=20, title="PCIs", description="Command: lspci")
             refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
             refresh_button.connect("clicked", self.update_pci_page)
             # group2.set_header_suffix(refresh_button)
@@ -434,14 +452,14 @@ class CommandTestWindow(Adw.Window):
                     group2.add(action_row)
 
     def update_usb_page(self, btn=None):
-        self.usb_content = Gtk.Box()
+        self.remove_content(self.usb_content)
         out = self.execute_terminal_command("lsusb")
         if out == "":
             page = self.empty_command_page("lsusb")
             self.usb_content.append(page)
         else:
             out = out.splitlines()
-            group2 = Adw.PreferencesGroup(margin_bottom=20, title="Usb", description="command: lsusb")
+            group2 = Adw.PreferencesGroup(margin_bottom=20, title="Usb", description="Command: lsusb")
             refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
             refresh_button.connect("clicked", self.update_usb_page)
             # group2.set_header_suffix(refresh_button)
@@ -470,6 +488,7 @@ class CommandTestWindow(Adw.Window):
                 expander_row.add_row(action_row)
 
     def update_network_page(self, btn=None):
+        self.remove_content(self.network_content)
         out = self.execute_terminal_command("ip -j address")
         if out == "":
             page = self.empty_command_page("ip address")
@@ -481,7 +500,7 @@ class CommandTestWindow(Adw.Window):
                     name = line['ifname']
                 except:
                     name = "N/A"
-                group2 = Adw.PreferencesGroup(margin_bottom=20, title=name, description="command: ip address")
+                group2 = Adw.PreferencesGroup(margin_bottom=20, title=name, description="Command: ip address")
                 refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
                 refresh_button.connect("clicked", self.update_network_page)
                 # group2.set_header_suffix(refresh_button)
@@ -520,14 +539,21 @@ class CommandTestWindow(Adw.Window):
                         row.add_suffix(Gtk.Label(opacity=0.60 , label=value, xalign=1, wrap=True, wrap_mode=2, hexpand=True, justify=1))
                         group2.add(row)
 
+    def remove_content(self, box):
+        child = box.get_first_child()
+        while child != None:
+            box.remove(child)
+            child = box.get_first_child()
+
     def update_cpu_page(self, btn=None):
+        self.remove_content(self.cpu_content)
         out = self.execute_terminal_command("lscpu -J")
         if out == "":
             page = self.empty_command_page("lscpu")
             self.cpu_content.append(page)
         else:
             data = json.loads(out)
-            group2 = Adw.PreferencesGroup(margin_bottom=20, title="CPU", description="command: lshw -c cpu")
+            group2 = Adw.PreferencesGroup(margin_bottom=20, title="CPU", description="Command: lscpu")
             refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
             refresh_button.connect("clicked", self.update_cpu_page)
             # group2.set_header_suffix(refresh_button)
@@ -555,6 +581,7 @@ class CommandTestWindow(Adw.Window):
                         group2.add(row)
 
     def update_motherboard_page(self, btn=None):
+        self.remove_content(self.motherboard_content)
         if 'SNAP' in os.environ:
             dmi_path = "/var/lib/snapd/hostfs/sys/devices/virtual/dmi/id/"
         else:
