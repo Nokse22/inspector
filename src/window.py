@@ -20,6 +20,7 @@
 from gi.repository import Adw
 from gi.repository import Gtk
 from gi.repository import Gio
+import gettext 
 import gi, os, subprocess, threading, time, json, re, fnmatch
 
 class CommandTestWindow(Adw.PreferencesWindow):
@@ -251,11 +252,11 @@ class CommandTestWindow(Adw.PreferencesWindow):
                     group.set_header_suffix(refresh_button)
                     self.disks_content.add(group)
                     self.disk_page_children.append(group)
-                    row = Adw.ActionRow(title=_("Total size"))
-                    row.add_suffix(Gtk.Label(label=size, wrap=True, selectable=True))
-                    group.add(row)
+                    expander_row = Adw.ExpanderRow(title=_("Total size: "+size))
+                    group.add(expander_row)
                 else:
                     if loop_group == None:
+                        loop_count = self.execute_terminal_command("lsblk -d | grep loop | wc -l")
                         loop_group = Adw.PreferencesGroup(title=_("Loop devices"), description=_("command: lsblk"))
                         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
                         refresh_button.set_tooltip_text(_("Refresh"))
@@ -263,6 +264,8 @@ class CommandTestWindow(Adw.PreferencesWindow):
                         loop_group.set_header_suffix(refresh_button)
                         self.disks_content.add(loop_group)
                         self.disk_page_children.append(loop_group)
+                        loop_expander_row = Adw.ExpanderRow(title=gettext.ngettext("Device Count: %s", "Devices Count: %s", loop_count) % loop_count.rstrip())
+                        loop_group.add(loop_expander_row)
                     try:
                         subtitle = device['mountpoints'][0]
                     except:
@@ -276,7 +279,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
                     except:
                         size = "N/A"
                     row.add_suffix(Gtk.Label(label=size, wrap=True, selectable=True))
-                    loop_group.add(row)
+                    loop_expander_row.add_row(row)
                 if "children" in device:
                     group = Adw.PreferencesGroup()
                     self.disks_content.add(group)
@@ -297,13 +300,15 @@ class CommandTestWindow(Adw.PreferencesWindow):
                             name = partition['name']
                         except:
                             name = "Name"
-                        row = Adw.ActionRow(title=name, subtitle=subtitle)
-                        try:
-                            size = partition['size']
-                        except:
-                            size = "N/A"
-                        row.add_suffix(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
-                        group.add(row)
+                        if not subtitle or not fnmatch.fnmatch(subtitle, "*snap*"):
+                            row = Adw.ActionRow(title=name, subtitle=subtitle)
+                            try:
+                                size = partition['size']
+                            except:
+                                size = "N/A"
+                            row.add_suffix(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
+                            expander_row.add_row(row)
+
 
     def update_memory_page(self, btn=None):
         for child in self.memory_page_children:
