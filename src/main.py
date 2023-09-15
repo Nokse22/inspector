@@ -73,7 +73,7 @@ class CommandTestApplication(Adw.Application):
                                 copyright='© 2023 Nokse')
         # Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL. 
         # One name per line, please do not remove previous names.
-        about.set_translator_credits(_("translator-credits"))        
+        about.set_translator_credits(_("translator-credits"))
         about.present()
 
     def on_preferences_action(self, widget, _):
