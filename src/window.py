@@ -20,6 +20,7 @@
 from gi.repository import Adw
 from gi.repository import Gtk
 from gi.repository import Gio
+
 import gettext 
 import gi, os, subprocess, threading, time, json, re, fnmatch
 
@@ -48,7 +49,6 @@ class CommandTestWindow(Adw.PreferencesWindow):
         menu.append(_("About Inspector"), "app.about")
 
         menu_button.set_menu_model(menu)
-
         #hd.pack_start(menu_button)
         about_button = Gtk.Button(icon_name="help-about-symbolic", valign=3, action_name='app.about')
         about_button.set_tooltip_text(_("About Inspector"))
@@ -105,11 +105,12 @@ class CommandTestWindow(Adw.PreferencesWindow):
         self.update_system_page()
 
     def execute_terminal_command(self, command):
-        if 'SNAP' not in os.environ:
+        if 'FLATPAK_ID' in os.environ:
             console_permissions = "flatpak-spawn --host "
         else:
             console_permissions = ""
         txt = console_permissions + command
+        print(txt)
         process = subprocess.Popen(txt, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, shell=True)
         try:
@@ -223,6 +224,7 @@ class CommandTestWindow(Adw.PreferencesWindow):
             self.disks_content.remove(child)
         self.disk_page_children = []
         out = self.execute_terminal_command("lsblk -J")
+
         if out == "":
             page = self.empty_command_page("lsblk")
             self.disks_content.add(page)
@@ -291,6 +293,8 @@ class CommandTestWindow(Adw.PreferencesWindow):
                     for partition in partitions:
                         try:
                             subtitle = partition['mountpoints'][0]
+                            if subtitle and fnmatch.fnmatch(subtitle, "*snap*"):
+                                subtitle = '/'
                         except:
                             try:
                                 subtitle = partition['mountpoint']
@@ -300,14 +304,13 @@ class CommandTestWindow(Adw.PreferencesWindow):
                             name = partition['name']
                         except:
                             name = "Name"
-                        if not subtitle or not fnmatch.fnmatch(subtitle, "*snap*"):
-                            row = Adw.ActionRow(title=name, subtitle=subtitle)
-                            try:
-                                size = partition['size']
-                            except:
-                                size = "N/A"
-                            row.add_suffix(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
-                            expander_row.add_row(row)
+                        row = Adw.ActionRow(title=name, subtitle=subtitle)
+                        try:
+                            size = partition['size']
+                        except:
+                            size = "N/A"
+                        row.add_suffix(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
+                        expander_row.add_row(row)
 
 
     def update_memory_page(self, btn=None):
