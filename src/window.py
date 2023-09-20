@@ -234,7 +234,7 @@ class CommandTestWindow(Adw.Window):
             self.system_content.append(page)
             return
 
-        group = Adw.PreferencesGroup(margin_bottom=20, title="Distro", description="Details from /etc/os-release")
+        group = Adw.PreferencesGroup(margin_bottom=20, title=_("Distribution"), description="Details from /etc/os-release")
         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
         refresh_button.connect("clicked", self.update_system_page)
         # group.set_header_suffix(refresh_button)
@@ -317,12 +317,11 @@ class CommandTestWindow(Adw.Window):
 
         # cat /etc/os-release
 
-        group = Adw.PreferencesGroup(title=_("Distro"), description=_("command: cat /etc/os-release"))
+        group = Adw.PreferencesGroup(title=_("Distribution"), description=_("command: cat /etc/os-release"))
         refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
         refresh_button.connect("clicked", self.update_system_page)
         group.set_header_suffix(refresh_button)
-        self.system_content.add(group)
-        self.system_page_children.append(group)
+        self.system_content.append(group)
         
         if 'SNAP' in os.environ:
             out = self.execute_terminal_command("cat /var/lib/snapd/hostfs/etc/os-release")
@@ -375,8 +374,7 @@ class CommandTestWindow(Adw.Window):
                     refresh_button.set_tooltip_text(_("Refresh"))
                     refresh_button.connect("clicked", self.update_disk_page)
                     group.set_header_suffix(refresh_button)
-                    self.disks_content.add(group)
-                    self.disk_page_children.append(group)
+                    self.disks_content.append(group)
                     expander_row = Adw.ExpanderRow(title=_("Total size: "+size))
                     group.add(expander_row)
                 else:
@@ -388,7 +386,6 @@ class CommandTestWindow(Adw.Window):
                         refresh_button.connect("clicked", self.update_disk_page)
                         loop_group.set_header_suffix(refresh_button)
                         self.disks_content.add(loop_group)
-                        self.disk_page_children.append(loop_group)
                         loop_expander_row = Adw.ExpanderRow(title=gettext.ngettext("Device Count: %s", "Devices Count: %s", loop_count) % loop_count.rstrip())
                         loop_group.add(loop_expander_row)
                     try:
@@ -550,7 +547,7 @@ class CommandTestWindow(Adw.Window):
                     name = line['ifname']
                 except:
                     name = "N/A"
-                group2 = Adw.PreferencesGroup(margin_bottom=20,title=name, description=_("command: ip address"), margin_bottom=20)
+                group2 = Adw.PreferencesGroup(title=name, description=_("command: ip address"), margin_bottom=20)
                 refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
                 refresh_button.set_tooltip_text(_("Refresh"))
                 refresh_button.connect("clicked", self.update_network_page)
@@ -605,11 +602,7 @@ class CommandTestWindow(Adw.Window):
         else:
             data = json.loads(out)
             group2 = Adw.PreferencesGroup(title=_("CPU"), description=_("command: lshw -c cpu"))
-            refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-            refresh_button.set_tooltip_text(_("Refresh"))
-            refresh_button.connect("clicked", self.update_hardware_page)
-            group2.set_header_suffix(refresh_button)
-            self.cpu_content.add(group2)
+            self.cpu_content.append(group2)
 
             add_flags = False
             try:
@@ -673,10 +666,6 @@ class CommandTestWindow(Adw.Window):
 
         # Create and set the main preferences group for motherboard info
         group = Adw.PreferencesGroup(title=_("Motherboard"), description=_("Details from /sys/devices/virtual/dmi/id"))
-        refresh_button = Gtk.Button(icon_name="view-refresh-symbolic", valign=3, css_classes=["flat"])
-        refresh_button.set_tooltip_text(_("Refresh"))
-        refresh_button.connect("clicked", self.update_motherboard_page)
-        # group.set_header_suffix(refresh_button)
         self.motherboard_content.append(group)
 
         # Populate the group with DMI details
