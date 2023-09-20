@@ -71,17 +71,6 @@ class CommandTestWindow(Adw.Window):
         self.scrolled_window.set_child(self.clamp)
         self.toolbar_view.set_content(self.scrolled_window)
 
-        sidebar_condition = Adw.BreakpointCondition.new_length(1, 500, 2)
-        sidebar_breakpoint = Adw.Breakpoint.new(sidebar_condition)
-
-        sidebar_breakpoint.set_condition(sidebar_condition)
-        sidebar_breakpoint.add_setter(self.split_view, "collapsed", True)
-        sidebar_breakpoint.add_setter(sidebar_button, "visible", True)
-        sidebar_breakpoint.connect("apply", self.toggle_menu_button)
-        sidebar_breakpoint.connect("unapply", self.toggle_menu_button)
-
-        self.add_breakpoint(sidebar_breakpoint)
-
         menu_button = Gtk.MenuButton()
         menu_button.set_icon_name("open-menu-symbolic")
         menu = Gio.Menu()
@@ -97,6 +86,18 @@ class CommandTestWindow(Adw.Window):
         self.menu_button.set_menu_model(menu)
         headerbar.pack_end(self.menu_button)
         headerbar.pack_end(reload_button)
+
+        sidebar_condition = Adw.BreakpointCondition.new_length(1, 500, 2)
+        sidebar_breakpoint = Adw.Breakpoint.new(sidebar_condition)
+
+        sidebar_breakpoint.set_condition(sidebar_condition)
+        sidebar_breakpoint.add_setter(self.split_view, "collapsed", True)
+        sidebar_breakpoint.add_setter(menu_button, "visible", False)
+        sidebar_breakpoint.add_setter(sidebar_button, "visible", True)
+        sidebar_breakpoint.connect("apply", self.toggle_menu_button)
+        sidebar_breakpoint.connect("unapply", self.toggle_menu_button)
+
+        self.add_breakpoint(sidebar_breakpoint)
 
         self.motherboard_content = Gtk.Box(orientation=1)
         self.sidebar_list_box.append(Gtk.Label(label=_("Motherboard"), name="MOBO", xalign=0))
@@ -217,7 +218,7 @@ class CommandTestWindow(Adw.Window):
         return out
 
     def empty_command_page(self, command):
-        group = Adw.PreferencesGroup(margin_bottom=20)
+        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24)
         empty_command_status_page = Adw.StatusPage(title=_("The command is not supported"),
                 icon_name="computer-fail-symbolic", hexpand=True, vexpand=True,
                 description=_("The command {0} returned empty.\n"
@@ -234,10 +235,7 @@ class CommandTestWindow(Adw.Window):
             self.system_content.append(page)
             return
 
-        group = Adw.PreferencesGroup(margin_bottom=20, title=_("Distribution"), description="Details from /etc/os-release")
-        refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-        refresh_button.connect("clicked", self.update_system_page)
-        # group.set_header_suffix(refresh_button)
+        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Distribution"), description="Details from /etc/os-release")
         self.system_content.append(group)
 
         if 'SNAP' in os.environ:
@@ -268,10 +266,7 @@ class CommandTestWindow(Adw.Window):
             page = self.empty_command_page("uname")
             self.kernel_content.append(page)
             return
-        group = Adw.PreferencesGroup(margin_bottom=20, title=_("System"), description=_("command: uname"))
-        refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-        refresh_button.connect("clicked", self.update_system_page)
-        # group.set_header_suffix(refresh_button)
+        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("System"), description=_("command: uname"))
         self.kernel_content.append(group)
 
         out = self.execute_terminal_command("uname -s")
@@ -317,10 +312,7 @@ class CommandTestWindow(Adw.Window):
 
         # cat /etc/os-release
 
-        group = Adw.PreferencesGroup(title=_("Distribution"), description=_("command: cat /etc/os-release"))
-        refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-        refresh_button.connect("clicked", self.update_system_page)
-        group.set_header_suffix(refresh_button)
+        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Distribution"), description=_("command: cat /etc/os-release"))
         self.system_content.append(group)
         
         if 'SNAP' in os.environ:
@@ -369,22 +361,14 @@ class CommandTestWindow(Adw.Window):
                     except:
                         size = ""
                     text = f"Name: {name}, Size: {size}"
-                    group = Adw.PreferencesGroup(margin_bottom=20, title=name, description=_("command: lsblk"))
-                    refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-                    refresh_button.set_tooltip_text(_("Refresh"))
-                    refresh_button.connect("clicked", self.update_disk_page)
-                    group.set_header_suffix(refresh_button)
+                    group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("command: lsblk"))
                     self.disks_content.append(group)
                     expander_row = Adw.ExpanderRow(title=_("Total size: "+size))
                     group.add(expander_row)
                 else:
                     if loop_group == None:
                         loop_count = self.execute_terminal_command("lsblk -d | grep loop | wc -l")
-                        loop_group = Adw.PreferencesGroup(title=_("Loop devices"), description=_("command: lsblk"))
-                        refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-                        refresh_button.set_tooltip_text(_("Refresh"))
-                        refresh_button.connect("clicked", self.update_disk_page)
-                        loop_group.set_header_suffix(refresh_button)
+                        loop_group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Loop devices"), description=_("command: lsblk"))
                         self.disks_content.add(loop_group)
                         loop_expander_row = Adw.ExpanderRow(title=gettext.ngettext("Device Count: %s", "Devices Count: %s", loop_count) % loop_count.rstrip())
                         loop_group.add(loop_expander_row)
@@ -403,7 +387,7 @@ class CommandTestWindow(Adw.Window):
                     row.add_suffix(Gtk.Label(label=size, wrap=True, selectable=True))
                     loop_expander_row.add_row(row)
                 if "children" in device:
-                    group = Adw.PreferencesGroup(margin_bottom=20, )
+                    group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, )
                     self.disks_content.append(group)
                     try:
                         partitions = device["children"]
@@ -440,11 +424,7 @@ class CommandTestWindow(Adw.Window):
             self.memory_content.append(page)
         else:
             data = json.loads(out)
-            group2 = Adw.PreferencesGroup(title=_("Ranges"), description=_("command: lsmem"))
-            refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-            refresh_button.set_tooltip_text(_("Refresh"))
-            refresh_button.connect("clicked", self.update_memory_page)
-            # group2.set_header_suffix(refresh_button)
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Ranges"), description=_("command: lsmem"))
             self.memory_content.append(group2)
             try:
                 memory = data["memory"]
@@ -481,11 +461,7 @@ class CommandTestWindow(Adw.Window):
             out = out.splitlines()
             text = "range "
             pattern = r'(\S+)\s(.*?):\s(.*)'
-            group2 = Adw.PreferencesGroup(margin_bottom=20, title=_("PCIs"), description=_("command: lspci"))
-            refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-            refresh_button.set_tooltip_text(_("Refresh"))
-            refresh_button.connect("clicked", self.update_pci_page)
-            # group2.set_header_suffix(refresh_button)
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("PCIs"), description=_("command: lspci"))
             self.pci_content.append(group2)
             for line in out:
                 match = re.match(pattern, line)
@@ -505,11 +481,7 @@ class CommandTestWindow(Adw.Window):
             self.usb_content.append(page)
         else:
             out = out.splitlines()
-            group2 = Adw.PreferencesGroup(margin_bottom=20, title=_("USB"), description=_("command: lsusb"))
-            refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-            refresh_button.set_tooltip_text(_("Refresh"))
-            refresh_button.connect("clicked", self.update_usb_page)
-            # group2.set_header_suffix(refresh_button)
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("USB"), description=_("command: lsusb"))
             self.usb_content.append(group2)
             for line in out:
                 result = []
@@ -547,11 +519,7 @@ class CommandTestWindow(Adw.Window):
                     name = line['ifname']
                 except:
                     name = "N/A"
-                group2 = Adw.PreferencesGroup(title=name, description=_("command: ip address"), margin_bottom=20)
-                refresh_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-                refresh_button.set_tooltip_text(_("Refresh"))
-                refresh_button.connect("clicked", self.update_network_page)
-                # group2.set_header_suffix(refresh_button)
+                group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("command: ip address"))
                 self.network_content.append(group2)
                 for key, value in line.items():
 
@@ -601,7 +569,7 @@ class CommandTestWindow(Adw.Window):
             self.cpu_content.append(page)
         else:
             data = json.loads(out)
-            group2 = Adw.PreferencesGroup(title=_("CPU"), description=_("command: lshw -c cpu"))
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("CPU"), description=_("command: lshw -c cpu"))
             self.cpu_content.append(group2)
 
             add_flags = False
@@ -665,7 +633,7 @@ class CommandTestWindow(Adw.Window):
         ]
 
         # Create and set the main preferences group for motherboard info
-        group = Adw.PreferencesGroup(title=_("Motherboard"), description=_("Details from /sys/devices/virtual/dmi/id"))
+        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Motherboard"), description=_("Details from /sys/devices/virtual/dmi/id"))
         self.motherboard_content.append(group)
 
         # Populate the group with DMI details
