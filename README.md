@@ -9,7 +9,7 @@
   A Gtk4 Libadwaita wrapper for various cli commands.
 The commands are already installed on any system usually.
 
-Suggestions are welcome. The idea for the app is to make a graphical user interface for common commands.
+Suggestions are welcome. The idea for the app is to make a graphical user interface for common commands or to display information read from files.
   </p>
   <p>View information like:
 	    <ul>
@@ -22,17 +22,13 @@ Suggestions are welcome. The idea for the app is to make a graphical user interf
 	      <li>Motherboard and bios</li>
 	      <li>System and distro</li>
       </ul>
-	  </p>
+    </p>
 
   <details><summary><h2>Click here for screenshots 🖼️</h2></summary>
   <div align="center">
   <img src="data/resources/screenshot 1.png" height="300"/>
   <img src="data/resources/screenshot 2.png" height="300"/>
   <img src="data/resources/screenshot 3.png" height="300"/>
-  <img src="data/resources/screenshot 4.png" height="300"/>
-  <img src="data/resources/screenshot 5.png" height="300"/>
-  <img src="data/resources/screenshot 6.png" height="300"/>
-  <img src="data/resources/screenshot 7.png" height="300"/>
   </div>
   </details>
 
