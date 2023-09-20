@@ -34,7 +34,7 @@ class CommandTestApplication(Adw.Application):
         super().__init__(application_id='io.github.nokse22.inspector',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
-        self.create_action('about', self.on_about_action)
+        self.create_action('about', self.on_about_action, ['F1'])
 
         self.create_action('reload', self.on_reload_action, ['<primary>r'])
 
@@ -62,17 +62,20 @@ class CommandTestApplication(Adw.Application):
             self.win = CommandTestWindow(application=self)
         self.win.present()
 
-    def on_about_action(self, widget, _):
+    def on_about_action(self, *args):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name='Inspector',
+                                application_name=_("Inspector"),
                                 application_icon='io.github.nokse22.inspector',
                                 developer_name='Nokse',
-                                developers=["Nokse22 https://github.com/Nokse22","David Stephenson https://github.com/David-Stephenson"],
+                                developers=["Nokse22 https://github.com/Nokse22","David Stephenson https://github.com/David-Stephenson", "soumyaDghosh https://github.com/soumyaDghosh"],
                                 issue_url='https://github.com/Nokse22/inspector/issues',
                                 website='https://github.com/Nokse22/inspector',
-                                version='0.1.6',
+                                version='0.1.7',
                                 copyright='© 2023 Nokse')
+        # Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL. 
+        # One name per line, please do not remove previous names.
+        about.set_translator_credits(_("translator-credits"))
         about.present()
 
     def on_preferences_action(self, widget, _):

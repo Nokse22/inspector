@@ -1,8 +1,10 @@
 [Desktop Entry]
 Name=Inspector
+Comment=View information about your system
 Exec=inspector
 Icon=io.github.nokse22.inspector
 Terminal=false
 Type=Application
 Categories=GTK;Utility;
+Keywords=System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;
 StartupNotify=true

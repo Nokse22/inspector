@@ -29,8 +29,9 @@
             "buildsystem" : "meson",
             "sources" : [
                 {
-                    "type" : "dir",
-                    "url" : "."
+                    "type" : "git",
+                    "url" : "https://github.com/Nokse22/inspector",
+                    "branch" : "master"                    
                 }
             ]
         }
