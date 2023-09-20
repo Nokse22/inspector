@@ -36,6 +36,8 @@ class CommandTestApplication(Adw.Application):
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action, ['F1'])
 
+        self.create_action('reload', self.on_reload_action, ['<primary>r'])
+
         css = '''
         .link{
             padding: 0px;
@@ -95,6 +97,8 @@ class CommandTestApplication(Adw.Application):
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
+    def on_reload_action(self, *args):
+        self.win.reload_current()
 
 def main(version):
     """The application's entry point."""
