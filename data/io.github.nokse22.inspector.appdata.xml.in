@@ -21,18 +21,18 @@
   <releases>
     <release version="0.1.8" date="2023-08-11">
     	<description>
-			  <p>Improved app design and usability</p>
-    	  <p>Updated runtime to 45</p>
+			  <li>Improved app design and usability</li>
+    	  <li>Updated runtime to 45</li>
 		  </description>
   	</release>
     <release version="0.1.7" date="2023-09-15">
     	<description>
-			  <p>Fixed typo (kawaii-ghost)</p>
-    	  <p>Improved metadata</p>
-    	  <p>Made labels selectable</p>
-    	  <p>Added translation support (Sabri Ünal)</p>
-    	  <p>Added Turkish translation (Sabri Ünal)</p>
-    	  <p>Improved storage device view (soumyaDghosh)</p>
+			  <li>Fixed typo (kawaii-ghost)</li>
+    	  <li>Improved metadata</li>
+    	  <li>Made labels selectable</li>
+    	  <li>Added translation support (Sabri Ünal)</li>
+    	  <li>Added Turkish translation (Sabri Ünal)</li>
+    	  <li>Improved storage device view (soumyaDghosh)</li>
 		  </description>
   	</release>
     <release version="0.1.6" date="2023-08-12">
@@ -45,12 +45,12 @@
   	</release>
   	<release version="0.1.5" date="2023-08-11">
     	<description>
-			  <p>Added motherboard/bios page</p>
+			  <li>Added motherboard/bios page</li>
 		  </description>
   	</release>
   	<release version="0.1.4" date="2023-08-07">
     	<description>
-			  <p>Bug fixes</p>
+			  <li>Bug fixes</li>
 		  </description>
   	</release>
   </releases>
