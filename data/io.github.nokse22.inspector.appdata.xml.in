@@ -19,6 +19,12 @@
   <url type="bugtracker">https://github.com/Nokse22/inspector/issues</url>
 
   <releases>
+    <release version="0.1.8" date="2023-08-11">
+    	<description>
+			  <p>Improved app design and usability</p>
+    	  <p>Updated runtime to 45</p>
+		  </description>
+  	</release>
     <release version="0.1.7" date="2023-09-15">
     	<description>
 			  <p>Fixed typo (kawaii-ghost)</p>
