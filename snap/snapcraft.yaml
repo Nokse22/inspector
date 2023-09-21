@@ -1,0 +1,59 @@
+name: inspector # you probably want to 'snapcraft register <name>'
+base: core22 # the base snap is the execution environment for this snap
+adopt-info: inspector
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+website: https://github.com/Nokse22/inspector
+license: GPL-3.0
+source-code: https://github.com/Nokse22/inspector
+issues: https://github.com/Nokse22/inspector/issues
+contact: https://github.com/Nokse22/inspector
+
+
+
+architectures:
+  - build-on: amd64
+  - build-on: arm64
+  - build-on: armhf
+
+parts:
+  inspector:
+    # See 'snapcraft plugins'
+    plugin: meson
+    source: .
+    parse-info: [ usr/share/appdata/io.github.nokse22.inspector.appdata.xml ]
+    build-packages:
+      - blueprint-compiler
+    meson-parameters:
+      - --prefix=/snap/inspector/current/usr
+    override-build: |
+      craftctl default
+      sed -e '1c#!/usr/bin/env python3' -i ${CRAFT_PART_INSTALL}/snap/inspector/current/usr/bin/inspector
+      chmod +x $CRAFT_PART_INSTALL/snap/inspector/current/usr/bin/inspector
+    organize:
+      snap/inspector/current: .
+  deps:
+    plugin: nil
+    stage-packages:
+      - usbutils
+      - pciutils
+
+slots:
+  inspector:
+    interface: dbus
+    bus: session
+    name: io.github.nokse22.inspector
+
+apps:
+  inspector:
+    command: usr/bin/inspector
+    extensions: [ gnome ]
+    common-id: io.github.nokse22.inspector
+    desktop: usr/share/applications/io.github.nokse22.inspector.desktop
+    environment:
+      PYTHONPATH: $SNAP/usr/bin/inspector:$PYTHONPATH
+    plugs:
+      - mount-observe
+      - hardware-observe
+      - network-observe
+      - system-observe
