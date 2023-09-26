@@ -100,31 +100,31 @@ class CommandTestWindow(Adw.Window):
         self.add_breakpoint(sidebar_breakpoint)
 
         self.motherboard_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Motherboard"), name="MOBO", xalign=0))
+        self.sidebar_list_box.append(Gtk.Label(label=_("Motherboard"), name="MOBO", xalign=0, margin_top=8, margin_bottom=8))
 
         self.cpu_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Processor"), name="CPU", xalign=0))
+        self.sidebar_list_box.append(Gtk.Label(label=_("Processor"), name="CPU", xalign=0, margin_top=8, margin_bottom=8))
 
         self.memory_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Memory"), name="MEMORY", xalign=0))
+        self.sidebar_list_box.append(Gtk.Label(label=_("Memory"), name="MEMORY", xalign=0, margin_top=8, margin_bottom=8))
 
         self.disks_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Disk Drives"), name="DISK", xalign=0))
+        self.sidebar_list_box.append(Gtk.Label(label=_("Disk Drives"), name="DISK", xalign=0, margin_top=8, margin_bottom=8))
 
         self.pci_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("PCI Devices"), name="PCI", xalign=0))
+        self.sidebar_list_box.append(Gtk.Label(label=_("PCI Devices"), name="PCI", xalign=0, margin_top=8, margin_bottom=8))
 
         self.usb_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("USB Devices"), name="USB", xalign=0))
+        self.sidebar_list_box.append(Gtk.Label(label=_("USB Devices"), name="USB", xalign=0, margin_top=8, margin_bottom=8))
 
         self.network_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Network Devices"), name="NETWORK", xalign=0))
+        self.sidebar_list_box.append(Gtk.Label(label=_("Network Devices"), name="NETWORK", xalign=0, margin_top=8, margin_bottom=8))
 
         self.kernel_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Kernel"), name="KERNEL", xalign=0))
+        self.sidebar_list_box.append(Gtk.Label(label=_("Kernel"), name="KERNEL", xalign=0, margin_top=8, margin_bottom=8))
 
         self.system_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Distribution"), name="SYSTEM", xalign=0))
+        self.sidebar_list_box.append(Gtk.Label(label=_("Distribution"), name="SYSTEM", xalign=0, margin_top=8, margin_bottom=8))
 
         self.sidebar_list_box.select_row( self.sidebar_list_box.get_row_at_index(0))
 
@@ -266,7 +266,7 @@ class CommandTestWindow(Adw.Window):
             page = self.empty_command_page("uname")
             self.kernel_content.append(page)
             return
-        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("System"), description=_("command: uname"))
+        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("System"), description=_("Command: uname"))
         self.kernel_content.append(group)
 
         out = self.execute_terminal_command("uname -s")
@@ -312,7 +312,7 @@ class CommandTestWindow(Adw.Window):
 
         # cat /etc/os-release
 
-        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Distribution"), description=_("command: cat /etc/os-release"))
+        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Distribution"), description=_("Command: cat /etc/os-release"))
         self.system_content.append(group)
         
         if 'SNAP' in os.environ:
@@ -361,15 +361,15 @@ class CommandTestWindow(Adw.Window):
                     except:
                         size = ""
                     text = f"Name: {name}, Size: {size}"
-                    group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("command: lsblk"))
+                    group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("Command: lsblk"))
                     self.disks_content.append(group)
                     expander_row = Adw.ExpanderRow(title=_("Total size: "+size))
                     group.add(expander_row)
                 else:
                     if loop_group == None:
                         loop_count = self.execute_terminal_command("lsblk -d | grep loop | wc -l")
-                        loop_group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Loop devices"), description=_("command: lsblk"))
-                        self.disks_content.add(loop_group)
+                        loop_group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Loop devices"), description=_("Command: lsblk"))
+                        self.disks_content.append(loop_group)
                         loop_expander_row = Adw.ExpanderRow(title=gettext.ngettext("Device Count: %s", "Devices Count: %s", loop_count) % loop_count.rstrip())
                         loop_group.add(loop_expander_row)
                     try:
@@ -424,7 +424,7 @@ class CommandTestWindow(Adw.Window):
             self.memory_content.append(page)
         else:
             data = json.loads(out)
-            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Ranges"), description=_("command: lsmem"))
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Ranges"), description=_("Command: lsmem"))
             self.memory_content.append(group2)
             try:
                 memory = data["memory"]
@@ -461,7 +461,7 @@ class CommandTestWindow(Adw.Window):
             out = out.splitlines()
             text = "range "
             pattern = r'(\S+)\s(.*?):\s(.*)'
-            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("PCIs"), description=_("command: lspci"))
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("PCIs"), description=_("Command: lspci"))
             self.pci_content.append(group2)
             for line in out:
                 match = re.match(pattern, line)
@@ -481,7 +481,7 @@ class CommandTestWindow(Adw.Window):
             self.usb_content.append(page)
         else:
             out = out.splitlines()
-            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("USB"), description=_("command: lsusb"))
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("USB"), description=_("Command: lsusb"))
             self.usb_content.append(group2)
             for line in out:
                 result = []
@@ -519,7 +519,7 @@ class CommandTestWindow(Adw.Window):
                     name = line['ifname']
                 except:
                     name = "N/A"
-                group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("command: ip address"))
+                group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("Command: ip address"))
                 self.network_content.append(group2)
                 for key, value in line.items():
 
@@ -569,7 +569,7 @@ class CommandTestWindow(Adw.Window):
             self.cpu_content.append(page)
         else:
             data = json.loads(out)
-            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("CPU"), description=_("command: lshw -c cpu"))
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("CPU"), description=_("Command: lshw -c cpu"))
             self.cpu_content.append(group2)
 
             add_flags = False
