@@ -396,8 +396,10 @@ class CommandTestWindow(Adw.Window):
                     for partition in partitions:
                         try:
                             subtitle = partition['mountpoints'][0]
-                            if subtitle and fnmatch.fnmatch(subtitle, "*snap*"):
+                            if subtitle and fnmatch.fnmatch(subtitle, "/snap"):
                                 subtitle = '/'
+                            if subtitle.startswith('/var/lib/snapd/hostfs/'):
+                                subtitle = subtitle[21:]
                         except:
                             try:
                                 subtitle = partition['mountpoint']
