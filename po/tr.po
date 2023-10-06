@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inspector\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-09 02:37+0300\n"
-"PO-Revision-Date: 2023-09-09 02:37+0300\n"
+"POT-Creation-Date: 2023-10-06 15:18+0300\n"
+"PO-Revision-Date: 2023-10-06 15:22+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Türkçe <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: data/io.github.nokse22.inspector.desktop.in:3
-#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:66
-#: src/window.py:35
+#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:68
+#: src/window.py:57
 msgid "Inspector"
 msgstr "İnceleyici"
 
@@ -49,87 +49,64 @@ msgstr ""
 msgid "Nokse"
 msgstr "Nokse"
 
-#: data/io.github.nokse22.inspector.appdata.xml.in:24
-msgid "Fixed typo"
-msgstr "Yazım hatası düzeltildi"
-
-#: data/io.github.nokse22.inspector.appdata.xml.in:25
-msgid "Improved metadata"
-msgstr "Üst veriler iyileştirildi"
-
-#: data/io.github.nokse22.inspector.appdata.xml.in:31
-msgid "Fixed a critical bug if the app was run with older versions of lsblk"
-msgstr ""
-"Uygulamanın eski lsblk sürümüyle çalışırsa yaşadığı kritik hata düzeltildi"
-
-#: data/io.github.nokse22.inspector.appdata.xml.in:32
-msgid "Made the app more stable"
-msgstr "Uygulama daha stabil hale getirildi"
-
-#: data/io.github.nokse22.inspector.appdata.xml.in:38
-msgid "Added motherboard/bios page"
-msgstr "Ana kart/bios sayfası eklendi"
-
-#: data/io.github.nokse22.inspector.appdata.xml.in:43
-msgid "Bug fixes"
-msgstr "Hata düzeltmeler"
-
-#. Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL.
-#. One name per line, please do not remove previous names.
-#: src/main.py:76
+#: src/main.py:78
 msgid "translator-credits"
 msgstr "Sabri Ünal <libreajans@gmail.com>"
 
-#: src/window.py:45
+#: src/window.py:77
 msgid "Reload"
 msgstr "Yeniden Yükle"
 
-#: src/window.py:46
+#: src/window.py:78
 msgid "Keyboard shortcuts"
 msgstr "Klavye kısayolları"
 
-#: src/window.py:47 src/window.py:53
+#: src/window.py:79
 msgid "About Inspector"
 msgstr "İnceleyici Hakkında"
 
-#: src/window.py:56 src/window.py:393
-msgid "USB"
-msgstr "USB"
-
-#: src/window.py:60
-msgid "Disk"
-msgstr "Disk"
-
-#: src/window.py:64 src/window.py:348
-msgid "Memory"
-msgstr "Bellek"
-
-#: src/window.py:68
-msgid "PCI"
-msgstr "PCI"
-
-#: src/window.py:72
-msgid "Network"
-msgstr "Ağ"
-
-#: src/window.py:76 src/window.py:491
-msgid "CPU"
-msgstr "İşlemci"
-
-#. Create and set the main preferences group for motherboard info
-#: src/window.py:80 src/window.py:561
+#: src/window.py:103 src/window.py:638
 msgid "Motherboard"
 msgstr "Anakart"
 
-#: src/window.py:84 src/window.py:141
-msgid "System"
-msgstr "Sistem"
+#: src/window.py:106
+msgid "Processor"
+msgstr "İşlemci"
 
-#: src/window.py:123
+#: src/window.py:109 src/window.py:452
+msgid "Memory"
+msgstr "Bellek"
+
+#: src/window.py:112
+msgid "Disk Drives"
+msgstr "Disk Sürücüleri"
+
+#: src/window.py:115
+msgid "PCI Devices"
+msgstr "PCI Aygıtları"
+
+#: src/window.py:118
+#| msgid "Loop devices"
+msgid "USB Devices"
+msgstr "USB Aygıtları"
+
+#: src/window.py:121
+msgid "Network Devices"
+msgstr "Ağ Aygıtları"
+
+#: src/window.py:124
+msgid "Kernel"
+msgstr "Çekirdek"
+
+#: src/window.py:127 src/window.py:238 src/window.py:315
+msgid "Distribution"
+msgstr "Dağıtım"
+
+#: src/window.py:222
 msgid "The command is not supported"
 msgstr "Komut desteklenmiyor"
 
-#: src/window.py:125
+#: src/window.py:224
 #, python-brace-format
 msgid ""
 "The command {0} returned empty.\n"
@@ -140,209 +117,244 @@ msgstr ""
 "Uçbiriminizde çalıştırmayı deneyin, paketi sisteminize kurmanızı "
 "isteyecektir."
 
-#: src/window.py:141
-msgid "command: uname"
-msgstr "komut: uname"
+#: src/window.py:269
+msgid "System"
+msgstr "Sistem"
 
-#: src/window.py:149
+#: src/window.py:269
+msgid "Command: uname"
+msgstr "Komut: uname"
+
+#: src/window.py:274
 msgid "Kernel Name"
 msgstr "Çekirdek Adı"
 
-#: src/window.py:154
+#: src/window.py:279
 msgid "Network Node Hostname"
 msgstr "Ağ Düğümü Makine Adı"
 
-#: src/window.py:159
+#: src/window.py:284
 msgid "Kernel Release"
 msgstr "Çekirdek Dağıtımı"
 
-#: src/window.py:164
+#: src/window.py:289
 msgid "Kernel Version"
 msgstr "Çekirdek Sürümü"
 
-#: src/window.py:169
+#: src/window.py:294
 msgid "Machine Hardware Name"
 msgstr "Makine Donanım Adı"
 
-#: src/window.py:174
+#: src/window.py:299
 msgid "Processor Type"
 msgstr "İşlemci Türü"
 
-#: src/window.py:179
+#: src/window.py:304
 msgid "Hardware Platform"
 msgstr "Donanım Platformu"
 
-#: src/window.py:184
+#: src/window.py:309
 msgid "Operating System"
 msgstr "İşletim Sistemi"
 
-#. cat /etc/os-release
-#: src/window.py:190
-msgid "Distro"
-msgstr "Dağıtım"
+#: src/window.py:315
+msgid "Command: cat /etc/os-release"
+msgstr "Komut: cat /etc/os-release"
 
-#: src/window.py:190
-msgid "command: cat /etc/os-release"
-msgstr "komut: cat /etc/os-release"
+#: src/window.py:364 src/window.py:371
+msgid "Command: lsblk"
+msgstr "Komut: lsblk"
 
-#: src/window.py:247 src/window.py:259
-msgid "command: lsblk"
-msgstr "komut: lsblk"
+#: src/window.py:366
+msgid "Total size: "
+msgstr "Toplam boyut: "
 
-#: src/window.py:249 src/window.py:261 src/window.py:321 src/window.py:367
-#: src/window.py:395 src/window.py:441 src/window.py:493 src/window.py:563
-msgid "Refresh"
-msgstr "Yenile"
-
-#: src/window.py:254
-msgid "Total size"
-msgstr "Toplam boyut"
-
-#: src/window.py:259
+#: src/window.py:371
 msgid "Loop devices"
 msgstr "Döngü aygıtları"
 
-#: src/window.py:319
+#: src/window.py:373
+#, python-format
+msgid "Device Count: %s"
+msgid_plural "Devices Count: %s"
+msgstr[0] "Aygıt sayısı: %s"
+
+#: src/window.py:429
 msgid "Ranges"
 msgstr "Erimler"
 
-#: src/window.py:319
-msgid "command: lsmem"
-msgstr "komut: lsmem"
+#: src/window.py:429
+msgid "Command: lsmem"
+msgstr "Komut: lsmem"
 
-#: src/window.py:365
+#: src/window.py:466
 msgid "PCIs"
 msgstr "PCI"
 
-#: src/window.py:365
-msgid "command: lspci"
-msgstr "komut: lspci"
+#: src/window.py:466
+msgid "Command: lspci"
+msgstr "Komut: lspci"
 
-#: src/window.py:393
-msgid "command: lsusb"
-msgstr "komut: lsusb"
+#: src/window.py:486
+msgid "USB"
+msgstr "USB"
 
-#: src/window.py:419
+#: src/window.py:486
+msgid "Command: lsusb"
+msgstr "Komut: lsusb"
+
+#: src/window.py:507
 msgid "Bus"
 msgstr "Veri Yolu"
 
-#: src/window.py:439
-msgid "command: ip address"
-msgstr "komut: ip address"
+#: src/window.py:524
+msgid "Command: ip address"
+msgstr "Komut: ip address"
 
-#: src/window.py:452
+#: src/window.py:532
 msgid "Address info, ip"
 msgstr "Adres bilgileri, ip"
 
-#: src/window.py:491
-msgid "command: lshw -c cpu"
-msgstr "komut: lshw -c cpu"
+#: src/window.py:574
+msgid "CPU"
+msgstr "İşlemci"
 
-#: src/window.py:528
+#: src/window.py:574
+msgid "Command: lshw -c cpu"
+msgstr "Komut: lshw -c cpu"
+
+#: src/window.py:605
 msgid "BIOS Date"
 msgstr "BIOS Tarihi"
 
-#: src/window.py:529
+#: src/window.py:606
 msgid "BIOS Release"
 msgstr "BIOS Yayın"
 
-#: src/window.py:530
+#: src/window.py:607
 msgid "BIOS Vendor"
 msgstr "BIOS Üreticisi"
 
-#: src/window.py:531
+#: src/window.py:608
 msgid "BIOS Version"
 msgstr "BIOS Sürümü"
 
-#: src/window.py:532
+#: src/window.py:609
 msgid "Board Asset Tag"
 msgstr "Kart Varlık Etiketi"
 
-#: src/window.py:533
+#: src/window.py:610
 msgid "Board Name"
 msgstr "Kart Adı"
 
-#: src/window.py:534
+#: src/window.py:611
 msgid "Board Serial Number"
 msgstr "Kart Seri Numarası"
 
-#: src/window.py:535
+#: src/window.py:612
 msgid "Board Vendor"
 msgstr "Kart Üretici"
 
-#: src/window.py:536
+#: src/window.py:613
 msgid "Board Version"
 msgstr "Kart Sürümü"
 
-#: src/window.py:537
+#: src/window.py:614
 msgid "Chassis Asset Tag"
 msgstr "Kasa Varlık Etiketi"
 
-#: src/window.py:538
+#: src/window.py:615
 msgid "Chassis Serial Number"
 msgstr "Kasa Seri Numarası"
 
-#: src/window.py:539
+#: src/window.py:616
 msgid "Chassis Type"
 msgstr "Kasa Türü"
 
-#: src/window.py:540
+#: src/window.py:617
 msgid "Chassis Vendor"
 msgstr "Kasa Üreticisi"
 
-#: src/window.py:541
+#: src/window.py:618
 msgid "Chassis Version"
 msgstr "Kasa Sürümü"
 
-#: src/window.py:542
+#: src/window.py:619
 msgid "Product Family"
 msgstr "Kasa Ailesi"
 
-#: src/window.py:543
+#: src/window.py:620
 msgid "Product Name"
 msgstr "Ürün Adı"
 
-#: src/window.py:544
+#: src/window.py:621
 msgid "Product Serial Number"
 msgstr "Ürün Seri Numarası"
 
-#: src/window.py:545
+#: src/window.py:622
 msgid "Product SKU"
 msgstr "Ürün SKU"
 
-#: src/window.py:546
+#: src/window.py:623
 msgid "Product UUID"
 msgstr "Ürün UUID"
 
-#: src/window.py:547
+#: src/window.py:624
 msgid "Product Version"
 msgstr "Ürün Sürümü"
 
-#: src/window.py:548
+#: src/window.py:625
 msgid "Power"
 msgstr "Güç"
 
-#. ("subsystem", _("Subsystem")),
-#: src/window.py:550
+#: src/window.py:627
 msgid "System Vendor"
 msgstr "Sistem Üretici"
 
-#: src/window.py:554
+#: src/window.py:631
 msgid "Control"
 msgstr "Denetim"
 
-#: src/window.py:555
+#: src/window.py:632
 msgid "Runtime Active Time"
 msgstr "Çalışma Zamanı Aktif Zaman"
 
-#: src/window.py:556
+#: src/window.py:633
 msgid "Runtime Status"
 msgstr "Çalışma Zamanı Durumu"
 
-#: src/window.py:557
+#: src/window.py:634
 msgid "Runtime Suspended Time"
 msgstr "Çalışma Zamanı Askıya Alınma Zamanı"
 
-#: src/window.py:561
+#: src/window.py:638
 msgid "Details from /sys/devices/virtual/dmi/id"
 msgstr "Ayrıntıların kaynağı: /sys/devices/virtual/dmi/id"
+
+#~ msgid "Fixed typo"
+#~ msgstr "Yazım hatası düzeltildi"
+
+#~ msgid "Improved metadata"
+#~ msgstr "Üst veriler iyileştirildi"
+
+#~ msgid "Fixed a critical bug if the app was run with older versions of lsblk"
+#~ msgstr ""
+#~ "Uygulamanın eski lsblk sürümüyle çalışırsa yaşadığı kritik hata düzeltildi"
+
+#~ msgid "Made the app more stable"
+#~ msgstr "Uygulama daha stabil hale getirildi"
+
+#~ msgid "Added motherboard/bios page"
+#~ msgstr "Ana kart/bios sayfası eklendi"
+
+#~ msgid "Bug fixes"
+#~ msgstr "Hata düzeltmeler"
+
+#~ msgid "Disk"
+#~ msgstr "Disk"
+
+#~ msgid "PCI"
+#~ msgstr "PCI"
+
+#~ msgid "Refresh"
+#~ msgstr "Yenile"
