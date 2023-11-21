@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-09 02:37+0300\n"
+"POT-Creation-Date: 2023-10-06 15:18+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,10 +16,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: data/io.github.nokse22.inspector.desktop.in:3
-#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:66
-#: src/window.py:35
+#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:68
+#: src/window.py:57
 msgid "Inspector"
 msgstr ""
 
@@ -43,86 +44,63 @@ msgstr ""
 msgid "Nokse"
 msgstr ""
 
-#: data/io.github.nokse22.inspector.appdata.xml.in:24
-msgid "Fixed typo"
-msgstr ""
-
-#: data/io.github.nokse22.inspector.appdata.xml.in:25
-msgid "Improved metadata"
-msgstr ""
-
-#: data/io.github.nokse22.inspector.appdata.xml.in:31
-msgid "Fixed a critical bug if the app was run with older versions of lsblk"
-msgstr ""
-
-#: data/io.github.nokse22.inspector.appdata.xml.in:32
-msgid "Made the app more stable"
-msgstr ""
-
-#: data/io.github.nokse22.inspector.appdata.xml.in:38
-msgid "Added motherboard/bios page"
-msgstr ""
-
-#: data/io.github.nokse22.inspector.appdata.xml.in:43
-msgid "Bug fixes"
-msgstr ""
-
-#. Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL.
-#. One name per line, please do not remove previous names.
-#: src/main.py:76
+#: src/main.py:78
 msgid "translator-credits"
 msgstr ""
 
-#: src/window.py:45
+#: src/window.py:77
 msgid "Reload"
 msgstr ""
 
-#: src/window.py:46
+#: src/window.py:78
 msgid "Keyboard shortcuts"
 msgstr ""
 
-#: src/window.py:47 src/window.py:53
+#: src/window.py:79
 msgid "About Inspector"
 msgstr ""
 
-#: src/window.py:56 src/window.py:393
-msgid "USB"
-msgstr ""
-
-#: src/window.py:60
-msgid "Disk"
-msgstr ""
-
-#: src/window.py:64 src/window.py:348
-msgid "Memory"
-msgstr ""
-
-#: src/window.py:68
-msgid "PCI"
-msgstr ""
-
-#: src/window.py:72
-msgid "Network"
-msgstr ""
-
-#: src/window.py:76 src/window.py:491
-msgid "CPU"
-msgstr ""
-
-#. Create and set the main preferences group for motherboard info
-#: src/window.py:80 src/window.py:561
+#: src/window.py:103 src/window.py:638
 msgid "Motherboard"
 msgstr ""
 
-#: src/window.py:84 src/window.py:141
-msgid "System"
+#: src/window.py:106
+msgid "Processor"
 msgstr ""
 
-#: src/window.py:123
+#: src/window.py:109 src/window.py:452
+msgid "Memory"
+msgstr ""
+
+#: src/window.py:112
+msgid "Disk Drives"
+msgstr ""
+
+#: src/window.py:115
+msgid "PCI Devices"
+msgstr ""
+
+#: src/window.py:118
+msgid "USB Devices"
+msgstr ""
+
+#: src/window.py:121
+msgid "Network Devices"
+msgstr ""
+
+#: src/window.py:124
+msgid "Kernel"
+msgstr ""
+
+#: src/window.py:127 src/window.py:238 src/window.py:315
+msgid "Distribution"
+msgstr ""
+
+#: src/window.py:222
 msgid "The command is not supported"
 msgstr ""
 
-#: src/window.py:125
+#: src/window.py:224
 #, python-brace-format
 msgid ""
 "The command {0} returned empty.\n"
@@ -130,209 +108,217 @@ msgid ""
 "on your system."
 msgstr ""
 
-#: src/window.py:141
-msgid "command: uname"
+#: src/window.py:269
+msgid "System"
 msgstr ""
 
-#: src/window.py:149
+#: src/window.py:269
+msgid "Command: uname"
+msgstr ""
+
+#: src/window.py:274
 msgid "Kernel Name"
 msgstr ""
 
-#: src/window.py:154
+#: src/window.py:279
 msgid "Network Node Hostname"
 msgstr ""
 
-#: src/window.py:159
+#: src/window.py:284
 msgid "Kernel Release"
 msgstr ""
 
-#: src/window.py:164
+#: src/window.py:289
 msgid "Kernel Version"
 msgstr ""
 
-#: src/window.py:169
+#: src/window.py:294
 msgid "Machine Hardware Name"
 msgstr ""
 
-#: src/window.py:174
+#: src/window.py:299
 msgid "Processor Type"
 msgstr ""
 
-#: src/window.py:179
+#: src/window.py:304
 msgid "Hardware Platform"
 msgstr ""
 
-#: src/window.py:184
+#: src/window.py:309
 msgid "Operating System"
 msgstr ""
 
-#. cat /etc/os-release
-#: src/window.py:190
-msgid "Distro"
+#: src/window.py:315
+msgid "Command: cat /etc/os-release"
 msgstr ""
 
-#: src/window.py:190
-msgid "command: cat /etc/os-release"
+#: src/window.py:364 src/window.py:371
+msgid "Command: lsblk"
 msgstr ""
 
-#: src/window.py:247 src/window.py:259
-msgid "command: lsblk"
+#: src/window.py:366
+msgid "Total size: "
 msgstr ""
 
-#: src/window.py:249 src/window.py:261 src/window.py:321 src/window.py:367
-#: src/window.py:395 src/window.py:441 src/window.py:493 src/window.py:563
-msgid "Refresh"
-msgstr ""
-
-#: src/window.py:254
-msgid "Total size"
-msgstr ""
-
-#: src/window.py:259
+#: src/window.py:371
 msgid "Loop devices"
 msgstr ""
 
-#: src/window.py:319
+#: src/window.py:373
+#, python-format
+msgid "Device Count: %s"
+msgid_plural "Devices Count: %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window.py:429
 msgid "Ranges"
 msgstr ""
 
-#: src/window.py:319
-msgid "command: lsmem"
+#: src/window.py:429
+msgid "Command: lsmem"
 msgstr ""
 
-#: src/window.py:365
+#: src/window.py:466
 msgid "PCIs"
 msgstr ""
 
-#: src/window.py:365
-msgid "command: lspci"
+#: src/window.py:466
+msgid "Command: lspci"
 msgstr ""
 
-#: src/window.py:393
-msgid "command: lsusb"
+#: src/window.py:486
+msgid "USB"
 msgstr ""
 
-#: src/window.py:419
+#: src/window.py:486
+msgid "Command: lsusb"
+msgstr ""
+
+#: src/window.py:507
 msgid "Bus"
 msgstr ""
 
-#: src/window.py:439
-msgid "command: ip address"
-msgstr ""
-
-#: src/window.py:452
-msgid "Address info, ip"
-msgstr ""
-
-#: src/window.py:491
-msgid "command: lshw -c cpu"
-msgstr ""
-
-#: src/window.py:528
-msgid "BIOS Date"
-msgstr ""
-
-#: src/window.py:529
-msgid "BIOS Release"
-msgstr ""
-
-#: src/window.py:530
-msgid "BIOS Vendor"
-msgstr ""
-
-#: src/window.py:531
-msgid "BIOS Version"
+#: src/window.py:524
+msgid "Command: ip address"
 msgstr ""
 
 #: src/window.py:532
+msgid "Address info, ip"
+msgstr ""
+
+#: src/window.py:574
+msgid "CPU"
+msgstr ""
+
+#: src/window.py:574
+msgid "Command: lshw -c cpu"
+msgstr ""
+
+#: src/window.py:605
+msgid "BIOS Date"
+msgstr ""
+
+#: src/window.py:606
+msgid "BIOS Release"
+msgstr ""
+
+#: src/window.py:607
+msgid "BIOS Vendor"
+msgstr ""
+
+#: src/window.py:608
+msgid "BIOS Version"
+msgstr ""
+
+#: src/window.py:609
 msgid "Board Asset Tag"
 msgstr ""
 
-#: src/window.py:533
+#: src/window.py:610
 msgid "Board Name"
 msgstr ""
 
-#: src/window.py:534
+#: src/window.py:611
 msgid "Board Serial Number"
 msgstr ""
 
-#: src/window.py:535
+#: src/window.py:612
 msgid "Board Vendor"
 msgstr ""
 
-#: src/window.py:536
+#: src/window.py:613
 msgid "Board Version"
 msgstr ""
 
-#: src/window.py:537
+#: src/window.py:614
 msgid "Chassis Asset Tag"
 msgstr ""
 
-#: src/window.py:538
+#: src/window.py:615
 msgid "Chassis Serial Number"
 msgstr ""
 
-#: src/window.py:539
+#: src/window.py:616
 msgid "Chassis Type"
 msgstr ""
 
-#: src/window.py:540
+#: src/window.py:617
 msgid "Chassis Vendor"
 msgstr ""
 
-#: src/window.py:541
+#: src/window.py:618
 msgid "Chassis Version"
 msgstr ""
 
-#: src/window.py:542
+#: src/window.py:619
 msgid "Product Family"
 msgstr ""
 
-#: src/window.py:543
+#: src/window.py:620
 msgid "Product Name"
 msgstr ""
 
-#: src/window.py:544
+#: src/window.py:621
 msgid "Product Serial Number"
 msgstr ""
 
-#: src/window.py:545
+#: src/window.py:622
 msgid "Product SKU"
 msgstr ""
 
-#: src/window.py:546
+#: src/window.py:623
 msgid "Product UUID"
 msgstr ""
 
-#: src/window.py:547
+#: src/window.py:624
 msgid "Product Version"
 msgstr ""
 
-#: src/window.py:548
+#: src/window.py:625
 msgid "Power"
 msgstr ""
 
-#. ("subsystem", _("Subsystem")),
-#: src/window.py:550
+#: src/window.py:627
 msgid "System Vendor"
 msgstr ""
 
-#: src/window.py:554
+#: src/window.py:631
 msgid "Control"
 msgstr ""
 
-#: src/window.py:555
+#: src/window.py:632
 msgid "Runtime Active Time"
 msgstr ""
 
-#: src/window.py:556
+#: src/window.py:633
 msgid "Runtime Status"
 msgstr ""
 
-#: src/window.py:557
+#: src/window.py:634
 msgid "Runtime Suspended Time"
 msgstr ""
 
-#: src/window.py:561
+#: src/window.py:638
 msgid "Details from /sys/devices/virtual/dmi/id"
 msgstr ""
