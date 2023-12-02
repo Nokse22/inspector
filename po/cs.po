@@ -1,0 +1,340 @@
+# Turkish translation for Inspector.
+# Copyright (C) 2023 Inspector's COPYRIGHT HOLDER
+# This file is distributed under the same license as the Inspector package.
+#
+# vikdevelop https://github.com/vikdevelop, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Inspector\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-27 15:18+0300\n"
+"PO-Revision-Date: 2023-11-27 15:22+0300\n"
+"Last-Translator: vikdevelop https://github.com/vikdevelop\n"
+"Language-Team: Czech\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#: data/io.github.nokse22.inspector.desktop.in:3
+#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:68
+#: src/window.py:57
+msgid "Inspector"
+msgstr "Inspektor"
+
+#: data/io.github.nokse22.inspector.desktop.in:4
+#: data/io.github.nokse22.inspector.appdata.xml.in:8
+msgid "View information about your system"
+msgstr "Zobrazit informace o vašem systému"
+
+#: data/io.github.nokse22.inspector.desktop.in:10
+msgid ""
+"System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
+msgstr ""
+"System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:11
+msgid ""
+"View information about: Usb devices, Disk, Memory, PCI devices, Network, "
+"CPU, Motherboard and bios, System and distro"
+msgstr ""
+"Zobrazte si informace o zařízeních USB, disku, paměti, zařízeních PCI, síti, "
+"procesoru, základní desce a BIOSu, systému a distribuci"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:15
+msgid "Nokse"
+msgstr "Nox"
+
+#: src/main.py:78
+msgid "translator-credits"
+msgstr "vikdevelop https://github.com/vikdevelop"
+
+#: src/window.py:77
+msgid "Reload"
+msgstr "Načíst znovu"
+
+#: src/window.py:78
+msgid "Keyboard shortcuts"
+msgstr "Klávesové zkratky"
+
+#: src/window.py:79
+msgid "About Inspector"
+msgstr "O aplikaci"
+
+#: src/window.py:103 src/window.py:638
+msgid "Motherboard"
+msgstr "Základní deska"
+
+#: src/window.py:106
+msgid "Processor"
+msgstr "Procesor"
+
+#: src/window.py:109 src/window.py:452
+msgid "Memory"
+msgstr "Paměť"
+
+#: src/window.py:112
+msgid "Disk Drives"
+msgstr "Disková zařízení"
+
+#: src/window.py:115
+msgid "PCI Devices"
+msgstr "Zařízení PCI"
+
+#: src/window.py:118
+#| msgid "Loop devices"
+msgid "USB Devices"
+msgstr "Zařízení USB"
+
+#: src/window.py:121
+msgid "Network Devices"
+msgstr "Síťová zařízení"
+
+#: src/window.py:124
+msgid "Kernel"
+msgstr "Jádro"
+
+#: src/window.py:127 src/window.py:238 src/window.py:315
+msgid "Distribution"
+msgstr "Distribuce"
+
+#: src/window.py:222
+msgid "The command is not supported"
+msgstr "Příkaz není podporován"
+
+#: src/window.py:224
+#, python-brace-format
+msgid ""
+"The command {0} returned empty.\n"
+"Try running it on your terminal, it should prompt you to install the package "
+"on your system."
+msgstr ""
+"Příkaz {0} vrátil prázdnou hodnotu.\n"
+"Zkuste jej spustit ve vašem terminálu, měl by vás požádat o instalaci balíčku "
+"na vašem systému."
+
+#: src/window.py:269
+msgid "System"
+msgstr "Systém"
+
+#: src/window.py:269
+msgid "Command: uname"
+msgstr "Příkaz: uname"
+
+#: src/window.py:274
+msgid "Kernel Name"
+msgstr "Název jádra"
+
+#: src/window.py:279
+msgid "Network Node Hostname"
+msgstr "Hostitelský název síťového uzlu"
+
+#: src/window.py:284
+msgid "Kernel Release"
+msgstr "Vydání jádra"
+
+#: src/window.py:289
+msgid "Kernel Version"
+msgstr "Verze jádra"
+
+#: src/window.py:294
+msgid "Machine Hardware Name"
+msgstr "Název počítačového hardwaru"
+
+#: src/window.py:299
+msgid "Processor Type"
+msgstr "Typ procesoru"
+
+#: src/window.py:304
+msgid "Hardware Platform"
+msgstr "Platforma hardwaru"
+
+#: src/window.py:309
+msgid "Operating System"
+msgstr "Operační systém"
+
+#: src/window.py:315
+msgid "Command: cat /etc/os-release"
+msgstr "Příkaz: cat /etc/os-release"
+
+#: src/window.py:364 src/window.py:371
+msgid "Command: lsblk"
+msgstr "Příkaz: lsblk"
+
+#: src/window.py:366
+msgid "Total size: "
+msgstr "Celková velikost: "
+
+#: src/window.py:371
+msgid "Loop devices"
+msgstr "Zařízení ve smyčce"
+
+#: src/window.py:373
+#, python-format
+msgid "Device Count: %s"
+msgid_plural "Devices Count: %s"
+msgstr[0] "Počet zařízení: %s"
+
+#: src/window.py:429
+msgid "Ranges"
+msgstr "Rozsahy"
+
+#: src/window.py:429
+msgid "Command: lsmem"
+msgstr "Příkaz: lsmem"
+
+#: src/window.py:466
+msgid "PCIs"
+msgstr "PCI"
+
+#: src/window.py:466
+msgid "Command: lspci"
+msgstr "Příkaz: lspci"
+
+#: src/window.py:486
+msgid "USB"
+msgstr "USB"
+
+#: src/window.py:486
+msgid "Command: lsusb"
+msgstr "Příkaz: lsusb"
+
+#: src/window.py:507
+msgid "Bus"
+msgstr "Sběrnice"
+
+#: src/window.py:524
+msgid "Command: ip address"
+msgstr "Příkaz: ip address"
+
+#: src/window.py:532
+msgid "Address info, ip"
+msgstr "Informace o adrese, ip"
+
+#: src/window.py:574
+msgid "CPU"
+msgstr "CPU"
+
+#: src/window.py:574
+msgid "Command: lshw -c cpu"
+msgstr "Příkaz: lshw -c cpu"
+
+#: src/window.py:605
+msgid "BIOS Date"
+msgstr "Datum BIOSu"
+
+#: src/window.py:606
+msgid "BIOS Release"
+msgstr "Vydání BIOSu"
+
+#: src/window.py:607
+msgid "BIOS Vendor"
+msgstr "Vydavatel BIOSu"
+
+#: src/window.py:608
+msgid "BIOS Version"
+msgstr "Verze BIOSu"
+
+#: src/window.py:609
+msgid "Board Asset Tag"
+msgstr "Štítek majetku desky"
+
+#: src/window.py:610
+msgid "Board Name"
+msgstr "Název desky"
+
+#: src/window.py:611
+msgid "Board Serial Number"
+msgstr "Sériové číslo desky"
+
+#: src/window.py:612
+msgid "Board Vendor"
+msgstr "Výrobce desky"
+
+#: src/window.py:613
+msgid "Board Version"
+msgstr "Verze desky"
+
+#: src/window.py:614
+msgid "Chassis Asset Tag"
+msgstr "Štítek majetku podvozku"
+
+#: src/window.py:615
+msgid "Chassis Serial Number"
+msgstr "Sériové číslo podvozku"
+
+#: src/window.py:616
+msgid "Chassis Type"
+msgstr "Typ podvozku"
+
+#: src/window.py:617
+msgid "Chassis Vendor"
+msgstr "Výrobce podvozku"
+
+#: src/window.py:618
+msgid "Chassis Version"
+msgstr "Verze podvozku"
+
+#: src/window.py:619
+msgid "Product Family"
+msgstr "Rodina produktu"
+
+#: src/window.py:620
+msgid "Product Name"
+msgstr "Název produktu"
+
+#: src/window.py:621
+msgid "Product Serial Number"
+msgstr "Sériové číslo produktu"
+
+#: src/window.py:622
+msgid "Product SKU"
+msgstr "SKU produktu"
+
+#: src/window.py:623
+msgid "Product UUID"
+msgstr "UUID produktu"
+
+#: src/window.py:624
+msgid "Product Version"
+msgstr "Verze produktu"
+
+#: src/window.py:625
+msgid "Power"
+msgstr "Energie"
+
+#: src/window.py:627
+msgid "System Vendor"
+msgstr "Výrobce systému"
+
+#: src/window.py:631
+msgid "Control"
+msgstr "Ovládání"
+
+#: src/window.py:632
+msgid "Runtime Active Time"
+msgstr "Aktivní čas běhového prostředí"
+
+#: src/window.py:633
+msgid "Runtime Status"
+msgstr "Stav běhového prostředí"
+
+#: src/window.py:634
+msgid "Runtime Suspended Time"
+msgstr "Čas pozastavení běhového prostředí"
+
+#: src/window.py:638
+msgid "Details from /sys/devices/virtual/dmi/id"
+msgstr "Podrobnosti z: /sys/devices/virtual/dmi/id"
+
+#~ msgid "Disk"
+#~ msgstr "Disk"
+
+#~ msgid "PCI"
+#~ msgstr "PCI"
+
+#~ msgid "Refresh"
+#~ msgstr "Obnovit"
