@@ -21,14 +21,14 @@
 
   <releases>
     <release version="0.1.8" date="2023-09-26">
-    	<description>
+    	<description translatable="no">
 			  <p>Improved app design and usability</p>
     	  <p>Updated runtime to 45</p>
     	  <p>Added French translation</p>
 		  </description>
   	</release>
     <release version="0.1.7" date="2023-09-15">
-    	<description>
+    	<description translatable="no">
 			  <p>Fixed typo (kawaii-ghost)</p>
     	  <p>Improved metadata</p>
     	  <p>Made labels selectable</p>
@@ -38,18 +38,18 @@
 		  </description>
   	</release>
     <release version="0.1.6" date="2023-08-12">
-    	<description>
+    	<description translatable="no">
 				<p>Fixed a critical bug if the app was run with older versions of lsblk</p>
     	  <p>Made the app more stable</p>
 	    </description>
   	</release>
   	<release version="0.1.5" date="2023-08-11">
-    	<description>
+    	<description translatable="no">
 			  <p>Added motherboard/bios page</p>
 		  </description>
   	</release>
   	<release version="0.1.4" date="2023-08-07">
-    	<description>
+    	<description translatable="no">
 			  <p>Bug fixes</p>
 		  </description>
   	</release>
