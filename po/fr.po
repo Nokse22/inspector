@@ -173,7 +173,7 @@ msgstr "Plate-forme matérielle"
 
 #: src/window.py:184
 msgid "Operating System"
-msgstr "Système d'explotation"
+msgstr "Système d'exploitation"
 
 #. cat /etc/os-release
 #: src/window.py:190
@@ -243,7 +243,7 @@ msgstr "Date du BIOS"
 
 #: src/window.py:529
 msgid "BIOS Release"
-msgstr "Distribution de BIOS"
+msgstr "Distribution du BIOS"
 
 #: src/window.py:530
 msgid "BIOS Vendor"
