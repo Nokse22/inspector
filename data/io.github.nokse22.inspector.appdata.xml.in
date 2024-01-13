@@ -11,12 +11,15 @@
     <p>View information about: Usb devices, Disk, Memory, PCI devices, Network, CPU, Motherboard and bios, System and distro</p>
 	</description>
 
-	<content_rating type="oars-1.0"></content_rating>
-  <developer_name>Nokse</developer_name>
+  <content_rating type="oars-1.1" />
+  <developer_name translatable="no">Nokse</developer_name>
   <launchable type="desktop-id">io.github.nokse22.inspector.desktop</launchable>
+  <translation type="gettext">inspector</translation>
 
   <url type="homepage">https://github.com/Nokse22/inspector</url>
   <url type="bugtracker">https://github.com/Nokse22/inspector/issues</url>
+  <url type="vcs-browser">https://github.com/Nokse22/inspector</url>
+  <url type="translate">https://github.com/Nokse22/inspector/tree/master/po</url>
   <url type="donation">https://ko-fi.com/nokse22</url>
 
   <releases>
@@ -54,10 +57,6 @@
 		  </description>
   	</release>
   </releases>
-
-  <categories>
-    <category>Utility</category>
-  </categories>
 
 	<screenshots>
     <screenshot type="default">
