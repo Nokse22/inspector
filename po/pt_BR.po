@@ -1,0 +1,331 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-02 19:24+0100\n"
+"PO-Revision-Date: 2024-03-06 22:30-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: data/io.github.nokse22.inspector.desktop.in:3
+#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:68
+#: src/window.py:57
+msgid "Inspector"
+msgstr "Inspector"
+
+#: data/io.github.nokse22.inspector.desktop.in:4
+#: data/io.github.nokse22.inspector.appdata.xml.in:8
+msgid "View information about your system"
+msgstr "Ver informação sobre o seu sistema"
+
+#: data/io.github.nokse22.inspector.desktop.in:10
+msgid ""
+"System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
+msgstr ""
+"Sistema;Informaçao;Disco;Memoria;Dispositivos;Rede;Cpu;PlacaMae;BIOS;bios;"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:11
+msgid ""
+"View information about: Usb devices, Disk, Memory, PCI devices, Network, "
+"CPU, Motherboard and bios, System and distro"
+msgstr ""
+"Ver informação sobre: Dispositivos Usb, Disco, Memória, Dispositivos PCI, "
+"Rede, CPU, Placa Mãe e Bios, Sistema e Distro"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:15
+msgid "Nokse"
+msgstr "Nokse"
+
+#: src/main.py:78
+msgid "translator-credits"
+msgstr "Luiz Lima"
+
+#: src/window.py:77
+msgid "Reload"
+msgstr "Recarregar"
+
+#: src/window.py:78
+msgid "Keyboard shortcuts"
+msgstr "Atalhos de teclado"
+
+#: src/window.py:79
+msgid "About Inspector"
+msgstr "Sobre Inspector"
+
+#: src/window.py:103 src/window.py:636
+msgid "Motherboard"
+msgstr "Placa Mãe"
+
+#: src/window.py:106
+msgid "Processor"
+msgstr "Processador"
+
+#: src/window.py:109 src/window.py:450
+msgid "Memory"
+msgstr "Memória"
+
+#: src/window.py:112
+msgid "Disk Drives"
+msgstr "Unidade de Disco"
+
+#: src/window.py:115
+msgid "PCI Devices"
+msgstr "Dispositivos PCI"
+
+#: src/window.py:118
+msgid "USB Devices"
+msgstr "Dispositivos USB"
+
+#: src/window.py:121
+msgid "Network Devices"
+msgstr "Dispositivos de Rede"
+
+#: src/window.py:124
+msgid "Kernel"
+msgstr "Kernel"
+
+#: src/window.py:127 src/window.py:238 src/window.py:315
+msgid "Distribution"
+msgstr "Distribuição"
+
+#: src/window.py:222
+msgid "The command is not supported"
+msgstr "O comando não é suportado"
+
+#: src/window.py:224
+#, python-brace-format
+msgid ""
+"The command {0} returned empty.\n"
+"Try running it on your terminal, it should prompt you to install the package "
+"on your system."
+msgstr ""
+"O Comando {0} retornou vazio.\n"
+"Tente executar no terminal, ele deve solicitar a instalação do pacote no seu "
+"sistema."
+
+#: src/window.py:269
+msgid "System"
+msgstr "Sistema"
+
+#: src/window.py:269
+msgid "Command: uname"
+msgstr "Comando: uname"
+
+#: src/window.py:274
+msgid "Kernel Name"
+msgstr "Nome do Kernel"
+
+#: src/window.py:279
+msgid "Network Node Hostname"
+msgstr "Nome de Host do Nó da Rede"
+
+#: src/window.py:284
+msgid "Kernel Release"
+msgstr "Versão do Kernel"
+
+#: src/window.py:289
+msgid "Kernel Version"
+msgstr "Tipo do Kernel"
+
+#: src/window.py:294
+msgid "Machine Hardware Name"
+msgstr "Nome do Hardware da Máquina"
+
+#: src/window.py:299
+msgid "Processor Type"
+msgstr "Tipo do Processador"
+
+#: src/window.py:304
+msgid "Hardware Platform"
+msgstr "Plataforma do Hardware"
+
+#: src/window.py:309
+msgid "Operating System"
+msgstr "Sistema Operacional"
+
+#: src/window.py:315
+msgid "Command: cat /etc/os-release"
+msgstr "Comando: cat /etc/os-release"
+
+#: src/window.py:364 src/window.py:371
+msgid "Command: lsblk"
+msgstr "Comando: lsblk"
+
+#: src/window.py:366
+msgid "Total size: "
+msgstr "Tamanho Total: "
+
+#: src/window.py:371
+msgid "Loop devices"
+msgstr "Disposivos de loop"
+
+#: src/window.py:373
+#, python-format
+msgid "Device Count: %s"
+msgid_plural "Devices Count: %s"
+msgstr[0] "Contagem de Dispositivo: %s"
+msgstr[1] "Contagem de Dispositivos: %s"
+
+#: src/window.py:427
+msgid "Ranges"
+msgstr "Range"
+
+#: src/window.py:427
+msgid "Command: lsmem"
+msgstr "Comando: lsmem"
+
+#: src/window.py:464
+msgid "PCIs"
+msgstr "PCIs"
+
+#: src/window.py:464
+msgid "Command: lspci"
+msgstr "Comando: lspci"
+
+#: src/window.py:484
+msgid "USB"
+msgstr "USB"
+
+#: src/window.py:484
+msgid "Command: lsusb"
+msgstr "Comando: lsusb"
+
+#: src/window.py:505
+msgid "Bus"
+msgstr "Bus"
+
+#: src/window.py:522
+msgid "Command: ip address"
+msgstr "Comando: ip adress"
+
+#: src/window.py:530
+msgid "Address info, ip"
+msgstr "Informação de Endereço, ip"
+
+#: src/window.py:572
+msgid "CPU"
+msgstr "CPU"
+
+#: src/window.py:572
+msgid "Command: lshw -c cpu"
+msgstr "Comando: lshw -c cpu"
+
+#: src/window.py:603
+msgid "BIOS Date"
+msgstr "Data da Bios"
+
+#: src/window.py:604
+msgid "BIOS Release"
+msgstr "Lançamento da Bios"
+
+#: src/window.py:605
+msgid "BIOS Vendor"
+msgstr "Fornecedora da BIOS"
+
+#: src/window.py:606
+msgid "BIOS Version"
+msgstr "Versão da Bios"
+
+#: src/window.py:607
+msgid "Board Asset Tag"
+msgstr "Etiqueta de Identificação da Placa"
+
+#: src/window.py:608
+msgid "Board Name"
+msgstr "Nome da Placa"
+
+#: src/window.py:609
+msgid "Board Serial Number"
+msgstr "Numero de Série da Placa"
+
+#: src/window.py:610
+msgid "Board Vendor"
+msgstr "Fabricante da Placa"
+
+#: src/window.py:611
+msgid "Board Version"
+msgstr "Versão da Placa"
+
+#: src/window.py:612
+msgid "Chassis Asset Tag"
+msgstr "Etiqueta de Identificação do Chassi"
+
+#: src/window.py:613
+msgid "Chassis Serial Number"
+msgstr "Numero de Série do Chassi"
+
+#: src/window.py:614
+msgid "Chassis Type"
+msgstr "Tipo de Chassi"
+
+#: src/window.py:615
+msgid "Chassis Vendor"
+msgstr "Fabricante do Chassi"
+
+#: src/window.py:616
+msgid "Chassis Version"
+msgstr "Versão do Chassi"
+
+#: src/window.py:617
+msgid "Product Family"
+msgstr "Familia do Produto"
+
+#: src/window.py:618
+msgid "Product Name"
+msgstr "Nome do Produto"
+
+#: src/window.py:619
+msgid "Product Serial Number"
+msgstr "Numero de Série do Produto"
+
+#: src/window.py:620
+msgid "Product SKU"
+msgstr "SKU do Produto"
+
+#: src/window.py:621
+msgid "Product UUID"
+msgstr "UUID do Produto"
+
+#: src/window.py:622
+msgid "Product Version"
+msgstr "Versão do Produto"
+
+#: src/window.py:623
+msgid "Power"
+msgstr "Energia"
+
+#: src/window.py:625
+msgid "System Vendor"
+msgstr "Fornecedor do Sistema"
+
+#: src/window.py:629
+msgid "Control"
+msgstr "Controle"
+
+#: src/window.py:630
+msgid "Runtime Active Time"
+msgstr "Tempo Ativo do Ambiente de Execução"
+
+#: src/window.py:631
+msgid "Runtime Status"
+msgstr "Status do Ambiente de Execução"
+
+#: src/window.py:632
+msgid "Runtime Suspended Time"
+msgstr "Tempo de Suspensão do Ambiente de Execução"
+
+#: src/window.py:636
+msgid "Details from /sys/devices/virtual/dmi/id"
+msgstr "Detalhes de /sys/devices/virtual/dmi/id"
