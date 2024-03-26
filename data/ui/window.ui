@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.90.1 -->
+<interface>
+  <!-- interface-name inspector_cmb.ui -->
+  <requires lib="gtk" version="4.12"/>
+  <requires lib="libadwaita" version="1.4"/>
+  <template class="InspectorWindow" parent="AdwApplicationWindow">
+    <property name="title">Inspector</property>
+    <child>
+      <object class="AdwOverlaySplitView">
+        <property name="content">
+          <object class="AdwToolbarView">
+            <property name="content">
+              <object class="GtkStack" id="main_stack">
+                <child>
+                  <object class="GtkStackPage">
+                    <property name="child">
+                      <object class="GtkScrolledWindow">
+                        <property name="child">
+                          <object class="GtkBox" id="motherboard_content"/>
+                        </property>
+                      </object>
+                    </property>
+                    <property name="icon-name">airplane-mode-symbolic</property>
+                    <property name="name">motherboard</property>
+                    <property name="title">Motherboard</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkStackPage">
+                    <property name="child">
+                      <object class="GtkScrolledWindow">
+                        <property name="child">
+                          <object class="GtkBox" id="processor_content"/>
+                        </property>
+                      </object>
+                    </property>
+                    <property name="name">processor</property>
+                    <property name="title">Processor</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkStackPage">
+                    <property name="child">
+                      <object class="GtkScrolledWindow">
+                        <property name="child">
+                          <object class="GtkBox" id="memory_content"/>
+                        </property>
+                      </object>
+                    </property>
+                    <property name="name">memory</property>
+                    <property name="title">Memory</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkStackPage">
+                    <property name="child">
+                      <object class="GtkScrolledWindow">
+                        <property name="child">
+                          <object class="GtkBox" id="disk_content"/>
+                        </property>
+                      </object>
+                    </property>
+                    <property name="name">disk_drives</property>
+                    <property name="title">Disk Drives</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkStackPage">
+                    <property name="child">
+                      <object class="GtkScrolledWindow">
+                        <property name="child">
+                          <object class="GtkBox" id="pci_content"/>
+                        </property>
+                      </object>
+                    </property>
+                    <property name="name">pci_devices</property>
+                    <property name="title">PCI Devices</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkStackPage">
+                    <property name="child">
+                      <object class="GtkScrolledWindow">
+                        <property name="child">
+                          <object class="GtkBox" id="usb_content"/>
+                        </property>
+                      </object>
+                    </property>
+                    <property name="name">usb_devices</property>
+                    <property name="title">USB Devices</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkStackPage">
+                    <property name="child">
+                      <object class="GtkScrolledWindow">
+                        <property name="child">
+                          <object class="GtkBox" id="network_content"/>
+                        </property>
+                      </object>
+                    </property>
+                    <property name="name">network_devices</property>
+                    <property name="title">Network Devices</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkStackPage">
+                    <property name="child">
+                      <object class="GtkScrolledWindow">
+                        <property name="child">
+                          <object class="GtkBox" id="kernel_content"/>
+                        </property>
+                      </object>
+                    </property>
+                    <property name="name">kernel</property>
+                    <property name="title">Kernel</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkStackPage">
+                    <property name="child">
+                      <object class="GtkScrolledWindow">
+                        <property name="child">
+                          <object class="GtkBox" id="distribution_content"/>
+                        </property>
+                      </object>
+                    </property>
+                    <property name="name">distribution</property>
+                    <property name="title">Distribution</property>
+                  </object>
+                </child>
+              </object>
+            </property>
+            <property name="reveal-bottom-bars">False</property>
+            <child type="top">
+              <object class="AdwHeaderBar">
+                <property name="title-widget">
+                  <object class="AdwWindowTitle">
+                    <property name="title">Motherboard</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </property>
+        <property name="sidebar">
+          <object class="AdwToolbarView">
+            <property name="content">
+              <object class="GtkStackSidebar">
+                <property name="stack">main_stack</property>
+                <property name="css-classes">sidebar-fix</property>
+              </object>
+            </property>
+            <child type="top">
+              <object class="AdwHeaderBar">
+                <child type="start">
+                  <object class="GtkMenuButton">
+                    <property name="icon-name">open-menu-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+        <property name="sidebar-width-fraction">0.45</property>
+      </object>
+    </child>
+  </template>
+</interface>
+

@@ -24,21 +24,22 @@ from gi.repository import Gio
 import gettext 
 import gi, os, subprocess, threading, time, json, re, fnmatch
 
-class CommandTestWindow(Adw.Window):
-    __gtype_name__ = 'Inspector'
+@Gtk.Template(resource_path='/io/github/nokse22/inspector/ui/window.ui')
+class InspectorWindow(Adw.ApplicationWindow):
+    __gtype_name__ = 'InspectorWindow'
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.settings = Gio.Settings.new('io.github.nokse22.inspector')
 
-        self.set_default_size(800, 820)
-        self.props.width_request=300
+        # self.set_default_size(800, 820)
+        self.props.width_request=360
         self.props.height_request=400
         self.settings.bind("window-width", self, "default-width", Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind("window-height", self, "default-height", Gio.SettingsBindFlags.DEFAULT)
 
         self.split_view = Adw.OverlaySplitView(collapsed=False)
 
-        self.set_content(self.split_view)
+        # self.set_content(self.split_view)
         self.toolbar_view = Adw.ToolbarView()
         self.split_view.set_content(self.toolbar_view)
         headerbar = Adw.HeaderBar()
@@ -54,7 +55,7 @@ class CommandTestWindow(Adw.Window):
         self.sidebar_toolbar_view = Adw.ToolbarView()
         self.split_view.set_sidebar(self.sidebar_toolbar_view)
         sidebar_headerbar = Adw.HeaderBar()
-        self.set_title(_("Inspector"))
+        # self.set_title(_("Inspector"))
         sidebar_headerbar.set_show_title(True)
         self.sidebar_toolbar_view.add_top_bar(sidebar_headerbar)
 
@@ -87,7 +88,7 @@ class CommandTestWindow(Adw.Window):
         headerbar.pack_end(self.menu_button)
         headerbar.pack_end(reload_button)
 
-        sidebar_condition = Adw.BreakpointCondition.new_length(1, 500, 2)
+        sidebar_condition = Adw.BreakpointCondition.new_length(1, 600, 2)
         sidebar_breakpoint = Adw.Breakpoint.new(sidebar_condition)
 
         sidebar_breakpoint.set_condition(sidebar_condition)

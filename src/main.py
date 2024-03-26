@@ -24,7 +24,7 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw, Gdk
-from .window import CommandTestWindow
+from .window import InspectorWindow
 
 
 class CommandTestApplication(Adw.Application):
@@ -41,6 +41,10 @@ class CommandTestApplication(Adw.Application):
         css = '''
         .link{
             padding: 0px;
+        }
+
+        .sidebar-fix{
+            border:4px;
         }
         '''
         css_provider = Gtk.CssProvider()
@@ -59,12 +63,12 @@ class CommandTestApplication(Adw.Application):
         """
         self.win = self.props.active_window
         if not self.win:
-            self.win = CommandTestWindow(application=self)
+            self.win = InspectorWindow(application=self)
         self.win.present()
 
     def on_about_action(self, *args):
         """Callback for the app.about action."""
-        about = Adw.AboutWindow(transient_for=self.props.active_window,
+        about = Adw.AboutDialog(
                                 application_name=_("Inspector"),
                                 application_icon='io.github.nokse22.inspector',
                                 developer_name='Nokse',
@@ -76,7 +80,7 @@ class CommandTestApplication(Adw.Application):
         # Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL. 
         # One name per line, please do not remove previous names.
         about.set_translator_credits(_("translator-credits"))
-        about.present()
+        about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
