@@ -27,6 +27,9 @@ import gi, os, subprocess, threading, time, json, re, fnmatch
 @Gtk.Template(resource_path='/io/github/nokse22/inspector/ui/window.ui')
 class InspectorWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'InspectorWindow'
+
+    motherboard_content = Gtk.Template.Child()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.settings = Gio.Settings.new('io.github.nokse22.inspector')
@@ -40,94 +43,96 @@ class InspectorWindow(Adw.ApplicationWindow):
         self.split_view = Adw.OverlaySplitView(collapsed=False)
 
         # self.set_content(self.split_view)
-        self.toolbar_view = Adw.ToolbarView()
-        self.split_view.set_content(self.toolbar_view)
-        headerbar = Adw.HeaderBar()
-        self.title_label = Gtk.Label(label="Usb")
-        headerbar.set_title_widget(self.title_label)
-        sidebar_button = Gtk.Button(icon_name="sidebar-show-symbolic", visible=False)
-        sidebar_button.connect("clicked", self.show_sidebar)
-        headerbar.pack_start(sidebar_button)
-        reload_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-        reload_button.connect("clicked", self.reload_current)
-        self.toolbar_view.add_top_bar(headerbar)
+        # self.toolbar_view = Adw.ToolbarView()
+        # self.split_view.set_content(self.toolbar_view)
+        # headerbar = Adw.HeaderBar()
+        # self.title_label = Gtk.Label(label="Usb")
+        # headerbar.set_title_widget(self.title_label)
+        # sidebar_button = Gtk.Button(icon_name="sidebar-show-symbolic", visible=False)
+        # sidebar_button.connect("clicked", self.show_sidebar)
+        # headerbar.pack_start(sidebar_button)
+        # reload_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
+        # reload_button.connect("clicked", self.reload_current)
+        # self.toolbar_view.add_top_bar(headerbar)
 
-        self.sidebar_toolbar_view = Adw.ToolbarView()
-        self.split_view.set_sidebar(self.sidebar_toolbar_view)
-        sidebar_headerbar = Adw.HeaderBar()
+        # self.sidebar_toolbar_view = Adw.ToolbarView()
+        # self.split_view.set_sidebar(self.sidebar_toolbar_view)
+        # sidebar_headerbar = Adw.HeaderBar()
         # self.set_title(_("Inspector"))
-        sidebar_headerbar.set_show_title(True)
-        self.sidebar_toolbar_view.add_top_bar(sidebar_headerbar)
+        # sidebar_headerbar.set_show_title(True)
+        # self.sidebar_toolbar_view.add_top_bar(sidebar_headerbar)
 
-        self.sidebar_scrolled_window = Gtk.ScrolledWindow(vexpand=True)
-        self.sidebar_scrolled_window.set_policy(2,1)
-        self.sidebar_toolbar_view.set_content(self.sidebar_scrolled_window)
-        self.sidebar_list_box = Gtk.ListBox(css_classes=["navigation-sidebar"])
-        self.sidebar_list_box.connect("row-selected", self.on_row_selected)
-        self.sidebar_scrolled_window.set_child(self.sidebar_list_box)
+        # self.sidebar_scrolled_window = Gtk.ScrolledWindow(vexpand=True)
+        # self.sidebar_scrolled_window.set_policy(2,1)
+        # self.sidebar_toolbar_view.set_content(self.sidebar_scrolled_window)
+        # self.sidebar_list_box = Gtk.ListBox(css_classes=["navigation-sidebar"])
+        # self.sidebar_list_box.connect("row-selected", self.on_row_selected)
+        # self.sidebar_scrolled_window.set_child(self.sidebar_list_box)
 
-        self.clamp = Adw.Clamp(margin_start=12, margin_end=12)
-        self.scrolled_window = Gtk.ScrolledWindow(vexpand=True)
-        self.scrolled_window.set_policy(2,1)
-        self.scrolled_window.set_child(self.clamp)
-        self.toolbar_view.set_content(self.scrolled_window)
+        # self.clamp = Adw.Clamp(margin_start=12, margin_end=12)
+        # self.scrolled_window = Gtk.ScrolledWindow(vexpand=True)
+        # self.scrolled_window.set_policy(2,1)
+        # self.scrolled_window.set_child(self.clamp)
+        # self.toolbar_view.set_content(self.scrolled_window)
 
-        menu_button = Gtk.MenuButton()
-        menu_button.set_icon_name("open-menu-symbolic")
-        menu = Gio.Menu()
-        menu.append(_("Reload"), "app.reload")
-        menu.append(_("Keyboard shortcuts"), "win.show-help-overlay")
-        menu.append(_("About Inspector"), "app.about")
+        # menu_button = Gtk.MenuButton()
+        # menu_button.set_icon_name("open-menu-symbolic")
+        # menu = Gio.Menu()
+        # menu.append(_("Reload"), "app.reload")
+        # menu.append(_("Keyboard shortcuts"), "win.show-help-overlay")
+        # menu.append(_("About Inspector"), "app.about")
 
-        menu_button.set_menu_model(menu)
-        sidebar_headerbar.pack_start(menu_button)
+        # menu_button.set_menu_model(menu)
+        # sidebar_headerbar.pack_start(menu_button)
 
-        self.menu_button = Gtk.MenuButton(visible=False)
-        self.menu_button.set_icon_name("open-menu-symbolic")
-        self.menu_button.set_menu_model(menu)
-        headerbar.pack_end(self.menu_button)
-        headerbar.pack_end(reload_button)
+        # self.menu_button = Gtk.MenuButton(visible=False)
+        # self.menu_button.set_icon_name("open-menu-symbolic")
+        # self.menu_button.set_menu_model(menu)
+        # headerbar.pack_end(self.menu_button)
+        # headerbar.pack_end(reload_button)
 
-        sidebar_condition = Adw.BreakpointCondition.new_length(1, 600, 2)
-        sidebar_breakpoint = Adw.Breakpoint.new(sidebar_condition)
+        # sidebar_condition = Adw.BreakpointCondition.new_length(1, 600, 2)
+        # sidebar_breakpoint = Adw.Breakpoint.new(sidebar_condition)
 
-        sidebar_breakpoint.set_condition(sidebar_condition)
-        sidebar_breakpoint.add_setter(self.split_view, "collapsed", True)
-        sidebar_breakpoint.add_setter(menu_button, "visible", False)
-        sidebar_breakpoint.add_setter(sidebar_button, "visible", True)
-        sidebar_breakpoint.connect("apply", self.toggle_menu_button)
-        sidebar_breakpoint.connect("unapply", self.toggle_menu_button)
+        # sidebar_breakpoint.set_condition(sidebar_condition)
+        # sidebar_breakpoint.add_setter(self.split_view, "collapsed", True)
+        # sidebar_breakpoint.add_setter(menu_button, "visible", False)
+        # sidebar_breakpoint.add_setter(sidebar_button, "visible", True)
+        # sidebar_breakpoint.connect("apply", self.toggle_menu_button)
+        # sidebar_breakpoint.connect("unapply", self.toggle_menu_button)
 
-        self.add_breakpoint(sidebar_breakpoint)
+        # self.add_breakpoint(sidebar_breakpoint)
 
-        self.motherboard_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Motherboard"), name="MOBO", xalign=0, margin_top=8, margin_bottom=8))
+        # self.motherboard_content = Gtk.Box(orientation=1)
+        # self.sidebar_list_box.append(Gtk.Label(label=_("Motherboard"), name="MOBO", xalign=0, margin_top=8, margin_bottom=8))
 
-        self.cpu_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Processor"), name="CPU", xalign=0, margin_top=8, margin_bottom=8))
+        # self.cpu_content = Gtk.Box(orientation=1)
+        # self.sidebar_list_box.append(Gtk.Label(label=_("Processor"), name="CPU", xalign=0, margin_top=8, margin_bottom=8))
 
-        self.memory_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Memory"), name="MEMORY", xalign=0, margin_top=8, margin_bottom=8))
+        # self.memory_content = Gtk.Box(orientation=1)
+        # self.sidebar_list_box.append(Gtk.Label(label=_("Memory"), name="MEMORY", xalign=0, margin_top=8, margin_bottom=8))
 
-        self.disks_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Disk Drives"), name="DISK", xalign=0, margin_top=8, margin_bottom=8))
+        # self.disks_content = Gtk.Box(orientation=1)
+        # self.sidebar_list_box.append(Gtk.Label(label=_("Disk Drives"), name="DISK", xalign=0, margin_top=8, margin_bottom=8))
 
-        self.pci_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("PCI Devices"), name="PCI", xalign=0, margin_top=8, margin_bottom=8))
+        # self.pci_content = Gtk.Box(orientation=1)
+        # self.sidebar_list_box.append(Gtk.Label(label=_("PCI Devices"), name="PCI", xalign=0, margin_top=8, margin_bottom=8))
 
-        self.usb_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("USB Devices"), name="USB", xalign=0, margin_top=8, margin_bottom=8))
+        # self.usb_content = Gtk.Box(orientation=1)
+        # self.sidebar_list_box.append(Gtk.Label(label=_("USB Devices"), name="USB", xalign=0, margin_top=8, margin_bottom=8))
 
-        self.network_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Network Devices"), name="NETWORK", xalign=0, margin_top=8, margin_bottom=8))
+        # self.network_content = Gtk.Box(orientation=1)
+        # self.sidebar_list_box.append(Gtk.Label(label=_("Network Devices"), name="NETWORK", xalign=0, margin_top=8, margin_bottom=8))
 
-        self.kernel_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Kernel"), name="KERNEL", xalign=0, margin_top=8, margin_bottom=8))
+        # self.kernel_content = Gtk.Box(orientation=1)
+        # self.sidebar_list_box.append(Gtk.Label(label=_("Kernel"), name="KERNEL", xalign=0, margin_top=8, margin_bottom=8))
 
-        self.system_content = Gtk.Box(orientation=1)
-        self.sidebar_list_box.append(Gtk.Label(label=_("Distribution"), name="SYSTEM", xalign=0, margin_top=8, margin_bottom=8))
+        # self.system_content = Gtk.Box(orientation=1)
+        # self.sidebar_list_box.append(Gtk.Label(label=_("Distribution"), name="SYSTEM", xalign=0, margin_top=8, margin_bottom=8))
 
-        self.sidebar_list_box.select_row( self.sidebar_list_box.get_row_at_index(0))
+        # self.sidebar_list_box.select_row( self.sidebar_list_box.get_row_at_index(0))
+
+        self.update_motherboard_page()
 
     def toggle_menu_button(self, brkpnt):
         self.menu_button.set_visible(not self.menu_button.get_visible())
@@ -154,49 +159,49 @@ class InspectorWindow(Adw.ApplicationWindow):
             case "KERNEL":
                 self.update_kernel_page()
 
-    def on_row_selected(self, list_box, row):
-        name = row.get_child().get_name()
-        nice_name = row.get_child().get_label()
-        self.title_label.set_label(nice_name)
-        match name:
-            case "USB":
-                if self.usb_content.get_first_child() == None:
-                    self.update_usb_page()
-                self.clamp.set_child(self.usb_content)
-            case "DISK":
-                if self.disks_content.get_first_child() == None:
-                    self.update_disk_page()
-                self.clamp.set_child(self.disks_content)
-            case "PCI":
-                if self.pci_content.get_first_child() == None:
-                    self.update_pci_page()
-                self.clamp.set_child(self.pci_content)
-            case "MEMORY":
-                if self.memory_content.get_first_child() == None:
-                    self.update_memory_page()
-                self.clamp.set_child(self.memory_content)
-            case "NETWORK":
-                if self.network_content.get_first_child() == None:
-                    self.update_network_page()
-                self.clamp.set_child(self.network_content)
-            case "CPU":
-                if self.cpu_content.get_first_child() == None:
-                    self.update_cpu_page()
-                self.clamp.set_child(self.cpu_content)
-            case "MOBO":
-                if self.motherboard_content.get_first_child() == None:
-                    self.update_motherboard_page()
-                self.clamp.set_child(self.motherboard_content)
-            case "SYSTEM":
-                if self.system_content.get_first_child() == None:
-                    self.update_system_page()
-                self.clamp.set_child(self.system_content)
-            case "KERNEL":
-                if self.system_content.get_first_child() == None:
-                    self.update_kernel_page()
-                self.clamp.set_child(self.kernel_content)
-        if self.split_view.get_collapsed():
-            self.split_view.set_show_sidebar(False)
+    # def on_row_selected(self, list_box, row):
+    #     name = row.get_child().get_name()
+    #     nice_name = row.get_child().get_label()
+    #     self.title_label.set_label(nice_name)
+    #     match name:
+    #         case "USB":
+    #             if self.usb_content.get_first_child() == None:
+    #                 self.update_usb_page()
+    #             self.clamp.set_child(self.usb_content)
+    #         case "DISK":
+    #             if self.disks_content.get_first_child() == None:
+    #                 self.update_disk_page()
+    #             self.clamp.set_child(self.disks_content)
+    #         case "PCI":
+    #             if self.pci_content.get_first_child() == None:
+    #                 self.update_pci_page()
+    #             self.clamp.set_child(self.pci_content)
+    #         case "MEMORY":
+    #             if self.memory_content.get_first_child() == None:
+    #                 self.update_memory_page()
+    #             self.clamp.set_child(self.memory_content)
+    #         case "NETWORK":
+    #             if self.network_content.get_first_child() == None:
+    #                 self.update_network_page()
+    #             self.clamp.set_child(self.network_content)
+    #         case "CPU":
+    #             if self.cpu_content.get_first_child() == None:
+    #                 self.update_cpu_page()
+    #             self.clamp.set_child(self.cpu_content)
+    #         case "MOBO":
+    #             if self.motherboard_content.get_first_child() == None:
+    #                 self.update_motherboard_page()
+    #             self.clamp.set_child(self.motherboard_content)
+    #         case "SYSTEM":
+    #             if self.system_content.get_first_child() == None:
+    #                 self.update_system_page()
+    #             self.clamp.set_child(self.system_content)
+    #         case "KERNEL":
+    #             if self.system_content.get_first_child() == None:
+    #                 self.update_kernel_page()
+    #             self.clamp.set_child(self.kernel_content)
+    #     if self.split_view.get_collapsed():
+    #         self.split_view.set_show_sidebar(False)
 
     def show_sidebar(self, btn):
         self.split_view.set_show_sidebar(not self.split_view.get_show_sidebar())
@@ -599,7 +604,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                         group2.add(row)
 
     def update_motherboard_page(self, btn=None):
-        self.remove_content(self.motherboard_content)
+        # self.remove_content(self.motherboard_content)
         
         dmi_path = "/sys/devices/virtual/dmi/id/"
         dmi_keys = [
