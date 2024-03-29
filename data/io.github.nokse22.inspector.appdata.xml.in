@@ -13,6 +13,9 @@
 
   <content_rating type="oars-1.1" />
   <developer_name translate="no">Nokse</developer_name>
+  <developer id="io.github.nokse22">
+	  <name translate="no">Nokse</name>
+  </developer>
   <launchable type="desktop-id">io.github.nokse22.inspector.desktop</launchable>
   <translation type="gettext">inspector</translation>
 
