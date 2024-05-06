@@ -34,6 +34,10 @@
     	<description translatable="no">
 			  <p>Used latest Libadwaita widgets</p>
     	  <p>Updated runtime to 46</p>
+    	  <p>Added Czech translation</p>
+    	  <p>Added Italian translation</p>
+    	  <p>Added Brazilian translation</p>
+    	  <p>Added Hindi translation</p>
 		  </description>
   	</release>
     <release version="0.1.8" date="2023-09-26">
