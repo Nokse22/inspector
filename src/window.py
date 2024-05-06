@@ -29,183 +29,67 @@ class InspectorWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'InspectorWindow'
 
     motherboard_content = Gtk.Template.Child()
+    system_content = Gtk.Template.Child()
+    disks_content = Gtk.Template.Child()
+    pci_content = Gtk.Template.Child()
+    memory_content = Gtk.Template.Child()
+    usb_content = Gtk.Template.Child()
+    kernel_content = Gtk.Template.Child()
+    network_content = Gtk.Template.Child()
+    cpu_content = Gtk.Template.Child()
+
+    overlay_split_view = Gtk.Template.Child()
+    main_stack = Gtk.Template.Child()
+    window_title = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.settings = Gio.Settings.new('io.github.nokse22.inspector')
 
-        # self.set_default_size(800, 820)
-        self.props.width_request=360
-        self.props.height_request=400
         self.settings.bind("window-width", self, "default-width", Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind("window-height", self, "default-height", Gio.SettingsBindFlags.DEFAULT)
 
-        self.split_view = Adw.OverlaySplitView(collapsed=False)
-
-        # self.set_content(self.split_view)
-        # self.toolbar_view = Adw.ToolbarView()
-        # self.split_view.set_content(self.toolbar_view)
-        # headerbar = Adw.HeaderBar()
-        # self.title_label = Gtk.Label(label="Usb")
-        # headerbar.set_title_widget(self.title_label)
-        # sidebar_button = Gtk.Button(icon_name="sidebar-show-symbolic", visible=False)
-        # sidebar_button.connect("clicked", self.show_sidebar)
-        # headerbar.pack_start(sidebar_button)
-        # reload_button = Gtk.Button(icon_name="view-refresh-symbolic",valign=3, css_classes=["flat"])
-        # reload_button.connect("clicked", self.reload_current)
-        # self.toolbar_view.add_top_bar(headerbar)
-
-        # self.sidebar_toolbar_view = Adw.ToolbarView()
-        # self.split_view.set_sidebar(self.sidebar_toolbar_view)
-        # sidebar_headerbar = Adw.HeaderBar()
-        # self.set_title(_("Inspector"))
-        # sidebar_headerbar.set_show_title(True)
-        # self.sidebar_toolbar_view.add_top_bar(sidebar_headerbar)
-
-        # self.sidebar_scrolled_window = Gtk.ScrolledWindow(vexpand=True)
-        # self.sidebar_scrolled_window.set_policy(2,1)
-        # self.sidebar_toolbar_view.set_content(self.sidebar_scrolled_window)
-        # self.sidebar_list_box = Gtk.ListBox(css_classes=["navigation-sidebar"])
-        # self.sidebar_list_box.connect("row-selected", self.on_row_selected)
-        # self.sidebar_scrolled_window.set_child(self.sidebar_list_box)
-
-        # self.clamp = Adw.Clamp(margin_start=12, margin_end=12)
-        # self.scrolled_window = Gtk.ScrolledWindow(vexpand=True)
-        # self.scrolled_window.set_policy(2,1)
-        # self.scrolled_window.set_child(self.clamp)
-        # self.toolbar_view.set_content(self.scrolled_window)
-
-        # menu_button = Gtk.MenuButton()
-        # menu_button.set_icon_name("open-menu-symbolic")
-        # menu = Gio.Menu()
-        # menu.append(_("Reload"), "app.reload")
-        # menu.append(_("Keyboard shortcuts"), "win.show-help-overlay")
-        # menu.append(_("About Inspector"), "app.about")
-
-        # menu_button.set_menu_model(menu)
-        # sidebar_headerbar.pack_start(menu_button)
-
-        # self.menu_button = Gtk.MenuButton(visible=False)
-        # self.menu_button.set_icon_name("open-menu-symbolic")
-        # self.menu_button.set_menu_model(menu)
-        # headerbar.pack_end(self.menu_button)
-        # headerbar.pack_end(reload_button)
-
-        # sidebar_condition = Adw.BreakpointCondition.new_length(1, 600, 2)
-        # sidebar_breakpoint = Adw.Breakpoint.new(sidebar_condition)
-
-        # sidebar_breakpoint.set_condition(sidebar_condition)
-        # sidebar_breakpoint.add_setter(self.split_view, "collapsed", True)
-        # sidebar_breakpoint.add_setter(menu_button, "visible", False)
-        # sidebar_breakpoint.add_setter(sidebar_button, "visible", True)
-        # sidebar_breakpoint.connect("apply", self.toggle_menu_button)
-        # sidebar_breakpoint.connect("unapply", self.toggle_menu_button)
-
-        # self.add_breakpoint(sidebar_breakpoint)
-
-        # self.motherboard_content = Gtk.Box(orientation=1)
-        # self.sidebar_list_box.append(Gtk.Label(label=_("Motherboard"), name="MOBO", xalign=0, margin_top=8, margin_bottom=8))
-
-        # self.cpu_content = Gtk.Box(orientation=1)
-        # self.sidebar_list_box.append(Gtk.Label(label=_("Processor"), name="CPU", xalign=0, margin_top=8, margin_bottom=8))
-
-        # self.memory_content = Gtk.Box(orientation=1)
-        # self.sidebar_list_box.append(Gtk.Label(label=_("Memory"), name="MEMORY", xalign=0, margin_top=8, margin_bottom=8))
-
-        # self.disks_content = Gtk.Box(orientation=1)
-        # self.sidebar_list_box.append(Gtk.Label(label=_("Disk Drives"), name="DISK", xalign=0, margin_top=8, margin_bottom=8))
-
-        # self.pci_content = Gtk.Box(orientation=1)
-        # self.sidebar_list_box.append(Gtk.Label(label=_("PCI Devices"), name="PCI", xalign=0, margin_top=8, margin_bottom=8))
-
-        # self.usb_content = Gtk.Box(orientation=1)
-        # self.sidebar_list_box.append(Gtk.Label(label=_("USB Devices"), name="USB", xalign=0, margin_top=8, margin_bottom=8))
-
-        # self.network_content = Gtk.Box(orientation=1)
-        # self.sidebar_list_box.append(Gtk.Label(label=_("Network Devices"), name="NETWORK", xalign=0, margin_top=8, margin_bottom=8))
-
-        # self.kernel_content = Gtk.Box(orientation=1)
-        # self.sidebar_list_box.append(Gtk.Label(label=_("Kernel"), name="KERNEL", xalign=0, margin_top=8, margin_bottom=8))
-
-        # self.system_content = Gtk.Box(orientation=1)
-        # self.sidebar_list_box.append(Gtk.Label(label=_("Distribution"), name="SYSTEM", xalign=0, margin_top=8, margin_bottom=8))
-
-        # self.sidebar_list_box.select_row( self.sidebar_list_box.get_row_at_index(0))
+        self.main_stack.connect("notify::visible-child-name", self.on_stack_child_name_changed)
 
         self.update_motherboard_page()
+        self.update_usb_page()
+        self.update_disk_page()
+        self.update_pci_page()
+        self.update_memory_page()
+        self.update_network_page()
+        self.update_cpu_page()
+        self.update_system_page()
+        self.update_kernel_page()
 
-    def toggle_menu_button(self, brkpnt):
-        self.menu_button.set_visible(not self.menu_button.get_visible())
+    def on_stack_child_name_changed(self, stack, child_name):
+        self.window_title.set_title(self.main_stack.get_visible_child().get_name())
 
-    def reload_current(self, btn=None):
-        name = self.sidebar_list_box.get_selected_row().get_child().get_name()
-        match name:
-            case "USB":
+    @Gtk.Template.Callback("on_sidebar_button_clicked")
+    def on_sidebar_button_clicked(self, btn):
+        self.overlay_split_view.set_show_sidebar(True)
+
+    @Gtk.Template.Callback("on_reload_clicked")
+    def on_reload_clicked(self, btn):
+        page_name = self.main_stack.get_visible_child_name()
+        match page_name:
+            case "usb_devices":
                 self.update_usb_page()
-            case "DISK":
+            case "disk_drives":
                 self.update_disk_page()
-            case "PCI":
+            case "pci_devices":
                 self.update_pci_page()
-            case "MEMORY":
+            case "memory":
                 self.update_memory_page()
-            case "NETWORK":
+            case "network_devices":
                 self.update_network_page()
-            case "CPU":
+            case "processor":
                 self.update_cpu_page()
-            case "MOBO":
+            case "motherboard":
                 self.update_motherboard_page()
-            case "SYSTEM":
+            case "distribution":
                 self.update_system_page()
-            case "KERNEL":
+            case "kernel":
                 self.update_kernel_page()
-
-    # def on_row_selected(self, list_box, row):
-    #     name = row.get_child().get_name()
-    #     nice_name = row.get_child().get_label()
-    #     self.title_label.set_label(nice_name)
-    #     match name:
-    #         case "USB":
-    #             if self.usb_content.get_first_child() == None:
-    #                 self.update_usb_page()
-    #             self.clamp.set_child(self.usb_content)
-    #         case "DISK":
-    #             if self.disks_content.get_first_child() == None:
-    #                 self.update_disk_page()
-    #             self.clamp.set_child(self.disks_content)
-    #         case "PCI":
-    #             if self.pci_content.get_first_child() == None:
-    #                 self.update_pci_page()
-    #             self.clamp.set_child(self.pci_content)
-    #         case "MEMORY":
-    #             if self.memory_content.get_first_child() == None:
-    #                 self.update_memory_page()
-    #             self.clamp.set_child(self.memory_content)
-    #         case "NETWORK":
-    #             if self.network_content.get_first_child() == None:
-    #                 self.update_network_page()
-    #             self.clamp.set_child(self.network_content)
-    #         case "CPU":
-    #             if self.cpu_content.get_first_child() == None:
-    #                 self.update_cpu_page()
-    #             self.clamp.set_child(self.cpu_content)
-    #         case "MOBO":
-    #             if self.motherboard_content.get_first_child() == None:
-    #                 self.update_motherboard_page()
-    #             self.clamp.set_child(self.motherboard_content)
-    #         case "SYSTEM":
-    #             if self.system_content.get_first_child() == None:
-    #                 self.update_system_page()
-    #             self.clamp.set_child(self.system_content)
-    #         case "KERNEL":
-    #             if self.system_content.get_first_child() == None:
-    #                 self.update_kernel_page()
-    #             self.clamp.set_child(self.kernel_content)
-    #     if self.split_view.get_collapsed():
-    #         self.split_view.set_show_sidebar(False)
-
-    def show_sidebar(self, btn):
-        self.split_view.set_show_sidebar(not self.split_view.get_show_sidebar())
-
 
     def execute_terminal_command(self, command):
         if 'FLATPAK_ID' in os.environ:
@@ -213,7 +97,6 @@ class InspectorWindow(Adw.ApplicationWindow):
         else:
             console_permissions = ""
         txt = console_permissions + command
-        print(txt)
         process = subprocess.Popen(txt, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, shell=True)
         try:
@@ -225,15 +108,14 @@ class InspectorWindow(Adw.ApplicationWindow):
 
     def empty_command_page(self, command):
         group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24)
-        empty_command_status_page = Adw.StatusPage(title=_("The command is not supported"),
+        empty_command_status_page = Adw.StatusPage(title=_("Error executing command"),
                 icon_name="computer-fail-symbolic", hexpand=True, vexpand=True,
-                description=_("The command {0} returned empty.\n"
-                              "Try running it on your terminal, it should prompt you to "
-                              "install the package on your system.").format(command))
+                description=_("The command {0} returned empty.").format(command))
         group.add(empty_command_status_page)
         return group
 
-    def update_system_page(self, btn=None):
+    def update_system_page(self, *args):
+        print("distro")
         self.remove_content(self.system_content)
         out = self.execute_terminal_command("uname -a")
         if out == "":
@@ -265,7 +147,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                 row.add_suffix(Gtk.Label(opacity=0.60 , label=value.replace('"', ''), wrap=True, wrap_mode=2, hexpand=True, xalign=1, justify=1))
             group.add(row)
 
-    def update_kernel_page(self, btn=None):
+    def update_kernel_page(self, *args):
         self.remove_content(self.kernel_content)
         out = self.execute_terminal_command("uname -a")
         if out == "":
@@ -278,71 +160,45 @@ class InspectorWindow(Adw.ApplicationWindow):
         out = self.execute_terminal_command("uname -s")
         
         row = Adw.ActionRow(title=_("Kernel Name"))
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
         out = self.execute_terminal_command("uname -n")
         row = Adw.ActionRow(title=_("Network Node Hostname"))
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
         out = self.execute_terminal_command("uname -r")
         row = Adw.ActionRow(title=_("Kernel Release"))
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
         out = self.execute_terminal_command("uname -v")
         row = Adw.ActionRow(title=_("Kernel Version"))
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
         out = self.execute_terminal_command("uname -m")
         row = Adw.ActionRow(title=_("Machine Hardware Name"))
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
         out = self.execute_terminal_command("uname -p")
         row = Adw.ActionRow(title=_("Processor Type"))
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
         out = self.execute_terminal_command("uname -i")
         row = Adw.ActionRow(title=_("Hardware Platform"))
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
         out = self.execute_terminal_command("uname -o")
         row = Adw.ActionRow(title=_("Operating System"))
-        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
+        row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
-        # cat /etc/os-release
-
-        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Distribution"), description=_("Command: cat /etc/os-release"))
-        self.system_content.append(group)
-        
-        if 'SNAP' in os.environ:
-            out = self.execute_terminal_command("cat /var/lib/snapd/hostfs/etc/os-release")
-        else:
-            out = self.execute_terminal_command("cat /etc/os-release")
-        out = out.splitlines()
-
-        for line in out:
-            key, value = line.split('=')
-            key = key.replace('_', ' ').title()
-            row = Adw.ActionRow(title=key)
-            if "Url" in key:
-                link = Gtk.LinkButton(uri=value.replace('"', ''), label=value.replace('"', ''), hexpand=True)
-                label = link.get_child()
-                label.set_wrap(True)
-                label.set_xalign(1)
-                label.set_justify(1)
-                row.add_suffix(link)
-            else:
-                row.add_suffix(Gtk.Label(label=value.replace('"', ''), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
-            group.add(row)
-
-    def update_disk_page(self, btn=None):
+    def update_disk_page(self, *args):
         self.remove_content(self.disks_content)
         out = self.execute_terminal_command("lsblk -J")
 
@@ -362,15 +218,26 @@ class InspectorWindow(Adw.ApplicationWindow):
                 except:
                     name = "N/A"
                 if not fnmatch.fnmatch(name, 'loop*'):
-                    try:
-                        size = device['size']
-                    except:
-                        size = ""
-                    text = f"Name: {name}, Size: {size}"
-                    group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("Command: lsblk"))
-                    self.disks_content.append(group)
-                    expander_row = Adw.ExpanderRow(title=_("Total size: "+size))
-                    group.add(expander_row)
+                    if "children" in device:
+                        try:
+                            size = device['size']
+                        except:
+                            size = ""
+                        text = f"Name: {name}, Size: {size}"
+                        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("Command: lsblk"))
+                        self.disks_content.append(group)
+                        expander_row = Adw.ExpanderRow(title=_("Total size: "+size))
+                        group.add(expander_row)
+                    else:
+                        try:
+                            size = device['size']
+                        except:
+                            size = ""
+                        text = f"Name: {name}, Size: {size}"
+                        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("Command: lsblk"))
+                        self.disks_content.append(group)
+                        action_row = Adw.ActionRow(title=_("Total size: "+size))
+                        group.add(action_row)
                 else:
                     if loop_group == None:
                         loop_count = self.execute_terminal_command("lsblk -d | grep loop | wc -l")
@@ -424,7 +291,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                         row.add_suffix(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
                         expander_row.add_row(row)
 
-    def update_memory_page(self, btn=None):
+    def update_memory_page(self, *args):
         self.remove_content(self.memory_content)
         out = self.execute_terminal_command("lsmem -J")
         if out == "":
@@ -459,7 +326,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                 row.add_suffix(box)
                 group2.add(row)
 
-    def update_pci_page(self, btn=None):
+    def update_pci_page(self, *args):
         self.remove_content(self.pci_content)
         out = self.execute_terminal_command("lspci")
         if out == "":
@@ -481,7 +348,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                     action_row = Adw.ActionRow(title=third_part, subtitle=second_part)
                     group2.add(action_row)
 
-    def update_usb_page(self, btn=None):
+    def update_usb_page(self, *args):
         self.remove_content(self.usb_content)
         out = self.execute_terminal_command("lsusb")
         if out == "":
@@ -507,14 +374,14 @@ class InspectorWindow(Adw.ApplicationWindow):
                 group2.add(expander_row)
 
                 action_row = Adw.ActionRow(title=name)
-                action_row.add_suffix(Gtk.Label(label=value, xalign=1, justify=1, selectable=True))
+                action_row.add_suffix(Gtk.Label(label=value, xalign=1, justify=1, selectable=True, css_classes=["dim-label"]))
                 expander_row.add_row(action_row)
 
                 action_row = Adw.ActionRow(title=_("Bus"))
-                action_row.add_suffix(Gtk.Label(label=result[0], wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
+                action_row.add_suffix(Gtk.Label(label=result[0], wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
                 expander_row.add_row(action_row)
 
-    def update_network_page(self, btn=None):
+    def update_network_page(self, *args):
         self.remove_content(self.network_content)
         out = self.execute_terminal_command("ip -j address")
         if out == "":
@@ -560,7 +427,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                                 expander_row.add_row(row)
                     elif key not in ["ifname","ifindex", "addr_info"]:
                         row = Adw.ActionRow(title=key[0].upper() + key[1:] )
-                        row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
+                        row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1, css_classes=["dim-label"]))
                         group2.add(row)
 
     def remove_content(self, box):
@@ -569,7 +436,7 @@ class InspectorWindow(Adw.ApplicationWindow):
             box.remove(child)
             child = box.get_first_child()
 
-    def update_cpu_page(self, btn=None):
+    def update_cpu_page(self, *args):
         self.remove_content(self.cpu_content)
         out = self.execute_terminal_command("lscpu -J")
         if out == "":
@@ -577,7 +444,7 @@ class InspectorWindow(Adw.ApplicationWindow):
             self.cpu_content.append(page)
         else:
             data = json.loads(out)
-            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("CPU"), description=_("Command: lshw -c cpu"))
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("CPU"), description=_("Command: lscpu"))
             self.cpu_content.append(group2)
 
             add_flags = False
@@ -600,11 +467,12 @@ class InspectorWindow(Adw.ApplicationWindow):
                         row = Adw.ActionRow(title=value[0].upper() + value[1:])
                     elif key == "data":
 
-                        row.add_suffix(Gtk.Label(label=value[0].upper() + value[1:], xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
+                        row.add_suffix(Gtk.Label(label=value[0].upper() + value[1:], css_classes=["dim-label"],
+                                xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
                         group2.add(row)
 
-    def update_motherboard_page(self, btn=None):
-        # self.remove_content(self.motherboard_content)
+    def update_motherboard_page(self, *args):
+        self.remove_content(self.motherboard_content)
         
         dmi_path = "/sys/devices/virtual/dmi/id/"
         dmi_keys = [
@@ -666,6 +534,6 @@ class InspectorWindow(Adw.ApplicationWindow):
                 value = "N/A"  # Or any default value if you cannot access a file
 
             row = Adw.ActionRow(title=label)
-            row.add_suffix(Gtk.Label(label=value, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
+            row.add_suffix(Gtk.Label(label=value, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
             group.add(row)
 
