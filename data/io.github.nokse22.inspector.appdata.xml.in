@@ -12,14 +12,27 @@
 	</description>
 
 	<content_rating type="oars-1.0"></content_rating>
-  <developer_name>Nokse</developer_name>
+  <developer id="io.github.nokse22">
+    <name translatable="no">Nokse</name>
+  </developer>
   <launchable type="desktop-id">io.github.nokse22.inspector.desktop</launchable>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#86d37f</color>
+    <color type="primary" scheme_preference="dark">#21631b</color>
+  </branding>
 
   <url type="homepage">https://github.com/Nokse22/inspector</url>
   <url type="bugtracker">https://github.com/Nokse22/inspector/issues</url>
   <url type="donation">https://ko-fi.com/nokse22</url>
 
   <releases>
+    <release version="0.1.9" date="2024-04-07">
+    	<description translatable="no">
+			  <p>Used latest Libadwaita widgets</p>
+    	  <p>Updated runtime to 46</p>
+		  </description>
+  	</release>
     <release version="0.1.8" date="2023-09-26">
     	<description translatable="no">
 			  <p>Improved app design and usability</p>
@@ -68,6 +81,24 @@
 	  </screenshot>
 	  <screenshot>
 	    <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%203.png</image>
+	  </screenshot>
+	  <screenshot type="default">
+      <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%204.png</image>
+    </screenshot>
+	  <screenshot>
+	    <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%205.png</image>
+	  </screenshot>
+	  <screenshot>
+	    <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%206.png</image>
+	  </screenshot>
+	  <screenshot type="default">
+      <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%207.png</image>
+    </screenshot>
+	  <screenshot>
+	    <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%208.png</image>
+	  </screenshot>
+	  <screenshot>
+	    <image>https://raw.githubusercontent.com/Nokse22/inspector/master/data/resources/screenshot%209.png</image>
 	  </screenshot>
   </screenshots>
 
