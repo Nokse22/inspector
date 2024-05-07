@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: inspector\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-02 19:24+0100\n"
-"PO-Revision-Date: 2024-04-04 19:25+0530\n"
+"PO-Revision-Date: 2024-05-07 20:54+0530\n"
 "Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi\n"
 "Language: hi\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 46.0\n"
+"X-Generator: Gtranslator 46.1\n"
 
 #: data/io.github.nokse22.inspector.desktop.in:3
 #: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:68
@@ -227,7 +227,7 @@ msgstr "BIOS दिनांक"
 
 #: src/window.py:604
 msgid "BIOS Release"
-msgstr "बायोस रिलीज"
+msgstr "BIOS रिलीज"
 
 #: src/window.py:605
 msgid "BIOS Vendor"
