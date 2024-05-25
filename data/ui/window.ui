@@ -239,6 +239,7 @@
                 <child type="end">
                   <object class="GtkButton">
                     <property name="icon-name">arrow-circular-top-right-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Reload Current Page</property>
                     <signal name="clicked" handler="on_reload_clicked"/>
                   </object>
                 </child>
