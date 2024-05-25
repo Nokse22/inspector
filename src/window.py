@@ -115,7 +115,6 @@ class InspectorWindow(Adw.ApplicationWindow):
         return group
 
     def update_system_page(self, *args):
-        print("distro")
         self.remove_content(self.system_content)
         out = self.execute_terminal_command("uname -a")
         if out == "":
@@ -434,6 +433,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         child = box.get_first_child()
         while child != None:
             box.remove(child)
+            del child
             child = box.get_first_child()
 
     def update_cpu_page(self, *args):
