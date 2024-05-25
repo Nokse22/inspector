@@ -75,7 +75,7 @@ class CommandTestApplication(Adw.Application):
                                 developers=["Nokse22 https://github.com/Nokse22","David Stephenson https://github.com/David-Stephenson", "soumyaDghosh https://github.com/soumyaDghosh"],
                                 issue_url='https://github.com/Nokse22/inspector/issues',
                                 website='https://github.com/Nokse22/inspector',
-                                version='0.1.9',
+                                version='0.2.0',
                                 copyright='© 2023 Nokse')
         # Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL. 
         # One name per line, please do not remove previous names.
