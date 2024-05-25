@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-02 19:24+0100\n"
+"POT-Creation-Date: 2024-05-25 15:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,8 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: data/io.github.nokse22.inspector.desktop.in:3
-#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:68
-#: src/window.py:57
+#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:72
 msgid "Inspector"
 msgstr ""
 
@@ -40,285 +39,262 @@ msgid ""
 "CPU, Motherboard and bios, System and distro"
 msgstr ""
 
-#: data/io.github.nokse22.inspector.appdata.xml.in:15
-msgid "Nokse"
+#: data/io.github.nokse22.inspector.appdata.xml.in:41
+msgid "Used latest Libadwaita widgets"
 msgstr ""
 
-#: src/main.py:78
+#: data/io.github.nokse22.inspector.appdata.xml.in:42
+msgid "Updated runtime to 46"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:43
+msgid "Added Czech translation"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:44
+msgid "Added Italian translation"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:45
+msgid "Added Brazilian translation"
+msgstr ""
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:46
+msgid "Added Hindi translation"
+msgstr ""
+
+#: src/main.py:82
 msgid "translator-credits"
 msgstr ""
 
-#: src/window.py:77
-msgid "Reload"
+#: src/window.py:111
+msgid "Error executing command"
 msgstr ""
 
-#: src/window.py:78
-msgid "Keyboard shortcuts"
+#: src/window.py:113
+#, python-brace-format
+msgid "The command {0} returned empty."
 msgstr ""
 
-#: src/window.py:79
-msgid "About Inspector"
-msgstr ""
-
-#: src/window.py:103 src/window.py:636
-msgid "Motherboard"
-msgstr ""
-
-#: src/window.py:106
-msgid "Processor"
-msgstr ""
-
-#: src/window.py:109 src/window.py:450
-msgid "Memory"
-msgstr ""
-
-#: src/window.py:112
-msgid "Disk Drives"
-msgstr ""
-
-#: src/window.py:115
-msgid "PCI Devices"
-msgstr ""
-
-#: src/window.py:118
-msgid "USB Devices"
-msgstr ""
-
-#: src/window.py:121
-msgid "Network Devices"
-msgstr ""
-
-#: src/window.py:124
-msgid "Kernel"
-msgstr ""
-
-#: src/window.py:127 src/window.py:238 src/window.py:315
+#: src/window.py:125
 msgid "Distribution"
 msgstr ""
 
-#: src/window.py:222
-msgid "The command is not supported"
-msgstr ""
-
-#: src/window.py:224
-#, python-brace-format
-msgid ""
-"The command {0} returned empty.\n"
-"Try running it on your terminal, it should prompt you to install the package "
-"on your system."
-msgstr ""
-
-#: src/window.py:269
+#: src/window.py:156
 msgid "System"
 msgstr ""
 
-#: src/window.py:269
+#: src/window.py:156
 msgid "Command: uname"
 msgstr ""
 
-#: src/window.py:274
+#: src/window.py:161
 msgid "Kernel Name"
 msgstr ""
 
-#: src/window.py:279
+#: src/window.py:166
 msgid "Network Node Hostname"
 msgstr ""
 
-#: src/window.py:284
+#: src/window.py:171
 msgid "Kernel Release"
 msgstr ""
 
-#: src/window.py:289
+#: src/window.py:176
 msgid "Kernel Version"
 msgstr ""
 
-#: src/window.py:294
+#: src/window.py:181
 msgid "Machine Hardware Name"
 msgstr ""
 
-#: src/window.py:299
+#: src/window.py:186
 msgid "Processor Type"
 msgstr ""
 
-#: src/window.py:304
+#: src/window.py:191
 msgid "Hardware Platform"
 msgstr ""
 
-#: src/window.py:309
+#: src/window.py:196
 msgid "Operating System"
 msgstr ""
 
-#: src/window.py:315
-msgid "Command: cat /etc/os-release"
-msgstr ""
-
-#: src/window.py:364 src/window.py:371
+#: src/window.py:226 src/window.py:236 src/window.py:243
 msgid "Command: lsblk"
 msgstr ""
 
-#: src/window.py:366
+#: src/window.py:228 src/window.py:238
 msgid "Total size: "
 msgstr ""
 
-#: src/window.py:371
+#: src/window.py:243
 msgid "Loop devices"
 msgstr ""
 
-#: src/window.py:373
+#: src/window.py:245
 #, python-format
 msgid "Device Count: %s"
 msgid_plural "Devices Count: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/window.py:427
+#: src/window.py:301
 msgid "Ranges"
 msgstr ""
 
-#: src/window.py:427
+#: src/window.py:301
 msgid "Command: lsmem"
 msgstr ""
 
-#: src/window.py:464
+#: src/window.py:324
+msgid "Memory"
+msgstr ""
+
+#: src/window.py:338
 msgid "PCIs"
 msgstr ""
 
-#: src/window.py:464
+#: src/window.py:338
 msgid "Command: lspci"
 msgstr ""
 
-#: src/window.py:484
+#: src/window.py:358
 msgid "USB"
 msgstr ""
 
-#: src/window.py:484
+#: src/window.py:358
 msgid "Command: lsusb"
 msgstr ""
 
-#: src/window.py:505
+#: src/window.py:379
 msgid "Bus"
 msgstr ""
 
-#: src/window.py:522
+#: src/window.py:396
 msgid "Command: ip address"
 msgstr ""
 
-#: src/window.py:530
+#: src/window.py:404
 msgid "Address info, ip"
 msgstr ""
 
-#: src/window.py:572
+#: src/window.py:447
 msgid "CPU"
 msgstr ""
 
-#: src/window.py:572
-msgid "Command: lshw -c cpu"
+#: src/window.py:447
+msgid "Command: lscpu"
 msgstr ""
 
-#: src/window.py:603
+#: src/window.py:479
 msgid "BIOS Date"
 msgstr ""
 
-#: src/window.py:604
+#: src/window.py:480
 msgid "BIOS Release"
 msgstr ""
 
-#: src/window.py:605
+#: src/window.py:481
 msgid "BIOS Vendor"
 msgstr ""
 
-#: src/window.py:606
+#: src/window.py:482
 msgid "BIOS Version"
 msgstr ""
 
-#: src/window.py:607
+#: src/window.py:483
 msgid "Board Asset Tag"
 msgstr ""
 
-#: src/window.py:608
+#: src/window.py:484
 msgid "Board Name"
 msgstr ""
 
-#: src/window.py:609
+#: src/window.py:485
 msgid "Board Serial Number"
 msgstr ""
 
-#: src/window.py:610
+#: src/window.py:486
 msgid "Board Vendor"
 msgstr ""
 
-#: src/window.py:611
+#: src/window.py:487
 msgid "Board Version"
 msgstr ""
 
-#: src/window.py:612
+#: src/window.py:488
 msgid "Chassis Asset Tag"
 msgstr ""
 
-#: src/window.py:613
+#: src/window.py:489
 msgid "Chassis Serial Number"
 msgstr ""
 
-#: src/window.py:614
+#: src/window.py:490
 msgid "Chassis Type"
 msgstr ""
 
-#: src/window.py:615
+#: src/window.py:491
 msgid "Chassis Vendor"
 msgstr ""
 
-#: src/window.py:616
+#: src/window.py:492
 msgid "Chassis Version"
 msgstr ""
 
-#: src/window.py:617
+#: src/window.py:493
 msgid "Product Family"
 msgstr ""
 
-#: src/window.py:618
+#: src/window.py:494
 msgid "Product Name"
 msgstr ""
 
-#: src/window.py:619
+#: src/window.py:495
 msgid "Product Serial Number"
 msgstr ""
 
-#: src/window.py:620
+#: src/window.py:496
 msgid "Product SKU"
 msgstr ""
 
-#: src/window.py:621
+#: src/window.py:497
 msgid "Product UUID"
 msgstr ""
 
-#: src/window.py:622
+#: src/window.py:498
 msgid "Product Version"
 msgstr ""
 
-#: src/window.py:623
+#: src/window.py:499
 msgid "Power"
 msgstr ""
 
-#: src/window.py:625
+#: src/window.py:501
 msgid "System Vendor"
 msgstr ""
 
-#: src/window.py:629
+#: src/window.py:505
 msgid "Control"
 msgstr ""
 
-#: src/window.py:630
+#: src/window.py:506
 msgid "Runtime Active Time"
 msgstr ""
 
-#: src/window.py:631
+#: src/window.py:507
 msgid "Runtime Status"
 msgstr ""
 
-#: src/window.py:632
+#: src/window.py:508
 msgid "Runtime Suspended Time"
 msgstr ""
 
-#: src/window.py:636
+#: src/window.py:512
+msgid "Motherboard"
+msgstr ""
+
+#: src/window.py:512
 msgid "Details from /sys/devices/virtual/dmi/id"
 msgstr ""
