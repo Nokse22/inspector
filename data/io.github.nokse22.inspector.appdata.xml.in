@@ -30,6 +30,12 @@
   <url type="donation">https://ko-fi.com/nokse22</url>
 
   <releases>
+    <release version="0.2.0" date="2024-05-25">
+    	<description translate="no">
+    	  <p>Fixed bug</p>
+    	  <p>Updated screenshots</p>
+		  </description>
+  	</release>
     <release version="0.1.9" date="2024-04-07">
     	<description translatable="no">
 			  <p>Used latest Libadwaita widgets</p>
