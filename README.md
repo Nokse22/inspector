@@ -26,9 +26,9 @@ Suggestions are welcome. The idea for the app is to make a graphical user interf
 
   <details><summary><h2>Click here for screenshots 🖼️</h2></summary>
   <div align="center">
-  <img src="data/resources/screenshot 1.png" height="300"/>
-  <img src="data/resources/screenshot 2.png" height="300"/>
-  <img src="data/resources/screenshot 3.png" height="300"/>
+  <img src="data/resources/screenshot 1.png" max-height="300"/>
+  <img src="data/resources/screenshot 2.png" max-height="300"/>
+  <img src="data/resources/screenshot 3.png" max-height="300"/>
   </div>
   </details>
 
