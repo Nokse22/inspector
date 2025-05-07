@@ -18,12 +18,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import sys
-import gi
 
-gi.require_version('Gtk', '4.0')
-gi.require_version('Adw', '1')
-
-from gi.repository import Gtk, Gio, Adw, Gdk
+from gi.repository import Gio, Adw
 from .window import InspectorWindow
 
 
@@ -58,7 +54,7 @@ class CommandTestApplication(Adw.Application):
                                 developers=["Nokse22 https://github.com/Nokse22","David Stephenson https://github.com/David-Stephenson", "soumyaDghosh https://github.com/soumyaDghosh"],
                                 issue_url='https://github.com/Nokse22/inspector/issues',
                                 website='https://github.com/Nokse22/inspector',
-                                version='0.2.0',
+                                version='0.3.0',
                                 copyright='© 2023 Nokse')
         # Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL. 
         # One name per line, please do not remove previous names.
@@ -86,6 +82,7 @@ class CommandTestApplication(Adw.Application):
 
     def on_reload_action(self, *args):
         self.win.reload_current()
+
 
 def main(version):
     """The application's entry point."""
