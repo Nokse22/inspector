@@ -13,9 +13,8 @@ permissions:
   contents: read
 jobs:
   flatpak:
-    name: "GNOME on Flatpak"
+    name: "Flatpak"
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.user.login != 'weblate' }}
     container:
       image: bilelmoussaoui/flatpak-github-actions:gnome-44
       options: --privileged
