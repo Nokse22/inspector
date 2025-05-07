@@ -1,160 +1,159 @@
-# Frech translation for Inspector.
-# Copyright (C) 2023 Inspector's COPYRIGHT HOLDER
-# This file is distributed under the same license as the Inspector package.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#
-#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Inspector\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-25 15:13+0200\n"
-"PO-Revision-Date: 2024-08-31 14:38+0200\n"
-"Last-Translator: Irénée Thirion <irenee.thirion@e.email>\n"
+"PO-Revision-Date: 2024-08-14 20:04+0800\n"
+"Last-Translator: SuGotLand 苏革岚 <sugotland@outlook.com>\n"
 "Language-Team: \n"
-"Language: fr\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/io.github.nokse22.inspector.desktop.in:3
 #: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:72
 msgid "Inspector"
-msgstr "Inspecteur"
+msgstr "Inspector"
 
 #: data/io.github.nokse22.inspector.desktop.in:4
 #: data/io.github.nokse22.inspector.appdata.xml.in:8
 msgid "View information about your system"
-msgstr "Visualiser des informations sur votre système"
+msgstr "查看你的系统信息"
 
 #: data/io.github.nokse22.inspector.desktop.in:10
 msgid ""
 "System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
 msgstr ""
 "System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
-"Système;Information;Disque;Mémoire;Périphériques;Réseau;CPU;Carte mère;BIOS;"
-"bios;"
+"系统;信息;硬盘;内存;设备;网络;CPU;主板;"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:11
 msgid ""
 "View information about: Usb devices, Disk, Memory, PCI devices, Network, "
 "CPU, Motherboard and bios, System and distro"
 msgstr ""
-"Visualisez les informations sur vos périphériques USB, disque, mémoire, "
-"périphériques PCI, réseau, CPU, carte mère et BIOS, système et distribution"
+"查看相关信息： USB设备、磁盘、内存、PCI设备、网络、CPU、主板和BIOS、系统"
+"和发行版"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:41
 msgid "Used latest Libadwaita widgets"
-msgstr "Utilisation des derniers widgets Libadwaita"
+msgstr "使用最新的 Libadwaita 组件"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:42
 msgid "Updated runtime to 46"
-msgstr "Mise à jour vers l’environnement d’exécution 46"
+msgstr "运行时更新到 46"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:43
 msgid "Added Czech translation"
-msgstr "Ajout d’une traduction tchèque"
+msgstr "已添加捷克语翻译"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:44
 msgid "Added Italian translation"
-msgstr "Ajout d’une traduction italienne"
+msgstr "已添加意大利语翻译"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:45
 msgid "Added Brazilian translation"
-msgstr "Ajout d’une traduction brésilienne"
+msgstr "已添加巴西语翻译"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:46
 msgid "Added Hindi translation"
-msgstr "Ajout d’une traduction hindoue"
+msgstr "已添加印地语翻译"
 
 #: src/main.py:82
 msgid "translator-credits"
-msgstr "Irénée THIRION"
+msgstr "SuGotLand <sugotland@outlook.com>, 2024"
 
 #: src/window.py:111
 msgid "Error executing command"
-msgstr "Erreur lors de l’exécution de la commande"
+msgstr "执行命令时出错"
 
 #: src/window.py:113
 #, python-brace-format
 msgid "The command {0} returned empty."
-msgstr "La commande {0} n’a rien donné."
+msgstr "命令{0}返回空值。"
 
 #: src/window.py:125
 msgid "Distribution"
-msgstr "Distribution"
+msgstr "发行版"
 
 #: src/window.py:156
 msgid "System"
-msgstr "Système"
+msgstr "系统"
 
 #: src/window.py:156
 msgid "Command: uname"
-msgstr "Commande : uname"
+msgstr "命令： uname"
 
 #: src/window.py:161
 msgid "Kernel Name"
-msgstr "Nom du noyau"
+msgstr "内核名称"
 
 #: src/window.py:166
 msgid "Network Node Hostname"
-msgstr "Nom d’hôte du nœud de réseau"
+msgstr "网络节点主机名称"
 
 #: src/window.py:171
 msgid "Kernel Release"
-msgstr "Distribution du noyau"
+msgstr "内核版本号"
 
 #: src/window.py:176
 msgid "Kernel Version"
-msgstr "Version du noyau"
+msgstr "内核版本"
 
 #: src/window.py:181
 msgid "Machine Hardware Name"
-msgstr "Nom du matériel de la machine"
+msgstr "计算机硬件名称"
 
 #: src/window.py:186
 msgid "Processor Type"
-msgstr "Type de processeur"
+msgstr "处理器类型"
 
 #: src/window.py:191
 msgid "Hardware Platform"
-msgstr "Plateforme matérielle"
+msgstr "硬件平台"
 
 #: src/window.py:196
 msgid "Operating System"
-msgstr "Système d’exploitation"
+msgstr "操作系统"
 
 #: src/window.py:226 src/window.py:236 src/window.py:243
 msgid "Command: lsblk"
-msgstr "Commande : lsblk"
+msgstr "命令: lsblk"
 
 #: src/window.py:228 src/window.py:238
 msgid "Total size: "
-msgstr "Taille totale : "
+msgstr "总大小："
 
 #: src/window.py:243
 msgid "Loop devices"
-msgstr "Périphériques en boucle"
+msgstr "环路设备"
 
 #: src/window.py:245
 #, python-format
 msgid "Device Count: %s"
 msgid_plural "Devices Count: %s"
-msgstr[0] "Nombre d’appareils : %s"
+msgstr[0] "设备计数： %s"
 
 #: src/window.py:301
 msgid "Ranges"
-msgstr "Gammes"
+msgstr "范围"
 
 #: src/window.py:301
 msgid "Command: lsmem"
-msgstr "Commande : lsmem"
+msgstr "命令：lsmen"
 
 #: src/window.py:324
 msgid "Memory"
-msgstr "Mémoire"
+msgstr "内存"
 
 #: src/window.py:338
 msgid "PCIs"
@@ -162,7 +161,7 @@ msgstr "PCIs"
 
 #: src/window.py:338
 msgid "Command: lspci"
-msgstr "Commande : lspci"
+msgstr "命令：lspci"
 
 #: src/window.py:358
 msgid "USB"
@@ -170,19 +169,19 @@ msgstr "USB"
 
 #: src/window.py:358
 msgid "Command: lsusb"
-msgstr "Commande : lsusb"
+msgstr "命令：lsusb"
 
 #: src/window.py:379
 msgid "Bus"
-msgstr "Bus"
+msgstr "总线"
 
 #: src/window.py:396
 msgid "Command: ip address"
-msgstr "Commande : ip address"
+msgstr "命令：ip address"
 
 #: src/window.py:404
 msgid "Address info, ip"
-msgstr "Information d'adresse, IP"
+msgstr "地址信息，ip"
 
 #: src/window.py:447
 msgid "CPU"
@@ -190,176 +189,116 @@ msgstr "CPU"
 
 #: src/window.py:447
 msgid "Command: lscpu"
-msgstr "Commande : lscpu"
+msgstr "命令：lscpu"
 
 #: src/window.py:479
 msgid "BIOS Date"
-msgstr "Date du BIOS"
+msgstr "BIOS 日期"
 
 #: src/window.py:480
 msgid "BIOS Release"
-msgstr "Distribution du BIOS"
+msgstr "BIOS 版本号"
 
 #: src/window.py:481
 msgid "BIOS Vendor"
-msgstr "Constructeur du BIOS"
+msgstr "BIOS 厂商"
 
 #: src/window.py:482
 msgid "BIOS Version"
-msgstr "Version du BIOS"
+msgstr "BIOS 版本"
 
 #: src/window.py:483
 msgid "Board Asset Tag"
-msgstr "Étiquette de la carte"
+msgstr "主板资产标签"
 
 #: src/window.py:484
 msgid "Board Name"
-msgstr "Nom de la carte"
+msgstr "主板名称"
 
 #: src/window.py:485
 msgid "Board Serial Number"
-msgstr "Numéro de série de la carte"
+msgstr "主板序列号"
 
 #: src/window.py:486
 msgid "Board Vendor"
-msgstr "Constructeur de la carte"
+msgstr "主板供应商"
 
 #: src/window.py:487
 msgid "Board Version"
-msgstr "Version de la carte"
+msgstr "主板版本"
 
 #: src/window.py:488
 msgid "Chassis Asset Tag"
-msgstr "Étiquette du châssis"
+msgstr "机箱资产标签"
 
 #: src/window.py:489
 msgid "Chassis Serial Number"
-msgstr "Numéro de série du châssis"
+msgstr "机箱序列号"
 
 #: src/window.py:490
 msgid "Chassis Type"
-msgstr "Type du châssis"
+msgstr "机箱类型"
 
 #: src/window.py:491
 msgid "Chassis Vendor"
-msgstr "Constructeur du châssis"
+msgstr "机箱厂商"
 
 #: src/window.py:492
 msgid "Chassis Version"
-msgstr "Version du châssis"
+msgstr "机箱版本"
 
 #: src/window.py:493
 msgid "Product Family"
-msgstr "Famille du matériel"
+msgstr "产品系列"
 
 #: src/window.py:494
 msgid "Product Name"
-msgstr "Nom du matériel"
+msgstr "产品名称"
 
 #: src/window.py:495
 msgid "Product Serial Number"
-msgstr "Numéro de série du matériel"
+msgstr "产品序列号"
 
 #: src/window.py:496
 msgid "Product SKU"
-msgstr "SKU du matériel"
+msgstr "产品型号"
 
 #: src/window.py:497
 msgid "Product UUID"
-msgstr "UUID du matériel"
+msgstr "产品 UUID"
 
 #: src/window.py:498
 msgid "Product Version"
-msgstr "Version du matériel"
+msgstr "产品版本"
 
 #: src/window.py:499
 msgid "Power"
-msgstr "Alimentation"
+msgstr "电源"
 
 #: src/window.py:501
 msgid "System Vendor"
-msgstr "Constructeur du matériel"
+msgstr "系统厂商"
 
 #: src/window.py:505
 msgid "Control"
-msgstr "Contrôle"
+msgstr "控制"
 
 #: src/window.py:506
 msgid "Runtime Active Time"
-msgstr "Temps actif d’exécution"
+msgstr "运行时活动时间"
 
 #: src/window.py:507
 msgid "Runtime Status"
-msgstr "Statut de la durée d’exécution"
+msgstr "运行时状态"
 
 #: src/window.py:508
 msgid "Runtime Suspended Time"
-msgstr "Temps d’exécution suspendu"
+msgstr "运行时挂起时间"
 
 #: src/window.py:512
 msgid "Motherboard"
-msgstr "Carte mère"
+msgstr "主板"
 
 #: src/window.py:512
 msgid "Details from /sys/devices/virtual/dmi/id"
-msgstr "Détails depuis /sys/devices/virtual/dmi/id"
-
-#~ msgid "Nokse"
-#~ msgstr "Nokse"
-
-#~ msgid "Fixed typo"
-#~ msgstr "Correction d'une faute de frappe"
-
-#~ msgid "Improved metadata"
-#~ msgstr "Métadonnées améliorées"
-
-#~ msgid "Fixed a critical bug if the app was run with older versions of lsblk"
-#~ msgstr ""
-#~ "Correction d'un bogue critique si l'application était exécutée avec des "
-#~ "versions plus anciennes de LSBLK"
-
-#~ msgid "Made the app more stable"
-#~ msgstr "Amélioration de la stabilité de l'application"
-
-#~ msgid "Added motherboard/bios page"
-#~ msgstr "Ajout de la page de carte mère/bios"
-
-#~ msgid "Bug fixes"
-#~ msgstr "Correctifs de bugs"
-
-#~ msgid "Reload"
-#~ msgstr "Recharger"
-
-#~ msgid "Keyboard shortcuts"
-#~ msgstr "Raccourcis clavier"
-
-#~ msgid "About Inspector"
-#~ msgstr "À propos d'Inspecteur"
-
-#~ msgid "Disk"
-#~ msgstr "Disque"
-
-#~ msgid "PCI"
-#~ msgstr "PCI"
-
-#~ msgid "Network"
-#~ msgstr "Réseau"
-
-#, python-brace-format
-#~ msgid ""
-#~ "The command {0} returned empty.\n"
-#~ "Try running it on your terminal, it should prompt you to install the "
-#~ "package on your system."
-#~ msgstr ""
-#~ "La commande {0} a retournée une valeur vide.\n"
-#~ "Essayez de l'exécuter sur votre terminal, cela devrait vous inviter à "
-#~ "installer le package sur votre système."
-
-#~ msgid "command: cat /etc/os-release"
-#~ msgstr "commande : cat /etc/os-release"
-
-#~ msgid "Refresh"
-#~ msgstr "Rafraîchir"
-
-#~ msgid "command: lshw -c cpu"
-#~ msgstr "commande : lshw -c cpu"
+msgstr "来自/sys/devices/virtual/dmi/id 的详细信息"

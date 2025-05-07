@@ -2,165 +2,167 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Scrambled777 <weblate.scrambled777@simplelogin.com>, 2024.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: inspector\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-25 15:13+0200\n"
-"PO-Revision-Date: 2024-05-30 20:33+0530\n"
-"Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
-"Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
-"Language: hi\n"
+"PO-Revision-Date: 2024-10-04 22:45+0200\n"
+"Last-Translator: Sunniva Løvstad <turtle@turtle.garden>\n"
+"Language-Team: \n"
+"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 46.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/io.github.nokse22.inspector.desktop.in:3
 #: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:72
 msgid "Inspector"
-msgstr "इंस्पेक्टर"
+msgstr "Inspector"
 
 #: data/io.github.nokse22.inspector.desktop.in:4
 #: data/io.github.nokse22.inspector.appdata.xml.in:8
 msgid "View information about your system"
-msgstr "अपने सिस्टम के बारे में जानकारी देखें"
+msgstr "Vis informasjon om systemet ditt"
 
 #: data/io.github.nokse22.inspector.desktop.in:10
 msgid ""
 "System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
-msgstr "सिस्टम;सूचना;डिस्क;मेमोरी;उपकरण;नेटवर्क;CPU;मदरबोर्ड;BIO;बायोस;"
+msgstr ""
+"System;Informasjon;Opplysninger;Disk;Minne;Enheter;Nettverk;CPU;"
+"Hovedkort;BIOS;"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:11
 msgid ""
 "View information about: Usb devices, Disk, Memory, PCI devices, Network, "
 "CPU, Motherboard and bios, System and distro"
 msgstr ""
-"इनके बारे में जानकारी देखें: USB उपकरण, डिस्क, मेमोरी, PCI उपकरण, नेटवर्क, CPU, मदरबोर्ड "
-"और बायोस, सिस्टम और वितरण"
+"Vis informasjon om USB-enheter, disken, minne, PCI-enheter, nettverket, "
+"CPU-en, hovedkortet, BIOS-en, systemet, og distroen."
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:41
 msgid "Used latest Libadwaita widgets"
-msgstr "नवीनतम Libadwaita विजेट का उपयोग किया गया"
+msgstr "Bruker nyeste Libadwaita-widgeter"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:42
 msgid "Updated runtime to 46"
-msgstr "रनटाइम को 46 पर अद्यतन किया गया"
+msgstr "Oppdaterte runtimen til 46"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:43
 msgid "Added Czech translation"
-msgstr "चेक अनुवाद जोड़ा गया"
+msgstr "La til oversetning til tsjekkisk"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:44
 msgid "Added Italian translation"
-msgstr "इतालवी अनुवाद जोड़ा गया"
+msgstr "La til oversetning til italiansk"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:45
 msgid "Added Brazilian translation"
-msgstr "ब्राज़ीलियाई अनुवाद जोड़ा गया"
+msgstr "La til oversetning til brasiliansk portugisisk"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:46
 msgid "Added Hindi translation"
-msgstr "हिंदी अनुवाद जोड़ा गया"
+msgstr "La til oversetning til hindi"
 
 #: src/main.py:82
 msgid "translator-credits"
-msgstr "Scrambled777 <weblate.scrambled777@simplelogin.com>"
+msgstr "Sunniva Løvstad <inspector@turtle.garden>"
 
 #: src/window.py:111
 msgid "Error executing command"
-msgstr "कमांड निष्पादित करने में त्रुटि"
+msgstr "Feil ved eksekutering av kommando"
 
 #: src/window.py:113
 #, python-brace-format
 msgid "The command {0} returned empty."
-msgstr "कमांड {0} खाली लौटा।"
+msgstr "Kommandoen {0} returnerte bare tomhet."
 
 #: src/window.py:125
 msgid "Distribution"
-msgstr "वितरण"
+msgstr "Distribusjon"
 
 #: src/window.py:156
 msgid "System"
-msgstr "सिस्टम"
+msgstr "System"
 
 #: src/window.py:156
 msgid "Command: uname"
-msgstr "कमांड: uname"
+msgstr "Kommando: uname"
 
 #: src/window.py:161
 msgid "Kernel Name"
-msgstr "कर्नेल नाम"
+msgstr "Kernelnavn"
 
 #: src/window.py:166
 msgid "Network Node Hostname"
-msgstr "नेटवर्क नोड होस्टनाम"
+msgstr "Nettverknodevertsnavn"
 
 #: src/window.py:171
 msgid "Kernel Release"
-msgstr "कर्नेल रिलीज"
+msgstr "Kernelutgave"
 
 #: src/window.py:176
 msgid "Kernel Version"
-msgstr "कर्नेल संस्करण"
+msgstr "Kernelversjon"
 
 #: src/window.py:181
 msgid "Machine Hardware Name"
-msgstr "मशीन हार्डवेयर का नाम"
+msgstr "Maskinvarenavn"
 
 #: src/window.py:186
 msgid "Processor Type"
-msgstr "प्रोसेसर प्रकार"
+msgstr "Prosessortype"
 
 #: src/window.py:191
 msgid "Hardware Platform"
-msgstr "हार्डवेयर प्लेटफार्म"
+msgstr "Maskinvareplattform"
 
 #: src/window.py:196
 msgid "Operating System"
-msgstr "ऑपरेटिंग सिस्टम"
+msgstr "Operativsystem"
 
 #: src/window.py:226 src/window.py:236 src/window.py:243
 msgid "Command: lsblk"
-msgstr "कमांड: lsblk"
+msgstr "Kommando: lsblk"
 
 #: src/window.py:228 src/window.py:238
 msgid "Total size: "
-msgstr "कुल आकार:"
+msgstr "Total størrelse: "
 
 #: src/window.py:243
 msgid "Loop devices"
-msgstr "लूप उपकरण"
+msgstr "Sløyfeenheter"
 
 #: src/window.py:245
 #, python-format
 msgid "Device Count: %s"
 msgid_plural "Devices Count: %s"
-msgstr[0] "उपकरण की संख्या: %s"
-msgstr[1] "उपकरणों की संख्या: %s"
+msgstr[0] "Enhetsantall: %s"
+msgstr[1] "Enhetsantall: %s"
 
 #: src/window.py:301
 msgid "Ranges"
-msgstr "रेंज"
+msgstr "Rekkevidder"
 
 #: src/window.py:301
 msgid "Command: lsmem"
-msgstr "कमांड: lsmem"
+msgstr "Kommando: lsmem"
 
 #: src/window.py:324
 msgid "Memory"
-msgstr "मेमोरी"
+msgstr "Minne"
 
 #: src/window.py:338
 msgid "PCIs"
-msgstr "PCIs"
+msgstr "PCI-er"
 
 #: src/window.py:338
 msgid "Command: lspci"
-msgstr "कमांड: lspci"
+msgstr "Kommando: lspci"
 
 #: src/window.py:358
 msgid "USB"
@@ -168,19 +170,19 @@ msgstr "USB"
 
 #: src/window.py:358
 msgid "Command: lsusb"
-msgstr "कमांड: lsusb"
+msgstr "Kommando: lsusb"
 
 #: src/window.py:379
 msgid "Bus"
-msgstr "बस"
+msgstr "Buss"
 
 #: src/window.py:396
 msgid "Command: ip address"
-msgstr "कमांड: ip address"
+msgstr "Kommando: ip address"
 
 #: src/window.py:404
 msgid "Address info, ip"
-msgstr "पता जानकारी, IP"
+msgstr "Adresseinformasjon på IP"
 
 #: src/window.py:447
 msgid "CPU"
@@ -188,116 +190,116 @@ msgstr "CPU"
 
 #: src/window.py:447
 msgid "Command: lscpu"
-msgstr "कमांड: lscpu"
+msgstr "Kommando: lscpu"
 
 #: src/window.py:479
 msgid "BIOS Date"
-msgstr "BIOS दिनांक"
+msgstr "BIOS-dato"
 
 #: src/window.py:480
 msgid "BIOS Release"
-msgstr "BIOS रिलीज"
+msgstr "BIOS-utgave"
 
 #: src/window.py:481
 msgid "BIOS Vendor"
-msgstr "BIOS विक्रेता"
+msgstr "BIOS-leverandør"
 
 #: src/window.py:482
 msgid "BIOS Version"
-msgstr "BIOS संस्करण"
+msgstr "BIOS-versjon"
 
 #: src/window.py:483
 msgid "Board Asset Tag"
-msgstr "बोर्ड परिसंपत्ति टैग"
+msgstr "Hovedkorteiendelstag"
 
 #: src/window.py:484
 msgid "Board Name"
-msgstr "बोर्ड का नाम"
+msgstr "Hovedkortnavn"
 
 #: src/window.py:485
 msgid "Board Serial Number"
-msgstr "बोर्ड क्रमांक"
+msgstr "Hovedkortserienummer"
 
 #: src/window.py:486
 msgid "Board Vendor"
-msgstr "बोर्ड विक्रेता"
+msgstr "Hovedkortleverandør"
 
 #: src/window.py:487
 msgid "Board Version"
-msgstr "बोर्ड संस्करण"
+msgstr "Hovedkortversjon"
 
 #: src/window.py:488
 msgid "Chassis Asset Tag"
-msgstr "चेसिस परिसंपत्ति टैग"
+msgstr "Chassiseiendelstag"
 
 #: src/window.py:489
 msgid "Chassis Serial Number"
-msgstr "चेसिस क्रमांक"
+msgstr "Chassisserienummer"
 
 #: src/window.py:490
 msgid "Chassis Type"
-msgstr "चेसिस प्रकार"
+msgstr "Chassistype"
 
 #: src/window.py:491
 msgid "Chassis Vendor"
-msgstr "चेसिस विक्रेता"
+msgstr "Chassisleverandør"
 
 #: src/window.py:492
 msgid "Chassis Version"
-msgstr "चेसिस संस्करण"
+msgstr "Chassisversjon"
 
 #: src/window.py:493
 msgid "Product Family"
-msgstr "उत्पाद परिवार"
+msgstr "Produktfamilie"
 
 #: src/window.py:494
 msgid "Product Name"
-msgstr "उत्पाद का नाम"
+msgstr "Produktnavn"
 
 #: src/window.py:495
 msgid "Product Serial Number"
-msgstr "उत्पाद क्रमांक"
+msgstr "Produktserienummer"
 
 #: src/window.py:496
 msgid "Product SKU"
-msgstr "उत्पाद SKU"
+msgstr "Produkt-SKU"
 
 #: src/window.py:497
 msgid "Product UUID"
-msgstr "उत्पाद UUID"
+msgstr "Produkt-UUID"
 
 #: src/window.py:498
 msgid "Product Version"
-msgstr "उत्पाद संस्करण"
+msgstr "Produktversjon"
 
 #: src/window.py:499
 msgid "Power"
-msgstr "ऊर्जा"
+msgstr "Strøm"
 
 #: src/window.py:501
 msgid "System Vendor"
-msgstr "सिस्टम विक्रेता"
+msgstr "Systemleverandør"
 
 #: src/window.py:505
 msgid "Control"
-msgstr "नियंत्रण"
+msgstr "Styre"
 
 #: src/window.py:506
 msgid "Runtime Active Time"
-msgstr "रनटाइम सक्रिय समय"
+msgstr "Aktiv kjøretid"
 
 #: src/window.py:507
 msgid "Runtime Status"
-msgstr "रनटाइम स्थिति"
+msgstr "Kjøretidsstatus"
 
 #: src/window.py:508
 msgid "Runtime Suspended Time"
-msgstr "रनटाइम निलंबित समय"
+msgstr "Suspendert kjøretid"
 
 #: src/window.py:512
 msgid "Motherboard"
-msgstr "मदरबोर्ड"
+msgstr "Hovedkort"
 
 #: src/window.py:512
 msgid "Details from /sys/devices/virtual/dmi/id"
-msgstr "/sys/devices/virtual/dmi/id से विवरण"
+msgstr "Detaljer fra /sys/devices/virtual/dmi/id"
