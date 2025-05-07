@@ -36,7 +36,7 @@ jobs:
       uses: docker/setup-qemu-action@v2
       with:
         platforms: arm64
-      - uses: flatpak/flatpak-github-actions/flatpak-builder@v4
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
           bundle: io.github.nokse22.inspector.flatpak
           manifest-path: io.github.nokse22.inspector.json
