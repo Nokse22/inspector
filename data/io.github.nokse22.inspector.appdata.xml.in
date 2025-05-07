@@ -29,23 +29,41 @@
   <url type="translate">https://github.com/Nokse22/inspector/tree/master/po</url>
   <url type="donation">https://ko-fi.com/nokse22</url>
 
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+  </recommends>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+
   <releases>
+    <release version="0.3.0" date="2025-05-07">
+      	<description translate="no">
+      	  <p>Added German translation</p>
+      	  <p>Added Russian translation</p>
+      	  <p>Added French translation</p>
+      	  <p>Added Norwegian Bokmål translation</p>
+      	  <p>Added Chinese translation</p>
+	    </description>
+    	</release>
     <release version="0.2.0" date="2024-05-25">
-    	<description translate="no">
-    	  <p>Fixed bug</p>
-    	  <p>Updated screenshots</p>
-		  </description>
-  	</release>
+      	<description translate="no">
+      	  <p>Fixed bug</p>
+      	  <p>Updated screenshots</p>
+	    </description>
+    	</release>
     <release version="0.1.9" date="2024-04-07">
-    	<description translatable="no">
-			  <p>Used latest Libadwaita widgets</p>
-    	  <p>Updated runtime to 46</p>
-    	  <p>Added Czech translation</p>
-    	  <p>Added Italian translation</p>
-    	  <p>Added Brazilian translation</p>
-    	  <p>Added Hindi translation</p>
-		  </description>
-  	</release>
+      	<description translatable="no">
+		    <p>Used latest Libadwaita widgets</p>
+      	  <p>Updated runtime to 46</p>
+      	  <p>Added Czech translation</p>
+      	  <p>Added Italian translation</p>
+      	  <p>Added Brazilian translation</p>
+      	  <p>Added Hindi translation</p>
+	    </description>
+    	</release>
     <release version="0.1.8" date="2023-09-26">
     	<description translate="no">
 			  <p>Improved app design and usability</p>
@@ -63,21 +81,21 @@
     	  <p>Improved storage device view (soumyaDghosh)</p>
 		  </description>
   	</release>
-    <release version="0.1.6" date="2023-08-12">
+  <release version="0.1.6" date="2023-08-12">
     	<description translate="no">
-				<p>Fixed a critical bug if the app was run with older versions of lsblk</p>
+			<p>Fixed a critical bug if the app was run with older versions of lsblk</p>
     	  <p>Made the app more stable</p>
-	    </description>
+    </description>
   	</release>
   	<release version="0.1.5" date="2023-08-11">
     	<description translate="no">
 			  <p>Added motherboard/bios page</p>
-		  </description>
+	  </description>
   	</release>
   	<release version="0.1.4" date="2023-08-07">
     	<description translate="no">
-			  <p>Bug fixes</p>
-		  </description>
+		  <p>Bug fixes</p>
+	  </description>
   	</release>
   </releases>
 
