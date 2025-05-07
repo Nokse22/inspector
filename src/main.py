@@ -38,23 +38,6 @@ class CommandTestApplication(Adw.Application):
 
         self.create_action('reload', self.on_reload_action, ['<primary>r'])
 
-        css = '''
-        .link{
-            padding: 0px;
-        }
-
-        .sidebar-fix{
-            border:4px;
-        }
-        '''
-        css_provider = Gtk.CssProvider()
-        css_provider.load_from_data(css, -1)
-        Gtk.StyleContext.add_provider_for_display(
-            Gdk.Display.get_default(),
-            css_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-        )
-
     def do_activate(self):
         """Called when the application is activated.
 
