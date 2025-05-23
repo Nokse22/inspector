@@ -93,6 +93,14 @@ class InspectorWindow(Adw.ApplicationWindow):
 
         print(self.generate_report_text()) # TEMP TESTING CALL, REMOVE WHEN DONE
 
+    @Gtk.Template.Callback("on_md_export_clicked")
+    def on_md_export_clicked(self, btn):
+        print('EXPORT MD OMG OMG???')
+
+    @Gtk.Template.Callback("on_html_export_clicked")
+    def on_HTML_export_clicked(self, btn):
+        print('EXPORT HTML OMG OMG???')
+
     def execute_terminal_command(self, command):
         if 'FLATPAK_ID' in os.environ:
             console_permissions = "flatpak-spawn --host "

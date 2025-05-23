@@ -245,12 +245,18 @@
                 </child>
                 <child>
                   <object class="GtkButton">
+                    <signal name="clicked" handler="on_md_export_clicked"/>
+                    <property name="has-tooltip">True</property>
                     <property name="label">Export .md</property>
+                    <property name="tooltip-text">Export All Data As .md</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton">
+                    <signal name="clicked" handler="on_html_export_clicked"/>
+                    <property name="has-tooltip">True</property>
                     <property name="label">Export .html</property>
+                    <property name="tooltip-text">Export All Data As .html</property>
                   </object>
                 </child>
               </object>
