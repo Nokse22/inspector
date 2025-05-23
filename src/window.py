@@ -325,6 +325,7 @@ class InspectorWindow(Adw.ApplicationWindow):
             group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.memory_content.append(group2)
             if export_data:
+                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
             try:
                 memory = data["memory"]
             except:
@@ -352,6 +353,11 @@ class InspectorWindow(Adw.ApplicationWindow):
                 group2.add(row)
 
                 if export_data:
+                    markdown_data += f"\n**{title_string}**\n* {range_}\n    * {size}\n    * {block}\n"
+            
+            if export_data:
+                return markdown_data
+
     def update_pci_page(self, *args, export_data = False):
         self.remove_content(self.pci_content)
         out = self.execute_terminal_command("lspci")
