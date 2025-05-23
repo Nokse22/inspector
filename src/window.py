@@ -161,48 +161,64 @@ class InspectorWindow(Adw.ApplicationWindow):
         description_string = "Command: uname"
         group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
         self.kernel_content.append(group)
+        if export_data:
+            markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
         
         title_string = "Kernel Name"
         out = self.execute_terminal_command("uname -s")
         row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
         title_string = "Network Node Hostname"
         out = self.execute_terminal_command("uname -n")
         row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
         title_string = "Kernel Release"
         out = self.execute_terminal_command("uname -r")
         row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
         title_string = "Kernel Version"
         out = self.execute_terminal_command("uname -v")
         row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
         title_string = "Machine Hardware Name"
         out = self.execute_terminal_command("uname -m")
         row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
         title_string = "Processor Type"
         out = self.execute_terminal_command("uname -p")
         row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
         title_string = "Hardware Platform"
         out = self.execute_terminal_command("uname -i")
         row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
         title_string = "Operating System"
         out = self.execute_terminal_command("uname -o")
@@ -210,6 +226,10 @@ class InspectorWindow(Adw.ApplicationWindow):
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
         if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
+
+        if export_data:
+            return markdown_data
 
     def update_disk_page(self, *args, export_data = False):
         self.remove_content(self.disks_content)
