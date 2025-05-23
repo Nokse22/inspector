@@ -161,10 +161,9 @@ class InspectorWindow(Adw.ApplicationWindow):
         description_string = "Command: uname"
         group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
         self.kernel_content.append(group)
-
-        out = self.execute_terminal_command("uname -s")
         
         title_string = "Kernel Name"
+        out = self.execute_terminal_command("uname -s")
         row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
