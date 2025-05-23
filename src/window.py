@@ -694,7 +694,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         # save all text output from the various pages
         # it would be possible to have it auto save this data to memory when updating the pages anyway giving 
         # faster report generation when the user wants but at the expense of slightly poorer memory efficency during general use
-        md_report_string = f"# Inspector Report:\n**Report done at: `{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}`\nReport issues or contribute at: https://github.com/Nokse22/inspector"
+        md_report_string = f"# Inspector Report:\n**Report done at: `{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}`**\n**Report issues or contribute at: https://github.com/Nokse22/inspector**"
         md_report_string += f"\n\n# Motherboard Information:{self.update_motherboard_page(export_data = True)}"
         md_report_string += f"\n\n# USB Device Information:{self.update_usb_page(export_data = True)}"
         md_report_string += f"\n\n# Disk Information:{self.update_disk_page(export_data = True)}"
