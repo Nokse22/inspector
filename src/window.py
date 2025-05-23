@@ -22,7 +22,7 @@ from gi.repository import Gtk
 from gi.repository import Gio
 
 import gettext 
-import gi, os, subprocess, threading, time, json, re, fnmatch
+import gi, os, subprocess, threading, time, json, re, fnmatch, markdown, datetime
 
 @Gtk.Template(resource_path='/io/github/nokse22/inspector/ui/window.ui')
 class InspectorWindow(Adw.ApplicationWindow):
@@ -539,3 +539,23 @@ class InspectorWindow(Adw.ApplicationWindow):
             row.add_suffix(Gtk.Label(label=value, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
             group.add(row)
 
+    def generate_report_text(self, *args): # produces a large markdown formatted string containing all data that inspector can see
+
+        # save all text output from the various pages
+        # it would be possible to have it auto save this data to memory when updating the pages anyway giving 
+        # faster report generation when the user wants but at the expense of slightly poorer memory efficency during general use
+        md_report_string = f"# Inspector Report:\n**Report done at: `{datetime.datetime.now()}`\nReport issues or contribute at: https://github.com/Nokse22/inspector"
+        md_report_string += f"\n\n# Motherboard Information:{self.update_motherboard_page(export_data = True)}"
+        md_report_string += f"\n\n# USB Device Information:{self.update_usb_page(export_data = True)}"
+        md_report_string += f"\n\n# Disk Information:{self.update_disk_page(export_data = True)}"
+        md_report_string += f"\n\n# PCI Device Information:{self.update_pci_page(export_data = True)}"
+        md_report_string += f"\n\n# Memory/RAM Information:{self.update_memory_page(export_data = True)}"
+        md_report_string += f"\n\n# Network Device Information:{self.update_network_page(export_data = True)}"
+        md_report_string += f"\n\n# Processor/CPU Information:{self.update_cpu_page(export_data = True)}"
+        md_report_string += f"\n\n# System Information:{self.update_system_page(export_data = True)}"
+        md_report_string += f"\n\n# Kernel Information:{self.update_kernel_page(export_data = True)}"
+
+        html_report_string = markdown.markdown(md_report_string)
+        html_report_string = html_report_string.replace('\n', '<br>')
+
+        return md_report_string, html_report_string
