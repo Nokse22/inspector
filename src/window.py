@@ -113,6 +113,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         file = dialog.save_text_file_finish(result)
         report_bytes = GLib.Bytes.new(report.encode("utf-8"))
         file[0].replace_contents_bytes_async(report_bytes, None, False, Gio.FileCreateFlags.NONE)
+        del report
 
     def execute_terminal_command(self, command):
         if 'FLATPAK_ID' in os.environ:
