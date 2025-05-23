@@ -22,7 +22,7 @@ from gi.repository import Gtk
 from gi.repository import Gio
 
 import gettext 
-import gi, os, subprocess, threading, time, json, re, fnmatch
+import gi, os, subprocess, threading, time, json, re, fnmatch, markdown, datetime
 
 @Gtk.Template(resource_path='/io/github/nokse22/inspector/ui/window.ui')
 class InspectorWindow(Adw.ApplicationWindow):
@@ -91,6 +91,8 @@ class InspectorWindow(Adw.ApplicationWindow):
             case "kernel":
                 self.update_kernel_page()
 
+        print(self.generate_report_text()) # TEMP TESTING CALL, REMOVE WHEN DONE
+
     def execute_terminal_command(self, command):
         if 'FLATPAK_ID' in os.environ:
             console_permissions = "flatpak-spawn --host "
@@ -114,7 +116,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         group.add(empty_command_status_page)
         return group
 
-    def update_system_page(self, *args):
+    def update_system_page(self, *args, export_data = False):
         self.remove_content(self.system_content)
         out = self.execute_terminal_command("uname -a")
         if out == "":
@@ -122,8 +124,12 @@ class InspectorWindow(Adw.ApplicationWindow):
             self.system_content.append(page)
             return
 
-        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Distribution"), description="Details from /etc/os-release")
+        title_string = "Distribution"
+        description_string = "Details from /etc/os-release"
+        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=(description_string))
         self.system_content.append(group)
+        if export_data:
+            markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
 
         if 'SNAP' in os.environ:
             out = self.execute_terminal_command("cat /var/lib/snapd/hostfs/etc/os-release")
@@ -146,58 +152,94 @@ class InspectorWindow(Adw.ApplicationWindow):
                 row.add_suffix(Gtk.Label(opacity=0.60 , label=value.replace('"', ''), wrap=True, wrap_mode=2, hexpand=True, xalign=1, justify=1))
             group.add(row)
 
-    def update_kernel_page(self, *args):
+            if export_data:
+                markdown_data += f"\n**{key}**\n* {value.replace('"', '')}\n"
+        
+        if export_data:
+            return markdown_data
+
+    def update_kernel_page(self, *args, export_data = False):
         self.remove_content(self.kernel_content)
         out = self.execute_terminal_command("uname -a")
         if out == "":
             page = self.empty_command_page("uname")
             self.kernel_content.append(page)
             return
-        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("System"), description=_("Command: uname"))
+        title_string = "System"
+        description_string = "Command: uname"
+        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
         self.kernel_content.append(group)
-
-        out = self.execute_terminal_command("uname -s")
+        if export_data:
+            markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
         
-        row = Adw.ActionRow(title=_("Kernel Name"))
+        title_string = "Kernel Name"
+        out = self.execute_terminal_command("uname -s")
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
+        title_string = "Network Node Hostname"
         out = self.execute_terminal_command("uname -n")
-        row = Adw.ActionRow(title=_("Network Node Hostname"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
+        title_string = "Kernel Release"
         out = self.execute_terminal_command("uname -r")
-        row = Adw.ActionRow(title=_("Kernel Release"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
+        title_string = "Kernel Version"
         out = self.execute_terminal_command("uname -v")
-        row = Adw.ActionRow(title=_("Kernel Version"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
+        title_string = "Machine Hardware Name"
         out = self.execute_terminal_command("uname -m")
-        row = Adw.ActionRow(title=_("Machine Hardware Name"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
+        title_string = "Processor Type"
         out = self.execute_terminal_command("uname -p")
-        row = Adw.ActionRow(title=_("Processor Type"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
+        title_string = "Hardware Platform"
         out = self.execute_terminal_command("uname -i")
-        row = Adw.ActionRow(title=_("Hardware Platform"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
+        title_string = "Operating System"
         out = self.execute_terminal_command("uname -o")
-        row = Adw.ActionRow(title=_("Operating System"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
+            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
 
-    def update_disk_page(self, *args):
+        if export_data:
+            return markdown_data
+
+    def update_disk_page(self, *args, export_data = False):
         self.remove_content(self.disks_content)
         out = self.execute_terminal_command("lsblk -J")
 
@@ -205,6 +247,8 @@ class InspectorWindow(Adw.ApplicationWindow):
             page = self.empty_command_page("lsblk")
             self.disks_content.append(page)
         else:
+            if export_data:
+                markdown_data = ""
             loop_group = None
             data = json.loads(out)
             try:
@@ -222,28 +266,38 @@ class InspectorWindow(Adw.ApplicationWindow):
                             size = device['size']
                         except:
                             size = ""
-                        text = f"Name: {name}, Size: {size}"
-                        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("Command: lsblk"))
+                        text = f"Name: {name}, Size: {size}" # deprecated var? i can see nothing refrencing this?
+                        description_string = "Command: lsblk"
+                        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_(description_string))
                         self.disks_content.append(group)
                         expander_row = Adw.ExpanderRow(title=_("Total size: "+size))
                         group.add(expander_row)
+                        if export_data:
+                            markdown_data += f"\n\n## {name}\n`{description_string}`\n**{"Total size: "+size}**\n"
                     else:
                         try:
                             size = device['size']
                         except:
                             size = ""
-                        text = f"Name: {name}, Size: {size}"
-                        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("Command: lsblk"))
+                        text = f"Name: {name}, Size: {size}" # deprecated var? i can see nothing referencing this?
+                        description_string = "Command: lsblk"
+                        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_(description_string))
                         self.disks_content.append(group)
                         action_row = Adw.ActionRow(title=_("Total size: "+size))
                         group.add(action_row)
+                        if export_data:
+                            markdown_data += f"\n\n## {name}\n`{description_string}`\n**{"Total size: "+size}**\n"
                 else:
                     if loop_group == None:
+                        title_string = "Loop devices"
+                        description_string = "Command: lsblk"
                         loop_count = self.execute_terminal_command("lsblk -d | grep loop | wc -l")
-                        loop_group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Loop devices"), description=_("Command: lsblk"))
+                        loop_group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
                         self.disks_content.append(loop_group)
                         loop_expander_row = Adw.ExpanderRow(title=gettext.ngettext("Device Count: %s", "Devices Count: %s", loop_count) % loop_count.rstrip())
                         loop_group.add(loop_expander_row)
+                        if export_data:
+                            markdown_data += f"\n\n## {title_string}\n`{description_string}`\n**{"Total size: "+size}**\n* {gettext.ngettext("Device Count: %s", "Devices Count: %s", loop_count) % loop_count.rstrip()}\n"
                     try:
                         subtitle = device['mountpoints'][0]
                     except:
@@ -258,6 +312,8 @@ class InspectorWindow(Adw.ApplicationWindow):
                         size = "N/A"
                     row.add_suffix(Gtk.Label(label=size, wrap=True, selectable=True))
                     loop_expander_row.add_row(row)
+                    if export_data:
+                        markdown_data += f"\n\n## {name}\n* {subtitle}\n    * {size}\n"
                 if "children" in device:
                     group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, )
                     self.disks_content.append(group)
@@ -290,7 +346,16 @@ class InspectorWindow(Adw.ApplicationWindow):
                         row.add_suffix(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
                         expander_row.add_row(row)
 
-    def update_memory_page(self, *args):
+                        if export_data:
+                            if subtitle != "":
+                                markdown_data += f"\n* {name}\n    * {subtitle}\n    * {size}\n"
+                            else:
+                                markdown_data += f"\n* {name}\n    * {size}\n"
+
+            if export_data:
+                return markdown_data
+
+    def update_memory_page(self, *args, export_data = False):
         self.remove_content(self.memory_content)
         out = self.execute_terminal_command("lsmem -J")
         if out == "":
@@ -298,8 +363,12 @@ class InspectorWindow(Adw.ApplicationWindow):
             self.memory_content.append(page)
         else:
             data = json.loads(out)
-            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Ranges"), description=_("Command: lsmem"))
+            title_string = "Ranges"
+            description_string = "Command: lsmem"
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.memory_content.append(group2)
+            if export_data:
+                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
             try:
                 memory = data["memory"]
             except:
@@ -317,15 +386,22 @@ class InspectorWindow(Adw.ApplicationWindow):
                     range_ = device['range']
                 except:
                     range_ = ""
-                text = "range " + block
+                text = "range " + block # what is the purpose of this var? (consider for removal?)
                 box = Gtk.Box(homogeneous=True, hexpand=True, width_request=150)
                 box.append(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
                 box.append(Gtk.Label(label=block, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
-                row = Adw.ActionRow(title=_("Memory"), subtitle=range_)
+                title_string = "Memory"
+                row = Adw.ActionRow(title=_(title_string), subtitle=range_)
                 row.add_suffix(box)
                 group2.add(row)
 
-    def update_pci_page(self, *args):
+                if export_data:
+                    markdown_data += f"\n**{title_string}**\n* {range_}\n    * {size}\n    * {block}\n"
+            
+            if export_data:
+                return markdown_data
+
+    def update_pci_page(self, *args, export_data = False):
         self.remove_content(self.pci_content)
         out = self.execute_terminal_command("lspci")
         if out == "":
@@ -335,8 +411,12 @@ class InspectorWindow(Adw.ApplicationWindow):
             out = out.splitlines()
             text = "range "
             pattern = r'(\S+)\s(.*?):\s(.*)'
-            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("PCIs"), description=_("Command: lspci"))
+            title_string = "PCI"
+            description_string = "Command: lspci"
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.pci_content.append(group2)
+            if export_data:
+                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
             for line in out:
                 match = re.match(pattern, line)
                 if match:
@@ -347,7 +427,13 @@ class InspectorWindow(Adw.ApplicationWindow):
                     action_row = Adw.ActionRow(title=third_part, subtitle=second_part)
                     group2.add(action_row)
 
-    def update_usb_page(self, *args):
+                    if export_data:
+                        markdown_data += f"\n**{third_part}**\n* {second_part}\n    * {first_part}\n" # should the first_part be displayed in report? it doesn't show in the window?
+
+            if export_data:
+                return markdown_data
+
+    def update_usb_page(self, *args, export_data = False):
         self.remove_content(self.usb_content)
         out = self.execute_terminal_command("lsusb")
         if out == "":
@@ -355,8 +441,12 @@ class InspectorWindow(Adw.ApplicationWindow):
             self.usb_content.append(page)
         else:
             out = out.splitlines()
-            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("USB"), description=_("Command: lsusb"))
+            title_string = "USB"
+            description_string = "Command: lsusb"
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.usb_content.append(group2)
+            if export_data:
+                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
             for line in out:
                 result = []
                 parts = line.split(' ')
@@ -380,30 +470,43 @@ class InspectorWindow(Adw.ApplicationWindow):
                 action_row.add_suffix(Gtk.Label(label=result[0], wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
                 expander_row.add_row(action_row)
 
-    def update_network_page(self, *args):
+                if export_data:
+                    markdown_data += f"\n**{result[2]}**\n* {name}\n    * {value}\n* {"Bus"}\n    * {result[0]}\n"
+        
+            if export_data:
+                return markdown_data
+
+    def update_network_page(self, *args, export_data = False):
         self.remove_content(self.network_content)
         out = self.execute_terminal_command("ip -j address")
         if out == "":
             page = self.empty_command_page("ip address")
             self.network_content.append(page)
         else:
+            markdown_data = ""
             data = json.loads(out)
             for line in data:
                 try:
-                    name = line['ifname']
+                    title_string = line['ifname']
                 except:
-                    name = "N/A"
-                group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("Command: ip address"))
+                    title_string = "N/A"
+                description_string = "Command: ip address"
+                group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=title_string, description=_(description_string))
                 self.network_content.append(group2)
+                if export_data:
+                    markdown_data += f"\n\n## {title_string}\n`{description_string}`\n"
                 for key, value in line.items():
 
                     if isinstance(value, list):
                         for val in value:
                             if isinstance(val, dict):
                                 if key == "addr_info":
-                                    expander_row = Adw.ExpanderRow(title=_("Address info, ip"))
+                                    title_string = "Address info, ip"
+                                    expander_row = Adw.ExpanderRow(title=_(title_string))
+                                    markdown_data += f"\n**{title_string}**"
                                 else:
                                     expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
+                                    markdown_data += f"\n**{key[0].upper() + key[1:]}**"
                                 group2.add(expander_row)
                                 for key2, value2 in val.items():
                                     row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
@@ -411,6 +514,8 @@ class InspectorWindow(Adw.ApplicationWindow):
                                     box = Gtk.Box(homogeneous=True, hexpand=True)
                                     box.append(Gtk.Label(label=value2, xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
                                     row.add_suffix(box)
+                                    if export_data:
+                                        markdown_data += f"\n* {key2[0].upper() + key2[1:]}\n    * {value2}\n"
                         try:
                             value[0]
                         except:
@@ -420,14 +525,23 @@ class InspectorWindow(Adw.ApplicationWindow):
                                 expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
                                 group2.add(expander_row)
                                 text = ""
+                                textmd = ""
                                 for val in value:
                                     text += val + ", "
+                                    textmd += f"* {val}\n"
                                 row = Adw.ActionRow(title=text)
                                 expander_row.add_row(row)
+                                if export_data:
+                                    markdown_data += f"\n**{key[0].upper() + key[1:]}**\n{textmd}"
                     elif key not in ["ifname","ifindex", "addr_info"]:
-                        row = Adw.ActionRow(title=key[0].upper() + key[1:] )
+                        row = Adw.ActionRow(title=key[0].upper() + key[1:])
                         row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1, css_classes=["dim-label"]))
                         group2.add(row)
+                        if export_data:
+                            markdown_data += f"\n**{key[0].upper() + key[1:]}**\n* {value}\n"
+
+            if export_data:
+                return markdown_data
 
     def remove_content(self, box):
         child = box.get_first_child()
@@ -436,7 +550,7 @@ class InspectorWindow(Adw.ApplicationWindow):
             del child
             child = box.get_first_child()
 
-    def update_cpu_page(self, *args):
+    def update_cpu_page(self, *args, export_data = False):
         self.remove_content(self.cpu_content)
         out = self.execute_terminal_command("lscpu -J")
         if out == "":
@@ -444,8 +558,13 @@ class InspectorWindow(Adw.ApplicationWindow):
             self.cpu_content.append(page)
         else:
             data = json.loads(out)
-            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("CPU"), description=_("Command: lscpu"))
+            title_string = "CPU"
+            description_string = "Command: lscpu"
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.cpu_content.append(group2)
+            if export_data:
+                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
+
 
             add_flags = False
             try:
@@ -458,20 +577,31 @@ class InspectorWindow(Adw.ApplicationWindow):
                     if value == "Flags:":
                         row = Adw.ExpanderRow(title=value[0].upper() + value[1:])
                         group2.add(row)
+                        if export_data:
+                            markdown_data += f"\n**{value[0].upper() + value[1:]}**\n"
                         add_flags = True
                     elif add_flags:
                         row2 = Adw.ActionRow(title=value)
                         row.add_row(row2)
+                        if export_data:
+                            markdown_data += f"\n* `{value}`\n"
                         add_flags = False
                     elif key == "field":
                         row = Adw.ActionRow(title=value[0].upper() + value[1:])
+                        if export_data:
+                            markdown_data += f"\n**{value[0].upper() + value[1:]}**\n"
                     elif key == "data":
 
                         row.add_suffix(Gtk.Label(label=value[0].upper() + value[1:], css_classes=["dim-label"],
                                 xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
                         group2.add(row)
+                        if export_data:
+                            markdown_data += f"\n* {value[0].upper() + value[1:]}\n"
+            
+            if export_data:
+                return markdown_data
 
-    def update_motherboard_page(self, *args):
+    def update_motherboard_page(self, *args, export_data = False):
         self.remove_content(self.motherboard_content)
         
         dmi_path = "/sys/devices/virtual/dmi/id/"
@@ -509,14 +639,20 @@ class InspectorWindow(Adw.ApplicationWindow):
         ]
 
         # Create and set the main preferences group for motherboard info
-        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Motherboard"), description=_("Details from /sys/devices/virtual/dmi/id"))
+        title_string = "Motherboard"
+        description_string = "Details from /sys/devices/virtual/dmi/id"
+        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
         self.motherboard_content.append(group)
+        if export_data:
+            markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
 
         # Populate the group with DMI details
         for key, label in dmi_keys:
             if key == "power":
                 expander_row = Adw.ExpanderRow(title=label)
                 group.add(expander_row)
+                if export_data:
+                    markdown_data += f"\n**{label}**"
                 for key2, label2 in power_keys:
                     row = Adw.ActionRow(title=label2)
                     try:
@@ -526,6 +662,8 @@ class InspectorWindow(Adw.ApplicationWindow):
                         value2 = "N/A"  # Or any default value if you cannot access a file
                     row.add_suffix(Gtk.Label(label=value2, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
                     expander_row.add_row(row)
+                    if export_data:
+                        markdown_data += f"\n* {label2}\n    * {value2}\n"
                 continue
             try:
                 with open(os.path.join(dmi_path, key), 'r') as f:
@@ -537,3 +675,29 @@ class InspectorWindow(Adw.ApplicationWindow):
             row.add_suffix(Gtk.Label(label=value, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
             group.add(row)
 
+            if export_data:
+                markdown_data += f"\n**{label}**\n* {value}\n"
+        
+        if export_data:
+            return markdown_data
+
+    def generate_report_text(self, *args): # produces a large markdown formatted string containing all data that inspector can see
+
+        # save all text output from the various pages
+        # it would be possible to have it auto save this data to memory when updating the pages anyway giving 
+        # faster report generation when the user wants but at the expense of slightly poorer memory efficency during general use
+        md_report_string = f"# Inspector Report:\n**Report done at: `{datetime.datetime.now()}`\nReport issues or contribute at: https://github.com/Nokse22/inspector"
+        md_report_string += f"\n\n# Motherboard Information:{self.update_motherboard_page(export_data = True)}"
+        md_report_string += f"\n\n# USB Device Information:{self.update_usb_page(export_data = True)}"
+        md_report_string += f"\n\n# Disk Information:{self.update_disk_page(export_data = True)}"
+        md_report_string += f"\n\n# PCI Device Information:{self.update_pci_page(export_data = True)}"
+        md_report_string += f"\n\n# Memory/RAM Information:{self.update_memory_page(export_data = True)}"
+        md_report_string += f"\n\n# Network Device Information:{self.update_network_page(export_data = True)}"
+        md_report_string += f"\n\n# Processor/CPU Information:{self.update_cpu_page(export_data = True)}"
+        md_report_string += f"\n\n# System Information:{self.update_system_page(export_data = True)}"
+        md_report_string += f"\n\n# Kernel Information:{self.update_kernel_page(export_data = True)}"
+
+        html_report_string = markdown.markdown(md_report_string)
+        html_report_string = html_report_string.replace('\n', '<br>')
+
+        return md_report_string, html_report_string
