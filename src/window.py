@@ -124,7 +124,9 @@ class InspectorWindow(Adw.ApplicationWindow):
             self.system_content.append(page)
             return
 
-        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Distribution"), description="Details from /etc/os-release")
+        title_string = "Distribution"
+        description_string = "Details from /etc/os-release"
+        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=(description_string))
         self.system_content.append(group)
 
         if 'SNAP' in os.environ:
@@ -155,47 +157,57 @@ class InspectorWindow(Adw.ApplicationWindow):
             page = self.empty_command_page("uname")
             self.kernel_content.append(page)
             return
-        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("System"), description=_("Command: uname"))
+        title_string = "System"
+        description_string = "Command: uname"
+        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
         self.kernel_content.append(group)
 
         out = self.execute_terminal_command("uname -s")
         
-        row = Adw.ActionRow(title=_("Kernel Name"))
+        title_string = "Kernel Name"
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
+        title_string = "Network Node Hostname"
         out = self.execute_terminal_command("uname -n")
-        row = Adw.ActionRow(title=_("Network Node Hostname"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
+        title_string = "Kernel Release"
         out = self.execute_terminal_command("uname -r")
-        row = Adw.ActionRow(title=_("Kernel Release"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
+        title_string = "Kernel Version"
         out = self.execute_terminal_command("uname -v")
-        row = Adw.ActionRow(title=_("Kernel Version"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
+        title_string = "Machine Hardware Name"
         out = self.execute_terminal_command("uname -m")
-        row = Adw.ActionRow(title=_("Machine Hardware Name"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
+        title_string = "Processor Type"
         out = self.execute_terminal_command("uname -p")
-        row = Adw.ActionRow(title=_("Processor Type"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
+        title_string = "Hardware Platform"
         out = self.execute_terminal_command("uname -i")
-        row = Adw.ActionRow(title=_("Hardware Platform"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
 
+        title_string = "Operating System"
         out = self.execute_terminal_command("uname -o")
-        row = Adw.ActionRow(title=_("Operating System"))
+        row = Adw.ActionRow(title=_(title_string))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
         if export_data:
@@ -226,8 +238,8 @@ class InspectorWindow(Adw.ApplicationWindow):
                             size = device['size']
                         except:
                             size = ""
-                        text = f"Name: {name}, Size: {size}"
-                        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("Command: lsblk"))
+                        text = f"Name: {name}, Size: {size}" # deprecated var? i can see nothing refrencing this?
+                        description_string = "Command: lsblk"
                         self.disks_content.append(group)
                         expander_row = Adw.ExpanderRow(title=_("Total size: "+size))
                         group.add(expander_row)
@@ -236,7 +248,6 @@ class InspectorWindow(Adw.ApplicationWindow):
                             size = device['size']
                         except:
                             size = ""
-                        text = f"Name: {name}, Size: {size}"
                         group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("Command: lsblk"))
                         self.disks_content.append(group)
                         action_row = Adw.ActionRow(title=_("Total size: "+size))
@@ -294,6 +305,10 @@ class InspectorWindow(Adw.ApplicationWindow):
                         row.add_suffix(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
                         expander_row.add_row(row)
 
+                        if export_data:
+                            if subtitle != "":
+                                markdown_data += f"\n* {name}\n    * {subtitle}\n    * {size}\n"
+                            else:
     def update_memory_page(self, *args, export_data = False):
         self.remove_content(self.memory_content)
         out = self.execute_terminal_command("lsmem -J")
@@ -303,7 +318,9 @@ class InspectorWindow(Adw.ApplicationWindow):
         else:
             data = json.loads(out)
             group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Ranges"), description=_("Command: lsmem"))
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.memory_content.append(group2)
+            if export_data:
             try:
                 memory = data["memory"]
             except:
@@ -329,6 +346,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                 row.add_suffix(box)
                 group2.add(row)
 
+                if export_data:
     def update_pci_page(self, *args, export_data = False):
         self.remove_content(self.pci_content)
         out = self.execute_terminal_command("lspci")
@@ -351,6 +369,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                     action_row = Adw.ActionRow(title=third_part, subtitle=second_part)
                     group2.add(action_row)
 
+                    if export_data:
     def update_usb_page(self, *args, export_data = False):
         self.remove_content(self.usb_content)
         out = self.execute_terminal_command("lsusb")
@@ -384,6 +403,10 @@ class InspectorWindow(Adw.ApplicationWindow):
                 action_row.add_suffix(Gtk.Label(label=result[0], wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
                 expander_row.add_row(action_row)
 
+                    markdown_data += f"\n**{result[2]}**\n* {name}\n    * {value}\n* {"Bus"}\n    * {result[0]}\n"
+        
+                return markdown_data
+
     def update_network_page(self, *args, export_data = False):
         self.remove_content(self.network_content)
         out = self.execute_terminal_command("ip -j address")
@@ -395,8 +418,8 @@ class InspectorWindow(Adw.ApplicationWindow):
             for line in data:
                 try:
                     name = line['ifname']
+                    title_string = line['ifname']
                 except:
-                    name = "N/A"
                 group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("Command: ip address"))
                 self.network_content.append(group2)
                 for key, value in line.items():
@@ -429,7 +452,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                                 row = Adw.ActionRow(title=text)
                                 expander_row.add_row(row)
                     elif key not in ["ifname","ifindex", "addr_info"]:
-                        row = Adw.ActionRow(title=key[0].upper() + key[1:] )
+                        row = Adw.ActionRow(title=key[0].upper() + key[1:])
                         row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1, css_classes=["dim-label"]))
                         group2.add(row)
 
