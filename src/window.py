@@ -128,6 +128,8 @@ class InspectorWindow(Adw.ApplicationWindow):
         description_string = "Details from /etc/os-release"
         group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=(description_string))
         self.system_content.append(group)
+        if export_data:
+            markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
 
         if 'SNAP' in os.environ:
             out = self.execute_terminal_command("cat /var/lib/snapd/hostfs/etc/os-release")
@@ -149,6 +151,12 @@ class InspectorWindow(Adw.ApplicationWindow):
             else:
                 row.add_suffix(Gtk.Label(opacity=0.60 , label=value.replace('"', ''), wrap=True, wrap_mode=2, hexpand=True, xalign=1, justify=1))
             group.add(row)
+
+            if export_data:
+                markdown_data += f"\n**{key}**\n* {value.replace('"', '')}\n"
+        
+        if export_data:
+            return markdown_data
 
     def update_kernel_page(self, *args, export_data = False):
         self.remove_content(self.kernel_content)
