@@ -366,6 +366,8 @@ class InspectorWindow(Adw.ApplicationWindow):
             description_string = "Command: lspci"
             group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.pci_content.append(group2)
+            if export_data:
+                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
             for line in out:
                 match = re.match(pattern, line)
                 if match:
@@ -377,6 +379,11 @@ class InspectorWindow(Adw.ApplicationWindow):
                     group2.add(action_row)
 
                     if export_data:
+                        markdown_data += f"\n**{third_part}**\n* {second_part}\n    * {first_part}\n" # should the first_part be displayed in report? it doesn't show in the window?
+
+            if export_data:
+                return markdown_data
+
     def update_usb_page(self, *args, export_data = False):
         self.remove_content(self.usb_content)
         out = self.execute_terminal_command("lsusb")
@@ -387,7 +394,10 @@ class InspectorWindow(Adw.ApplicationWindow):
             out = out.splitlines()
             title_string = "USB"
             description_string = "Command: lsusb"
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.usb_content.append(group2)
+            if export_data:
+                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
             for line in out:
                 result = []
                 parts = line.split(' ')
@@ -411,8 +421,10 @@ class InspectorWindow(Adw.ApplicationWindow):
                 action_row.add_suffix(Gtk.Label(label=result[0], wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
                 expander_row.add_row(action_row)
 
+                if export_data:
                     markdown_data += f"\n**{result[2]}**\n* {name}\n    * {value}\n* {"Bus"}\n    * {result[0]}\n"
         
+            if export_data:
                 return markdown_data
 
     def update_network_page(self, *args, export_data = False):
