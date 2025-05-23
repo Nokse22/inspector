@@ -114,7 +114,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         group.add(empty_command_status_page)
         return group
 
-    def update_system_page(self, *args):
+    def update_system_page(self, *args, export_data = False):
         self.remove_content(self.system_content)
         out = self.execute_terminal_command("uname -a")
         if out == "":
@@ -146,7 +146,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                 row.add_suffix(Gtk.Label(opacity=0.60 , label=value.replace('"', ''), wrap=True, wrap_mode=2, hexpand=True, xalign=1, justify=1))
             group.add(row)
 
-    def update_kernel_page(self, *args):
+    def update_kernel_page(self, *args, export_data = False):
         self.remove_content(self.kernel_content)
         out = self.execute_terminal_command("uname -a")
         if out == "":
@@ -196,8 +196,10 @@ class InspectorWindow(Adw.ApplicationWindow):
         row = Adw.ActionRow(title=_("Operating System"))
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
+        if export_data:
 
     def update_disk_page(self, *args):
+    def update_disk_page(self, *args, export_data = False):
         self.remove_content(self.disks_content)
         out = self.execute_terminal_command("lsblk -J")
 
@@ -290,7 +292,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                         row.add_suffix(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
                         expander_row.add_row(row)
 
-    def update_memory_page(self, *args):
+    def update_memory_page(self, *args, export_data = False):
         self.remove_content(self.memory_content)
         out = self.execute_terminal_command("lsmem -J")
         if out == "":
@@ -325,7 +327,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                 row.add_suffix(box)
                 group2.add(row)
 
-    def update_pci_page(self, *args):
+    def update_pci_page(self, *args, export_data = False):
         self.remove_content(self.pci_content)
         out = self.execute_terminal_command("lspci")
         if out == "":
@@ -347,7 +349,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                     action_row = Adw.ActionRow(title=third_part, subtitle=second_part)
                     group2.add(action_row)
 
-    def update_usb_page(self, *args):
+    def update_usb_page(self, *args, export_data = False):
         self.remove_content(self.usb_content)
         out = self.execute_terminal_command("lsusb")
         if out == "":
@@ -380,7 +382,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                 action_row.add_suffix(Gtk.Label(label=result[0], wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
                 expander_row.add_row(action_row)
 
-    def update_network_page(self, *args):
+    def update_network_page(self, *args, export_data = False):
         self.remove_content(self.network_content)
         out = self.execute_terminal_command("ip -j address")
         if out == "":
@@ -436,7 +438,7 @@ class InspectorWindow(Adw.ApplicationWindow):
             del child
             child = box.get_first_child()
 
-    def update_cpu_page(self, *args):
+    def update_cpu_page(self, *args, export_data = False):
         self.remove_content(self.cpu_content)
         out = self.execute_terminal_command("lscpu -J")
         if out == "":
@@ -471,7 +473,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                                 xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
                         group2.add(row)
 
-    def update_motherboard_page(self, *args):
+    def update_motherboard_page(self, *args, export_data = False):
         self.remove_content(self.motherboard_content)
         
         dmi_path = "/sys/devices/virtual/dmi/id/"
