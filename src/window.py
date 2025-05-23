@@ -91,6 +91,8 @@ class InspectorWindow(Adw.ApplicationWindow):
             case "kernel":
                 self.update_kernel_page()
 
+        print(self.generate_report_text()) # TEMP TESTING CALL, REMOVE WHEN DONE
+
     def execute_terminal_command(self, command):
         if 'FLATPAK_ID' in os.environ:
             console_permissions = "flatpak-spawn --host "
