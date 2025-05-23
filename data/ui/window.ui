@@ -245,12 +245,12 @@
                 </child>
                 <child>
                   <object class="GtkButton">
-                    <property name="label">Export as .md</property>
+                    <property name="label">Export .md</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton">
-                    <property name="label">Export as .html</property>
+                    <property name="label">Export .html</property>
                   </object>
                 </child>
               </object>
