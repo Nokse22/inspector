@@ -219,6 +219,8 @@ class InspectorWindow(Adw.ApplicationWindow):
             page = self.empty_command_page("lsblk")
             self.disks_content.append(page)
         else:
+            if export_data:
+                markdown_data = ""
             loop_group = None
             data = json.loads(out)
             try:
@@ -242,6 +244,8 @@ class InspectorWindow(Adw.ApplicationWindow):
                         self.disks_content.append(group)
                         expander_row = Adw.ExpanderRow(title=_("Total size: "+size))
                         group.add(expander_row)
+                        if export_data:
+                            markdown_data += f"\n\n## {name}\n`{description_string}`\n**{"Total size: "+size}**\n"
                     else:
                         try:
                             size = device['size']
@@ -253,6 +257,8 @@ class InspectorWindow(Adw.ApplicationWindow):
                         self.disks_content.append(group)
                         action_row = Adw.ActionRow(title=_("Total size: "+size))
                         group.add(action_row)
+                        if export_data:
+                            markdown_data += f"\n\n## {name}\n`{description_string}`\n**{"Total size: "+size}**\n"
                 else:
                     if loop_group == None:
                         title_string = "Loop devices"
@@ -262,6 +268,8 @@ class InspectorWindow(Adw.ApplicationWindow):
                         self.disks_content.append(loop_group)
                         loop_expander_row = Adw.ExpanderRow(title=gettext.ngettext("Device Count: %s", "Devices Count: %s", loop_count) % loop_count.rstrip())
                         loop_group.add(loop_expander_row)
+                        if export_data:
+                            markdown_data += f"\n\n## {title_string}\n`{description_string}`\n**{"Total size: "+size}**\n* {gettext.ngettext("Device Count: %s", "Devices Count: %s", loop_count) % loop_count.rstrip()}\n"
                     try:
                         subtitle = device['mountpoints'][0]
                     except:
@@ -276,6 +284,8 @@ class InspectorWindow(Adw.ApplicationWindow):
                         size = "N/A"
                     row.add_suffix(Gtk.Label(label=size, wrap=True, selectable=True))
                     loop_expander_row.add_row(row)
+                    if export_data:
+                        markdown_data += f"\n\n## {name}\n* {subtitle}\n    * {size}\n"
                 if "children" in device:
                     group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, )
                     self.disks_content.append(group)
@@ -312,6 +322,11 @@ class InspectorWindow(Adw.ApplicationWindow):
                             if subtitle != "":
                                 markdown_data += f"\n* {name}\n    * {subtitle}\n    * {size}\n"
                             else:
+                                markdown_data += f"\n* {name}\n    * {size}\n"
+
+            if export_data:
+                return markdown_data
+
     def update_memory_page(self, *args, export_data = False):
         self.remove_content(self.memory_content)
         out = self.execute_terminal_command("lsmem -J")
