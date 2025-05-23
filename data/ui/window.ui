@@ -243,6 +243,16 @@
                     <signal name="clicked" handler="on_reload_clicked"/>
                   </object>
                 </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="label">Export as .md</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="label">Export as .html</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
