@@ -212,7 +212,6 @@ class InspectorWindow(Adw.ApplicationWindow):
         group.add(row)
         if export_data:
 
-    def update_disk_page(self, *args):
     def update_disk_page(self, *args, export_data = False):
         self.remove_content(self.disks_content)
         out = self.execute_terminal_command("lsblk -J")
@@ -240,6 +239,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                             size = ""
                         text = f"Name: {name}, Size: {size}" # deprecated var? i can see nothing refrencing this?
                         description_string = "Command: lsblk"
+                        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_(description_string))
                         self.disks_content.append(group)
                         expander_row = Adw.ExpanderRow(title=_("Total size: "+size))
                         group.add(expander_row)
@@ -248,14 +248,18 @@ class InspectorWindow(Adw.ApplicationWindow):
                             size = device['size']
                         except:
                             size = ""
-                        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("Command: lsblk"))
+                        text = f"Name: {name}, Size: {size}" # deprecated var? i can see nothing referencing this?
+                        description_string = "Command: lsblk"
+                        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_(description_string))
                         self.disks_content.append(group)
                         action_row = Adw.ActionRow(title=_("Total size: "+size))
                         group.add(action_row)
                 else:
                     if loop_group == None:
+                        title_string = "Loop devices"
+                        description_string = "Command: lsblk"
                         loop_count = self.execute_terminal_command("lsblk -d | grep loop | wc -l")
-                        loop_group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Loop devices"), description=_("Command: lsblk"))
+                        loop_group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
                         self.disks_content.append(loop_group)
                         loop_expander_row = Adw.ExpanderRow(title=gettext.ngettext("Device Count: %s", "Devices Count: %s", loop_count) % loop_count.rstrip())
                         loop_group.add(loop_expander_row)
@@ -317,7 +321,8 @@ class InspectorWindow(Adw.ApplicationWindow):
             self.memory_content.append(page)
         else:
             data = json.loads(out)
-            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Ranges"), description=_("Command: lsmem"))
+            title_string = "Ranges"
+            description_string = "Command: lsmem"
             group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.memory_content.append(group2)
             if export_data:
@@ -342,7 +347,8 @@ class InspectorWindow(Adw.ApplicationWindow):
                 box = Gtk.Box(homogeneous=True, hexpand=True, width_request=150)
                 box.append(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
                 box.append(Gtk.Label(label=block, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
-                row = Adw.ActionRow(title=_("Memory"), subtitle=range_)
+                title_string = "Memory"
+                row = Adw.ActionRow(title=_(title_string), subtitle=range_)
                 row.add_suffix(box)
                 group2.add(row)
 
@@ -357,7 +363,9 @@ class InspectorWindow(Adw.ApplicationWindow):
             out = out.splitlines()
             text = "range "
             pattern = r'(\S+)\s(.*?):\s(.*)'
-            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("PCIs"), description=_("Command: lspci"))
+            title_string = "PCI"
+            description_string = "Command: lspci"
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.pci_content.append(group2)
             for line in out:
                 match = re.match(pattern, line)
@@ -378,7 +386,8 @@ class InspectorWindow(Adw.ApplicationWindow):
             self.usb_content.append(page)
         else:
             out = out.splitlines()
-            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("USB"), description=_("Command: lsusb"))
+            title_string = "USB"
+            description_string = "Command: lsusb"
             self.usb_content.append(group2)
             for line in out:
                 result = []
@@ -417,10 +426,11 @@ class InspectorWindow(Adw.ApplicationWindow):
             data = json.loads(out)
             for line in data:
                 try:
-                    name = line['ifname']
                     title_string = line['ifname']
                 except:
-                group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_("Command: ip address"))
+                    title_string = "N/A"
+                description_string = "Command: ip address"
+                group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=title_string, description=_(description_string))
                 self.network_content.append(group2)
                 for key, value in line.items():
 
@@ -428,7 +438,8 @@ class InspectorWindow(Adw.ApplicationWindow):
                         for val in value:
                             if isinstance(val, dict):
                                 if key == "addr_info":
-                                    expander_row = Adw.ExpanderRow(title=_("Address info, ip"))
+                                    title_string = "Address info, ip"
+                                    expander_row = Adw.ExpanderRow(title=_(title_string))
                                 else:
                                     expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
                                 group2.add(expander_row)
@@ -471,7 +482,9 @@ class InspectorWindow(Adw.ApplicationWindow):
             self.cpu_content.append(page)
         else:
             data = json.loads(out)
-            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("CPU"), description=_("Command: lscpu"))
+            title_string = "CPU"
+            description_string = "Command: lscpu"
+            group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.cpu_content.append(group2)
 
             add_flags = False
@@ -536,7 +549,9 @@ class InspectorWindow(Adw.ApplicationWindow):
         ]
 
         # Create and set the main preferences group for motherboard info
-        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_("Motherboard"), description=_("Details from /sys/devices/virtual/dmi/id"))
+        title_string = "Motherboard"
+        description_string = "Details from /sys/devices/virtual/dmi/id"
+        group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
         self.motherboard_content.append(group)
 
         # Populate the group with DMI details
