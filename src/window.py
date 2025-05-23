@@ -552,12 +552,16 @@ class InspectorWindow(Adw.ApplicationWindow):
         description_string = "Details from /sys/devices/virtual/dmi/id"
         group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
         self.motherboard_content.append(group)
+        if export_data:
+            markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
 
         # Populate the group with DMI details
         for key, label in dmi_keys:
             if key == "power":
                 expander_row = Adw.ExpanderRow(title=label)
                 group.add(expander_row)
+                if export_data:
+                    markdown_data += f"\n**{label}**"
                 for key2, label2 in power_keys:
                     row = Adw.ActionRow(title=label2)
                     try:
@@ -567,6 +571,8 @@ class InspectorWindow(Adw.ApplicationWindow):
                         value2 = "N/A"  # Or any default value if you cannot access a file
                     row.add_suffix(Gtk.Label(label=value2, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
                     expander_row.add_row(row)
+                    if export_data:
+                        markdown_data += f"\n* {label2}\n    * {value2}\n"
                 continue
             try:
                 with open(os.path.join(dmi_path, key), 'r') as f:
@@ -577,6 +583,12 @@ class InspectorWindow(Adw.ApplicationWindow):
             row = Adw.ActionRow(title=label)
             row.add_suffix(Gtk.Label(label=value, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
             group.add(row)
+
+            if export_data:
+                markdown_data += f"\n**{label}**\n* {value}\n"
+        
+        if export_data:
+            return markdown_data
 
     def generate_report_text(self, *args): # produces a large markdown formatted string containing all data that inspector can see
 
