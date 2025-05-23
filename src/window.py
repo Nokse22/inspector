@@ -342,7 +342,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                     range_ = device['range']
                 except:
                     range_ = ""
-                text = "range " + block
+                text = "range " + block # what is the purpose of this var? (consider for removal?)
                 box = Gtk.Box(homogeneous=True, hexpand=True, width_request=150)
                 box.append(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
                 box.append(Gtk.Label(label=block, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
