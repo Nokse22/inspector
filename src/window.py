@@ -422,6 +422,7 @@ class InspectorWindow(Adw.ApplicationWindow):
             page = self.empty_command_page("ip address")
             self.network_content.append(page)
         else:
+            markdown_data = ""
             data = json.loads(out)
             for line in data:
                 try:
@@ -431,6 +432,8 @@ class InspectorWindow(Adw.ApplicationWindow):
                 description_string = "Command: ip address"
                 group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=title_string, description=_(description_string))
                 self.network_content.append(group2)
+                if export_data:
+                    markdown_data += f"\n\n## {title_string}\n`{description_string}`\n"
                 for key, value in line.items():
 
                     if isinstance(value, list):
@@ -439,8 +442,10 @@ class InspectorWindow(Adw.ApplicationWindow):
                                 if key == "addr_info":
                                     title_string = "Address info, ip"
                                     expander_row = Adw.ExpanderRow(title=_(title_string))
+                                    markdown_data += f"\n**{title_string}**"
                                 else:
                                     expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
+                                    markdown_data += f"\n**{key[0].upper() + key[1:]}**"
                                 group2.add(expander_row)
                                 for key2, value2 in val.items():
                                     row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
@@ -448,6 +453,8 @@ class InspectorWindow(Adw.ApplicationWindow):
                                     box = Gtk.Box(homogeneous=True, hexpand=True)
                                     box.append(Gtk.Label(label=value2, xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
                                     row.add_suffix(box)
+                                    if export_data:
+                                        markdown_data += f"\n* {key2[0].upper() + key2[1:]}\n    * {value2}\n"
                         try:
                             value[0]
                         except:
@@ -457,14 +464,23 @@ class InspectorWindow(Adw.ApplicationWindow):
                                 expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
                                 group2.add(expander_row)
                                 text = ""
+                                textmd = ""
                                 for val in value:
                                     text += val + ", "
+                                    textmd += f"* {val}\n"
                                 row = Adw.ActionRow(title=text)
                                 expander_row.add_row(row)
+                                if export_data:
+                                    markdown_data += f"\n**{key[0].upper() + key[1:]}**\n{textmd}"
                     elif key not in ["ifname","ifindex", "addr_info"]:
                         row = Adw.ActionRow(title=key[0].upper() + key[1:])
                         row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1, css_classes=["dim-label"]))
                         group2.add(row)
+                        if export_data:
+                            markdown_data += f"\n**{key[0].upper() + key[1:]}**\n* {value}\n"
+
+            if export_data:
+                return markdown_data
 
     def remove_content(self, box):
         child = box.get_first_child()
