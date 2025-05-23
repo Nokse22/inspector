@@ -485,6 +485,9 @@ class InspectorWindow(Adw.ApplicationWindow):
             description_string = "Command: lscpu"
             group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.cpu_content.append(group2)
+            if export_data:
+                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
+
 
             add_flags = False
             try:
@@ -497,18 +500,29 @@ class InspectorWindow(Adw.ApplicationWindow):
                     if value == "Flags:":
                         row = Adw.ExpanderRow(title=value[0].upper() + value[1:])
                         group2.add(row)
+                        if export_data:
+                            markdown_data += f"\n**{value[0].upper() + value[1:]}**\n"
                         add_flags = True
                     elif add_flags:
                         row2 = Adw.ActionRow(title=value)
                         row.add_row(row2)
+                        if export_data:
+                            markdown_data += f"\n* `{value}`\n"
                         add_flags = False
                     elif key == "field":
                         row = Adw.ActionRow(title=value[0].upper() + value[1:])
+                        if export_data:
+                            markdown_data += f"\n**{value[0].upper() + value[1:]}**\n"
                     elif key == "data":
 
                         row.add_suffix(Gtk.Label(label=value[0].upper() + value[1:], css_classes=["dim-label"],
                                 xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
                         group2.add(row)
+                        if export_data:
+                            markdown_data += f"\n* {value[0].upper() + value[1:]}\n"
+            
+            if export_data:
+                return markdown_data
 
     def update_motherboard_page(self, *args, export_data = False):
         self.remove_content(self.motherboard_content)
