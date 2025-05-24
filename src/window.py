@@ -96,20 +96,21 @@ class InspectorWindow(Adw.ApplicationWindow):
     def on_md_export_clicked(self, btn):
         global report
         report = self.generate_report_text()[0]
-        self.file_save_dialog(report, 'md')
+        self.file_save_dialog('md')
 
     @Gtk.Template.Callback("on_html_export_clicked")
     def on_HTML_export_clicked(self, btn):
         global report
         report = self.generate_report_text()[1]
-        self.file_save_dialog(report, 'html')
+        self.file_save_dialog('html')
 
-    def file_save_dialog(self, report, type):
+    def file_save_dialog(self, type):
         file_save = Gtk.FileDialog()
         file_save.set_initial_name(f"inspector-report-{datetime.datetime.now().strftime('%Y-%m-%d-%H:%M:%S')}.{type}")
         file_save.save_text_file(self, None, self.file_save_response)
 
     def file_save_response(self, dialog, result):
+        global report
         file = dialog.save_text_file_finish(result)
         report_bytes = GLib.Bytes.new(report.encode("utf-8"))
         file[0].replace_contents_bytes_async(report_bytes, None, False, Gio.FileCreateFlags.NONE)
