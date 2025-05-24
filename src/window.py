@@ -95,13 +95,18 @@ class InspectorWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback("on_md_export_clicked")
     def on_md_export_clicked(self, btn):
         global report
-        report = self.generate_report_text()[0]
+        report = self.generate_report_text()
+        
         self.file_save_dialog('md')
 
     @Gtk.Template.Callback("on_html_export_clicked")
     def on_HTML_export_clicked(self, btn):
         global report
-        report = self.generate_report_text()[1]
+        report = self.generate_report_text()
+
+        report = markdown.markdown(report)
+        report = report.replace('\n', '<br>')
+
         self.file_save_dialog('html')
 
     def file_save_dialog(self, type):
@@ -720,7 +725,4 @@ class InspectorWindow(Adw.ApplicationWindow):
         md_report_string += f"\n\n# System Information:{self.update_system_page(export_data = True)}"
         md_report_string += f"\n\n# Kernel Information:{self.update_kernel_page(export_data = True)}"
 
-        html_report_string = markdown.markdown(md_report_string)
-        html_report_string = html_report_string.replace('\n', '<br>')
-
-        return md_report_string, html_report_string
+        return md_report_string
