@@ -51,7 +51,7 @@ class CommandTestApplication(Adw.Application):
                                 application_name=_("Inspector"),
                                 application_icon='io.github.nokse22.inspector',
                                 developer_name='Nokse',
-                                developers=["Nokse22 https://github.com/Nokse22","David Stephenson https://github.com/David-Stephenson", "soumyaDghosh https://github.com/soumyaDghosh"],
+                                developers=["Nokse22 https://github.com/Nokse22","David Stephenson https://github.com/David-Stephenson", "soumyaDghosh https://github.com/soumyaDghosh", "Epig-is-a-llama https://github.com/Epig-is-a-llama"],
                                 issue_url='https://github.com/Nokse22/inspector/issues',
                                 website='https://github.com/Nokse22/inspector',
                                 version='0.3.0',
