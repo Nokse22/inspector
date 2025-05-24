@@ -23,7 +23,7 @@ from gi.repository import Gio
 from gi.repository import GLib
 
 import gettext 
-import gi, os, subprocess, threading, time, json, re, fnmatch, datetime, markdown_it, markdown_pdf
+import gi, os, subprocess, threading, time, json, re, fnmatch, datetime, markdown, io#, xhtml2pdf
 
 @Gtk.Template(resource_path='/io/github/nokse22/inspector/ui/window.ui')
 class InspectorWindow(Adw.ApplicationWindow):
@@ -95,16 +95,18 @@ class InspectorWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback("on_md_export_clicked")
     def on_md_export_clicked(self, btn):
         global report
-        report = self.generate_report_text()
+        report_raw = self.generate_report_text()
+
+        report = report_raw
         
         self.file_save_dialog('md')
 
     @Gtk.Template.Callback("on_html_export_clicked")
     def on_html_export_clicked(self, btn):
         global report
-        report = self.generate_report_text()
+        report_raw = self.generate_report_text()
 
-        report = markdown_it.MarkdownIt().render(report)
+        report = markdown.markdown(report_raw)
         report = report.replace('\n', '<br>')
 
         self.file_save_dialog('html')
@@ -112,9 +114,11 @@ class InspectorWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback("on_pdf_export_clicked")
     def on_pdf_export_clicked(self, btn):
         global report
-        report = self.generate_report_text()
-
-
+        report_raw = self.generate_report_text()
+        return
+        report_file = io.BytesIO()
+        xhtml2pdf.pisa.CreatePDF(report_raw, report_file)
+        report = report_file.getbuffer()
 
         self.file_save_dialog('pdf')
 
