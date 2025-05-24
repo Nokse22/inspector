@@ -109,6 +109,15 @@ class InspectorWindow(Adw.ApplicationWindow):
 
         self.file_save_dialog('html')
 
+    @Gtk.Template.Callback("on_pdf_export_clicked")
+    def on_pdf_export_clicked(self, btn):
+        global report
+        report = self.generate_report_text()
+
+
+
+        self.file_save_dialog('pdf')
+
     def file_save_dialog(self, type):
         file_save = Gtk.FileDialog()
         file_save.set_initial_name(f"inspector-report-{datetime.datetime.now().strftime('%Y-%m-%d-%H:%M:%S')}.{type}")
