@@ -100,7 +100,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         self.file_save_dialog('md')
 
     @Gtk.Template.Callback("on_html_export_clicked")
-    def on_HTML_export_clicked(self, btn):
+    def on_html_export_clicked(self, btn):
         global report
         report = self.generate_report_text()
 
