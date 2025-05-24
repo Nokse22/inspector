@@ -174,7 +174,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=(description_string))
         self.system_content.append(group)
         if export_data:
-            markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
+            markdown_data = f"\n\n## {title_string}\n`{description_string}`\n\n"
 
         if 'SNAP' in os.environ:
             out = self.execute_terminal_command("cat /var/lib/snapd/hostfs/etc/os-release")
@@ -198,7 +198,7 @@ class InspectorWindow(Adw.ApplicationWindow):
             group.add(row)
 
             if export_data:
-                markdown_data += f"\n**{key}**\n* {value.replace('"', '')}\n"
+                markdown_data += f"**{key}:** {value.replace('"', '')}\n"
         
         if export_data:
             return markdown_data
@@ -215,7 +215,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
         self.kernel_content.append(group)
         if export_data:
-            markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
+            markdown_data = f"\n\n## {title_string}\n`{description_string}`\n\n"
         
         title_string = "Kernel Name"
         out = self.execute_terminal_command("uname -s")
@@ -223,7 +223,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
         if export_data:
-            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
+            markdown_data += f"**{title_string}:** {out.replace('\n', "")}\n"
 
         title_string = "Network Node Hostname"
         out = self.execute_terminal_command("uname -n")
@@ -231,7 +231,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
         if export_data:
-            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
+            markdown_data += f"**{title_string}:** {out.replace('\n', "")}\n"
 
         title_string = "Kernel Release"
         out = self.execute_terminal_command("uname -r")
@@ -239,7 +239,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
         if export_data:
-            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
+            markdown_data += f"**{title_string}:** {out.replace('\n', "")}\n"
 
         title_string = "Kernel Version"
         out = self.execute_terminal_command("uname -v")
@@ -247,7 +247,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
         if export_data:
-            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
+            markdown_data += f"**{title_string}:** {out.replace('\n', "")}\n"
 
         title_string = "Machine Hardware Name"
         out = self.execute_terminal_command("uname -m")
@@ -255,7 +255,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
         if export_data:
-            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
+            markdown_data += f"**{title_string}:** {out.replace('\n', "")}\n"
 
         title_string = "Processor Type"
         out = self.execute_terminal_command("uname -p")
@@ -263,7 +263,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
         if export_data:
-            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
+            markdown_data += f"**{title_string}:** {out.replace('\n', "")}\n"
 
         title_string = "Hardware Platform"
         out = self.execute_terminal_command("uname -i")
@@ -271,7 +271,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
         if export_data:
-            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
+            markdown_data += f"**{title_string}:** {out.replace('\n', "")}\n"
 
         title_string = "Operating System"
         out = self.execute_terminal_command("uname -o")
@@ -279,7 +279,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         row.add_suffix(Gtk.Label(label=out.replace('\n', ""), wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1, css_classes=["dim-label"]))
         group.add(row)
         if export_data:
-            markdown_data += f"\n**{title_string}**\n* {out.replace('\n', "")}\n"
+            markdown_data += f"**{title_string}:** {out.replace('\n', "")}\n"
 
         if export_data:
             return markdown_data
@@ -318,7 +318,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                         expander_row = Adw.ExpanderRow(title=_("Total size: "+size))
                         group.add(expander_row)
                         if export_data:
-                            markdown_data += f"\n\n## {name}\n`{description_string}`\n**{"Total size: "+size}**\n"
+                            markdown_data += f"\n\n## {name}\n`{description_string}`\n\n**{"Total size: "+size}**\n"
                     else:
                         try:
                             size = device['size']
@@ -331,7 +331,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                         action_row = Adw.ActionRow(title=_("Total size: "+size))
                         group.add(action_row)
                         if export_data:
-                            markdown_data += f"\n\n## {name}\n`{description_string}`\n**{"Total size: "+size}**\n"
+                            markdown_data += f"\n\n## {name}\n`{description_string}`\n\n**{"Total size: "+size}**\n"
                 else:
                     if loop_group == None:
                         title_string = "Loop devices"
@@ -342,7 +342,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                         loop_expander_row = Adw.ExpanderRow(title=gettext.ngettext("Device Count: %s", "Devices Count: %s", loop_count) % loop_count.rstrip())
                         loop_group.add(loop_expander_row)
                         if export_data:
-                            markdown_data += f"\n\n## {title_string}\n`{description_string}`\n**{"Total size: "+size}**\n* {gettext.ngettext("Device Count: %s", "Devices Count: %s", loop_count) % loop_count.rstrip()}\n"
+                            markdown_data += f"\n\n## {title_string}\n\n`{description_string}`\n**{"Total size: "+size}:** {gettext.ngettext("Device Count: %s", "Devices Count: %s", loop_count) % loop_count.rstrip()}\n"
                     try:
                         subtitle = device['mountpoints'][0]
                     except:
@@ -358,7 +358,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                     row.add_suffix(Gtk.Label(label=size, wrap=True, selectable=True))
                     loop_expander_row.add_row(row)
                     if export_data:
-                        markdown_data += f"\n\n## {name}\n* {subtitle}\n    * {size}\n"
+                        markdown_data += f"\n\n## {name}\n**{subtitle}:**{size}\n"
                 if "children" in device:
                     group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, )
                     self.disks_content.append(group)
@@ -393,9 +393,9 @@ class InspectorWindow(Adw.ApplicationWindow):
 
                         if export_data:
                             if subtitle != "":
-                                markdown_data += f"\n* {name}\n    * {subtitle}\n    * {size}\n"
+                                markdown_data += f"* {name} - {subtitle} - {size}\n"
                             else:
-                                markdown_data += f"\n* {name}\n    * {size}\n"
+                                markdown_data += f"* {name} - {size}\n"
 
             if export_data:
                 return markdown_data
@@ -413,7 +413,7 @@ class InspectorWindow(Adw.ApplicationWindow):
             group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.memory_content.append(group2)
             if export_data:
-                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
+                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n\n"
             try:
                 memory = data["memory"]
             except:
@@ -441,7 +441,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                 group2.add(row)
 
                 if export_data:
-                    markdown_data += f"\n**{title_string}**\n* {range_}\n    * {size}\n    * {block}\n"
+                    markdown_data += f"**{title_string}:**{range_} - {size} - {block}\n"
             
             if export_data:
                 return markdown_data
@@ -461,7 +461,7 @@ class InspectorWindow(Adw.ApplicationWindow):
             group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.pci_content.append(group2)
             if export_data:
-                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
+                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n\n"
             for line in out:
                 match = re.match(pattern, line)
                 if match:
@@ -473,7 +473,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                     group2.add(action_row)
 
                     if export_data:
-                        markdown_data += f"\n**{third_part}**\n* {second_part}\n    * {first_part}\n" # should the first_part be displayed in report? it doesn't show in the window?
+                        markdown_data += f"**{third_part}:** {second_part} - {first_part}\n" # should the first_part be displayed in report? it doesn't show in the window?
 
             if export_data:
                 return markdown_data
@@ -491,7 +491,7 @@ class InspectorWindow(Adw.ApplicationWindow):
             group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.usb_content.append(group2)
             if export_data:
-                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
+                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n\n"
             for line in out:
                 result = []
                 parts = line.split(' ')
@@ -516,7 +516,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                 expander_row.add_row(action_row)
 
                 if export_data:
-                    markdown_data += f"\n**{result[2]}**\n* {name}\n    * {value}\n* {"Bus"}\n    * {result[0]}\n"
+                    markdown_data += f"**{result[2]}:**\n* {name} - {value}\n* {"Bus"} - {result[0]}\n"
         
             if export_data:
                 return markdown_data
@@ -539,7 +539,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                 group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=title_string, description=_(description_string))
                 self.network_content.append(group2)
                 if export_data:
-                    markdown_data += f"\n\n## {title_string}\n`{description_string}`\n"
+                    markdown_data += f"\n\n## {title_string}\n`{description_string}`\n\n"
                 for key, value in line.items():
 
                     if isinstance(value, list):
@@ -548,10 +548,10 @@ class InspectorWindow(Adw.ApplicationWindow):
                                 if key == "addr_info":
                                     title_string = "Address info, ip"
                                     expander_row = Adw.ExpanderRow(title=_(title_string))
-                                    markdown_data += f"\n**{title_string}**"
+                                    markdown_data += f"**{title_string}**\n"
                                 else:
                                     expander_row = Adw.ExpanderRow(title=key[0].upper() + key[1:])
-                                    markdown_data += f"\n**{key[0].upper() + key[1:]}**"
+                                    markdown_data += f"**{key[0].upper() + key[1:]}**\n"
                                 group2.add(expander_row)
                                 for key2, value2 in val.items():
                                     row = Adw.ActionRow(title=key2[0].upper() + key2[1:])
@@ -560,7 +560,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                                     box.append(Gtk.Label(label=value2, xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
                                     row.add_suffix(box)
                                     if export_data:
-                                        markdown_data += f"\n* {key2[0].upper() + key2[1:]}\n    * {value2}\n"
+                                        markdown_data += f"* {key2[0].upper() + key2[1:]}:  {value2}\n"
                         try:
                             value[0]
                         except:
@@ -573,17 +573,17 @@ class InspectorWindow(Adw.ApplicationWindow):
                                 textmd = ""
                                 for val in value:
                                     text += val + ", "
-                                    textmd += f"* {val}\n"
+                                    textmd += f"\n* {val}"
                                 row = Adw.ActionRow(title=text)
                                 expander_row.add_row(row)
                                 if export_data:
-                                    markdown_data += f"\n**{key[0].upper() + key[1:]}**\n{textmd}"
+                                    markdown_data += f"**{key[0].upper() + key[1:]}:** {textmd}\n"
                     elif key not in ["ifname","ifindex", "addr_info"]:
                         row = Adw.ActionRow(title=key[0].upper() + key[1:])
                         row.add_suffix(Gtk.Label(label=value, xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1, css_classes=["dim-label"]))
                         group2.add(row)
                         if export_data:
-                            markdown_data += f"\n**{key[0].upper() + key[1:]}**\n* {value}\n"
+                            markdown_data += f"**{key[0].upper() + key[1:]}:** {value}\n"
 
             if export_data:
                 return markdown_data
@@ -608,7 +608,7 @@ class InspectorWindow(Adw.ApplicationWindow):
             group2 = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
             self.cpu_content.append(group2)
             if export_data:
-                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
+                markdown_data = f"\n\n## {title_string}\n`{description_string}`\n\n"
 
 
             add_flags = False
@@ -623,25 +623,25 @@ class InspectorWindow(Adw.ApplicationWindow):
                         row = Adw.ExpanderRow(title=value[0].upper() + value[1:])
                         group2.add(row)
                         if export_data:
-                            markdown_data += f"\n**{value[0].upper() + value[1:]}**\n"
+                            markdown_data += f"**{value[0].upper() + value[1:]}**\n"
                         add_flags = True
                     elif add_flags:
                         row2 = Adw.ActionRow(title=value)
                         row.add_row(row2)
                         if export_data:
-                            markdown_data += f"\n* `{value}`\n"
+                            markdown_data += f"* `{value}`\n"
                         add_flags = False
                     elif key == "field":
                         row = Adw.ActionRow(title=value[0].upper() + value[1:])
                         if export_data:
-                            markdown_data += f"\n**{value[0].upper() + value[1:]}**\n"
+                            markdown_data += f"**{value[0].upper() + value[1:]}** "
                     elif key == "data":
 
                         row.add_suffix(Gtk.Label(label=value[0].upper() + value[1:], css_classes=["dim-label"],
                                 xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
                         group2.add(row)
                         if export_data:
-                            markdown_data += f"\n* {value[0].upper() + value[1:]}\n"
+                            markdown_data += f"{value[0].upper() + value[1:]}\n"
             
             if export_data:
                 return markdown_data
@@ -689,7 +689,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=_(title_string), description=_(description_string))
         self.motherboard_content.append(group)
         if export_data:
-            markdown_data = f"\n\n## {title_string}\n`{description_string}`\n"
+            markdown_data = f"\n\n## {title_string}\n`{description_string}`\n\n"
 
         # Populate the group with DMI details
         for key, label in dmi_keys:
@@ -697,7 +697,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                 expander_row = Adw.ExpanderRow(title=label)
                 group.add(expander_row)
                 if export_data:
-                    markdown_data += f"\n**{label}**"
+                    markdown_data += f"**{label}:**\n"
                 for key2, label2 in power_keys:
                     row = Adw.ActionRow(title=label2)
                     try:
@@ -708,7 +708,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                     row.add_suffix(Gtk.Label(label=value2, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
                     expander_row.add_row(row)
                     if export_data:
-                        markdown_data += f"\n* {label2}\n    * {value2}\n"
+                        markdown_data += f"* {label2} - {value2}\n"
                 continue
             try:
                 with open(os.path.join(dmi_path, key), 'r') as f:
@@ -721,7 +721,7 @@ class InspectorWindow(Adw.ApplicationWindow):
             group.add(row)
 
             if export_data:
-                markdown_data += f"\n**{label}**\n* {value}\n"
+                markdown_data += f"**{label}:** {value}\n"
         
         if export_data:
             return markdown_data
