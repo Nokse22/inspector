@@ -23,7 +23,7 @@ from gi.repository import Gio
 from gi.repository import GLib
 
 import gettext 
-import gi, os, subprocess, threading, time, json, re, fnmatch, markdown, datetime
+import gi, os, subprocess, threading, time, json, re, fnmatch, datetime, markdown_it, markdown_pdf
 
 @Gtk.Template(resource_path='/io/github/nokse22/inspector/ui/window.ui')
 class InspectorWindow(Adw.ApplicationWindow):
@@ -104,7 +104,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         global report
         report = self.generate_report_text()
 
-        report = markdown.markdown(report)
+        report = markdown_it.MarkdownIt().render(report)
         report = report.replace('\n', '<br>')
 
         self.file_save_dialog('html')
