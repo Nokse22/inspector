@@ -34,6 +34,10 @@ class CommandTestApplication(Adw.Application):
 
         self.create_action('reload', self.on_reload_action, ['<primary>r'])
 
+        self.create_action('export_md', self.on_export_md, ['<primary>m'])
+        self.create_action('export_html', self.on_export_html, ['<primary>h'])
+        self.create_action('export_pdf', self.on_export_pdf, ['<primary>p'])
+
     def do_activate(self):
         """Called when the application is activated.
 
@@ -82,6 +86,15 @@ class CommandTestApplication(Adw.Application):
 
     def on_reload_action(self, *args):
         self.win.reload_current()
+
+    def on_export_md(self, *args):
+        self.win.on_md_export_clicked()
+
+    def on_export_html(self, *args):
+        self.win.on_html_export_clicked()
+
+    def on_export_pdf(self, *args):
+        self.win.on_pdf_export_clicked()
 
 
 def main(version):

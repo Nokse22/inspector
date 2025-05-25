@@ -245,34 +245,8 @@
                 </child>
                 <child>
                   <object class="GtkMenuButton">
-                    <property name="child">
-                      <object class="GtkButton"/>
-                    </property>
                     <property name="icon-name">accessories-text-editor-symbolic</property>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="has-tooltip">True</property>
-                        <property name="label">Export .md</property>
-                        <property name="tooltip-text">Export All Data As .md</property>
-                        <signal name="clicked" handler="on_md_export_clicked"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="has-tooltip">True</property>
-                        <property name="label">Export .html</property>
-                        <property name="tooltip-text">Export All Data As .html</property>
-                        <signal name="clicked" handler="on_html_export_clicked"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="has-tooltip">True</property>
-                        <property name="label">Export .pdf</property>
-                        <property name="tooltip-text">Export All Data As .pdf</property>
-                        <signal name="clicked" handler="on_pdf_export_clicked"/>
-                      </object>
-                    </child>
+                    <property name="menu-model">export_menu</property>
                   </object>
                 </child>
               </object>
@@ -322,6 +296,22 @@
           <item>
             <attribute name="action">app.about</attribute>
             <attribute name="label" translatable="yes">About Inspector</attribute>
+          </item>
+        </section>
+      </menu>
+      <menu id="export_menu">
+        <section>
+          <item>
+            <attribute name="action">app.export_md</attribute>
+            <attribute name="label" translatable="yes">Export as .md</attribute>
+          </item>
+          <item>
+            <attribute name="action">app.export_html</attribute>
+            <attribute name="label" translatable="yes">Export as .html</attribute>
+          </item>
+          <item>
+            <attribute name="action">app.export_pdf</attribute>
+            <attribute name="label" translatable="yes">Export as .pdf</attribute>
           </item>
         </section>
       </menu>

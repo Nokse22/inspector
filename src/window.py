@@ -92,8 +92,7 @@ class InspectorWindow(Adw.ApplicationWindow):
             case "kernel":
                 self.update_kernel_page()
 
-    @Gtk.Template.Callback("on_md_export_clicked")
-    def on_md_export_clicked(self, btn):
+    def on_md_export_clicked(self):
         global report
         report_raw = self.generate_report_text()
 
@@ -101,8 +100,7 @@ class InspectorWindow(Adw.ApplicationWindow):
         
         self.file_save_dialog('md')
 
-    @Gtk.Template.Callback("on_html_export_clicked")
-    def on_html_export_clicked(self, btn):
+    def on_html_export_clicked(self):
         global report
         report_raw = self.generate_report_text()
 
@@ -112,8 +110,7 @@ class InspectorWindow(Adw.ApplicationWindow):
 
         self.file_save_dialog('html')
 
-    @Gtk.Template.Callback("on_pdf_export_clicked")
-    def on_pdf_export_clicked(self, btn):
+    def on_pdf_export_clicked(self):
         global report
         report_raw = self.generate_report_text()
 
