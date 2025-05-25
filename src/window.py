@@ -106,8 +106,9 @@ class InspectorWindow(Adw.ApplicationWindow):
         global report
         report_raw = self.generate_report_text()
 
-        report = markdown.markdown(report_raw)
-        report = report.replace('\n', '<br>')
+        md = (markdown_it.MarkdownIt('commonmark', {'breaks':True, 'html':True}))
+
+        report = md.render(report_raw)
 
         self.file_save_dialog('html')
 
