@@ -23,7 +23,7 @@ from gi.repository import Gio
 from gi.repository import GLib
 
 import gettext 
-import gi, os, subprocess, threading, time, json, re, fnmatch, datetime, markdown, io#, xhtml2pdf
+import gi, os, subprocess, threading, time, json, re, fnmatch, datetime, io, markdown_it, weasyprint
 
 @Gtk.Template(resource_path='/io/github/nokse22/inspector/ui/window.ui')
 class InspectorWindow(Adw.ApplicationWindow):
