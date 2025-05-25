@@ -116,10 +116,12 @@ class InspectorWindow(Adw.ApplicationWindow):
     def on_pdf_export_clicked(self, btn):
         global report
         report_raw = self.generate_report_text()
-        return
-        report_file = io.BytesIO()
-        xhtml2pdf.pisa.CreatePDF(report_raw, report_file)
-        report = report_file.getbuffer()
+
+        md = (markdown_it.MarkdownIt('commonmark', {'breaks':True, 'html':True}))
+
+        report = md.render(report_raw)
+
+        report = weasyprint.HTML(string = report)
 
         self.file_save_dialog('pdf')
 
@@ -135,8 +137,13 @@ class InspectorWindow(Adw.ApplicationWindow):
         except:
             pass
         else:
-            report_bytes = GLib.Bytes.new(report.encode("utf-8"))
-            file[0].replace_contents_bytes_async(report_bytes, None, False, Gio.FileCreateFlags.NONE)
+            if type(report) == type(str()): # if its a string (ie. is from the HTML or MD export funcs)
+                report_bytes = GLib.Bytes.new(report.encode("utf-8"))
+                file[0].replace_contents_bytes_async(report_bytes, None, False, Gio.FileCreateFlags.NONE)
+
+            else: # if its anything else then it is from the pdf export func
+                report.write_pdf(file[0])
+            
             del report
 
     def execute_terminal_command(self, command):
