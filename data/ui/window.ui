@@ -244,19 +244,35 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkButton">
-                    <signal name="clicked" handler="on_md_export_clicked"/>
-                    <property name="has-tooltip">True</property>
-                    <property name="label">Export .md</property>
-                    <property name="tooltip-text">Export All Data As .md</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton">
-                    <signal name="clicked" handler="on_html_export_clicked"/>
-                    <property name="has-tooltip">True</property>
-                    <property name="label">Export .html</property>
-                    <property name="tooltip-text">Export All Data As .html</property>
+                  <object class="GtkMenuButton">
+                    <property name="child">
+                      <object class="GtkButton"/>
+                    </property>
+                    <property name="icon-name">accessories-text-editor-symbolic</property>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="has-tooltip">True</property>
+                        <property name="label">Export .md</property>
+                        <property name="tooltip-text">Export All Data As .md</property>
+                        <signal name="clicked" handler="on_md_export_clicked"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="has-tooltip">True</property>
+                        <property name="label">Export .html</property>
+                        <property name="tooltip-text">Export All Data As .html</property>
+                        <signal name="clicked" handler="on_html_export_clicked"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="has-tooltip">True</property>
+                        <property name="label">Export .pdf</property>
+                        <property name="tooltip-text">Export All Data As .pdf</property>
+                        <signal name="clicked" handler="on_pdf_export_clicked"/>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
