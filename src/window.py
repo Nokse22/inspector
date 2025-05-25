@@ -311,7 +311,6 @@ class InspectorWindow(Adw.ApplicationWindow):
                             size = device['size']
                         except:
                             size = ""
-                        text = f"Name: {name}, Size: {size}" # deprecated var? i can see nothing refrencing this?
                         description_string = "Command: lsblk"
                         group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_(description_string))
                         self.disks_content.append(group)
@@ -324,7 +323,6 @@ class InspectorWindow(Adw.ApplicationWindow):
                             size = device['size']
                         except:
                             size = ""
-                        text = f"Name: {name}, Size: {size}" # deprecated var? i can see nothing referencing this?
                         description_string = "Command: lsblk"
                         group = Adw.PreferencesGroup(margin_top=24, margin_bottom=24, title=name, description=_(description_string))
                         self.disks_content.append(group)
@@ -431,7 +429,6 @@ class InspectorWindow(Adw.ApplicationWindow):
                     range_ = device['range']
                 except:
                     range_ = ""
-                text = "range " + block # what is the purpose of this var? (consider for removal?)
                 box = Gtk.Box(homogeneous=True, hexpand=True, width_request=150)
                 box.append(Gtk.Label(label=size, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
                 box.append(Gtk.Label(label=block, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1))
