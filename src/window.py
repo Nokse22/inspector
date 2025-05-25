@@ -396,9 +396,9 @@ class InspectorWindow(Adw.ApplicationWindow):
 
                         if export_data:
                             if subtitle != "":
-                                markdown_data += f"* {name} - {subtitle} - {size}\n"
+                                markdown_data += f"    * {name} - {subtitle} - {size}\n"
                             else:
-                                markdown_data += f"* {name} - {size}\n"
+                                markdown_data += f"    * {name} - {size}\n"
 
             if export_data:
                 return markdown_data
@@ -443,7 +443,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                 group2.add(row)
 
                 if export_data:
-                    markdown_data += f"**{title_string}:**{range_} - {size} - {block}\n"
+                    markdown_data += f"**{title_string}:**\n    * {size}\n    * {range_} - {block}\n"
             
             if export_data:
                 return markdown_data
@@ -518,7 +518,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                 expander_row.add_row(action_row)
 
                 if export_data:
-                    markdown_data += f"**{result[2]}:**\n* {name} - {value}\n* {"Bus"} - {result[0]}\n"
+                    markdown_data += f"**{result[2]}:**\n    * {name} - {value}\n    * {"Bus"} - {result[0]}\n"
         
             if export_data:
                 return markdown_data
@@ -562,7 +562,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                                     box.append(Gtk.Label(label=value2, xalign=1, wrap=True, wrap_mode=1, selectable=True, hexpand=True, justify=1))
                                     row.add_suffix(box)
                                     if export_data:
-                                        markdown_data += f"* {key2[0].upper() + key2[1:]}:  {value2}\n"
+                                        markdown_data += f"    * {key2[0].upper() + key2[1:]}:  {value2}\n"
                         try:
                             value[0]
                         except:
@@ -575,7 +575,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                                 textmd = ""
                                 for val in value:
                                     text += val + ", "
-                                    textmd += f"\n* {val}"
+                                    textmd += f"\n    * {val}"
                                 row = Adw.ActionRow(title=text)
                                 expander_row.add_row(row)
                                 if export_data:
@@ -631,7 +631,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                         row2 = Adw.ActionRow(title=value)
                         row.add_row(row2)
                         if export_data:
-                            markdown_data += f"* `{value}`\n"
+                            markdown_data += f"    * `{value}`\n"
                         add_flags = False
                     elif key == "field":
                         row = Adw.ActionRow(title=value[0].upper() + value[1:])
@@ -710,7 +710,7 @@ class InspectorWindow(Adw.ApplicationWindow):
                     row.add_suffix(Gtk.Label(label=value2, wrap=True, wrap_mode=1, selectable=True, hexpand=True, xalign=1, justify=1))
                     expander_row.add_row(row)
                     if export_data:
-                        markdown_data += f"* {label2} - {value2}\n"
+                        markdown_data += f"    * {label2} - {value2}\n"
                 continue
             try:
                 with open(os.path.join(dmi_path, key), 'r') as f:
