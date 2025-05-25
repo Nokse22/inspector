@@ -247,6 +247,7 @@
                   <object class="GtkMenuButton">
                     <property name="icon-name">accessories-text-editor-symbolic</property>
                     <property name="menu-model">export_menu</property>
+                    <property name="tooltip-text" translatable="yes">Open Data Export Options</property>
                   </object>
                 </child>
               </object>
