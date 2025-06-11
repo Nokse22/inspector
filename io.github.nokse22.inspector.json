@@ -23,6 +23,10 @@
         "*.a"
     ],
     "modules" : [
+        "python3-markdown-it-py.json",
+        {"name": "markdown_it"},
+        "python3-weasyprint.json",
+        {"name": "weasyprint"},
     	{
             "name" : "inspector",
             "builddir" : true,
