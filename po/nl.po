@@ -1,0 +1,301 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-25 15:13+0200\n"
+"PO-Revision-Date: 2025-07-30 11:04+0200\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
+
+#: data/io.github.nokse22.inspector.desktop.in:3 data/io.github.nokse22.inspector.appdata.xml.in:6
+#: src/main.py:72
+msgid "Inspector"
+msgstr "Inspectie"
+
+#: data/io.github.nokse22.inspector.desktop.in:4 data/io.github.nokse22.inspector.appdata.xml.in:8
+msgid "View information about your system"
+msgstr "Bekijk informatie over uw systeem"
+
+#: data/io.github.nokse22.inspector.desktop.in:10
+msgid "System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
+msgstr "Systeem;Informatie;Disk;Schijf;Geheugen;Apparaten;Apparaat;Device;Netwerk;CPU;cpu;Moederbord;BIOS;bios;"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:11
+msgid ""
+"View information about: Usb devices, Disk, Memory, PCI devices, Network, CPU, Motherboard and bios, System "
+"and distro"
+msgstr ""
+"Bekijk informatie over usb-apparaten, de schijf, het geheugen, pci-apparaten, het network, cpu, moederbord, "
+"en bios-, systeem- en distributie-informatie"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:41
+msgid "Used latest Libadwaita widgets"
+msgstr "Verbeterd: nieuwste Libadwaita-widgets"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:42
+msgid "Updated runtime to 46"
+msgstr "Bijgewerkt: runtime 46"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:43
+msgid "Added Czech translation"
+msgstr "Nieuw: Tsjechische vertaling"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:44
+msgid "Added Italian translation"
+msgstr "Nieuw: Italiaanse vertaling"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:45
+msgid "Added Brazilian translation"
+msgstr "Nieuw: Braziliaanse vertaling"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:46
+msgid "Added Hindi translation"
+msgstr "Nieuw: Hindi-vertaling"
+
+#: src/main.py:82
+msgid "translator-credits"
+msgstr "Heimen Stoffels <vistausss@fastmail.com>"
+
+#: src/window.py:111
+msgid "Error executing command"
+msgstr "Uitvoeren van opdracht mislukt"
+
+#: src/window.py:113
+#, python-brace-format
+msgid "The command {0} returned empty."
+msgstr "‘{0}’ gaf geen antwoord."
+
+#: src/window.py:125
+msgid "Distribution"
+msgstr "Distributie"
+
+#: src/window.py:156
+msgid "System"
+msgstr "Systeem"
+
+#: src/window.py:156
+msgid "Command: uname"
+msgstr "Opdracht: uname"
+
+#: src/window.py:161
+msgid "Kernel Name"
+msgstr "Kernelnaam"
+
+#: src/window.py:166
+msgid "Network Node Hostname"
+msgstr "Hostnaam van netwerknode"
+
+#: src/window.py:171
+msgid "Kernel Release"
+msgstr "Kerneluitgave"
+
+#: src/window.py:176
+msgid "Kernel Version"
+msgstr "Kernelversie"
+
+#: src/window.py:181
+msgid "Machine Hardware Name"
+msgstr "Hardwarenaam van apparaat"
+
+#: src/window.py:186
+msgid "Processor Type"
+msgstr "Processortype"
+
+#: src/window.py:191
+msgid "Hardware Platform"
+msgstr "Hardwareplatform"
+
+#: src/window.py:196
+msgid "Operating System"
+msgstr "Besturingssysteem"
+
+#: src/window.py:226 src/window.py:236 src/window.py:243
+msgid "Command: lsblk"
+msgstr "Opdracht: lsblk"
+
+#: src/window.py:228 src/window.py:238
+msgid "Total size: "
+msgstr "Totale omvang: "
+
+#: src/window.py:243
+msgid "Loop devices"
+msgstr "Loopapparaten"
+
+#: src/window.py:245
+#, python-format
+msgid "Device Count: %s"
+msgid_plural "Devices Count: %s"
+msgstr[0] "Aantal apparaten: %s"
+msgstr[1] "Aantal apparaten: %s"
+
+#: src/window.py:301
+msgid "Ranges"
+msgstr "Bereik"
+
+#: src/window.py:301
+msgid "Command: lsmem"
+msgstr "Opdracht: lsmem"
+
+#: src/window.py:324
+msgid "Memory"
+msgstr "Geheugen"
+
+#: src/window.py:338
+msgid "PCIs"
+msgstr "Pci's"
+
+#: src/window.py:338
+msgid "Command: lspci"
+msgstr "Opdracht: lspci"
+
+#: src/window.py:358
+msgid "USB"
+msgstr "Usb"
+
+#: src/window.py:358
+msgid "Command: lsusb"
+msgstr "Opdracht: lsusb"
+
+#: src/window.py:379
+msgid "Bus"
+msgstr "Bus"
+
+#: src/window.py:396
+msgid "Command: ip address"
+msgstr "Opdracht: ip address"
+
+#: src/window.py:404
+msgid "Address info, ip"
+msgstr "IP-adresinformatie"
+
+#: src/window.py:447
+msgid "CPU"
+msgstr "Cpu"
+
+#: src/window.py:447
+msgid "Command: lscpu"
+msgstr "Opdracht: lscpu"
+
+#: src/window.py:479
+msgid "BIOS Date"
+msgstr "Biosdatum"
+
+#: src/window.py:480
+msgid "BIOS Release"
+msgstr "Biosuitgave"
+
+#: src/window.py:481
+msgid "BIOS Vendor"
+msgstr "Biosfabrikant"
+
+#: src/window.py:482
+msgid "BIOS Version"
+msgstr "Biosversie"
+
+#: src/window.py:483
+msgid "Board Asset Tag"
+msgstr "Moederbordlabel"
+
+#: src/window.py:484
+msgid "Board Name"
+msgstr "Moederbordnaam"
+
+#: src/window.py:485
+msgid "Board Serial Number"
+msgstr "Moederbordserienummer"
+
+#: src/window.py:486
+msgid "Board Vendor"
+msgstr "Moederbordfabrikant"
+
+#: src/window.py:487
+msgid "Board Version"
+msgstr "Moederbordversie"
+
+#: src/window.py:488
+msgid "Chassis Asset Tag"
+msgstr "Chassislabel"
+
+#: src/window.py:489
+msgid "Chassis Serial Number"
+msgstr "Serienummer van chassis"
+
+#: src/window.py:490
+msgid "Chassis Type"
+msgstr "Chassistype"
+
+#: src/window.py:491
+msgid "Chassis Vendor"
+msgstr "Chassisfabrikant"
+
+#: src/window.py:492
+msgid "Chassis Version"
+msgstr "Chassisversie"
+
+#: src/window.py:493
+msgid "Product Family"
+msgstr "Productreeks"
+
+#: src/window.py:494
+msgid "Product Name"
+msgstr "Productnaam"
+
+#: src/window.py:495
+msgid "Product Serial Number"
+msgstr "Serienummer van product"
+
+#: src/window.py:496
+msgid "Product SKU"
+msgstr "SKU van product"
+
+#: src/window.py:497
+msgid "Product UUID"
+msgstr "UUID van product"
+
+#: src/window.py:498
+msgid "Product Version"
+msgstr "Productversie"
+
+#: src/window.py:499
+msgid "Power"
+msgstr "Energie"
+
+#: src/window.py:501
+msgid "System Vendor"
+msgstr "Systeemfabrikant"
+
+#: src/window.py:505
+msgid "Control"
+msgstr "Beheer"
+
+#: src/window.py:506
+msgid "Runtime Active Time"
+msgstr "Gebruikstĳd"
+
+#: src/window.py:507
+msgid "Runtime Status"
+msgstr "Status"
+
+#: src/window.py:508
+msgid "Runtime Suspended Time"
+msgstr "Onderbrekingstijd"
+
+#: src/window.py:512
+msgid "Motherboard"
+msgstr "Moederbord"
+
+#: src/window.py:512
+msgid "Details from /sys/devices/virtual/dmi/id"
+msgstr "Details van /sys/devices/virtual/dmi/id"
