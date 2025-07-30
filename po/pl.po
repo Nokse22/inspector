@@ -1,0 +1,302 @@
+# Polish translation for Inspector.
+# Copyright (C) 2023 Inspector's COPYRIGHT HOLDER
+# This file is distributed under the same license as the Inspector package.
+#
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Inspector\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: data/io.github.nokse22.inspector.desktop.in:3
+#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:72
+msgid "Inspector"
+msgstr "Inspektor"
+
+#: data/io.github.nokse22.inspector.desktop.in:4
+#: data/io.github.nokse22.inspector.appdata.xml.in:8
+msgid "View information about your system"
+msgstr "Zobacz informacje o swoim systemie"
+
+#: data/io.github.nokse22.inspector.desktop.in:10
+msgid ""
+"System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
+msgstr "System;Informacje;Dysk;Pamięć;Urządzenia:Sieć;CPU;Płyta główna;BIOS;bios"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:11
+msgid ""
+"View information about: Usb devices, Disk, Memory, PCI devices, Network, "
+"CPU, Motherboard and bios, System and distro"
+msgstr ""
+"Zobacz informacje o: Urządzeniach USB, Dysku, Pamięci, Urządzeniach PCI, Sieci, "
+"CPU, Płyta główna i bios, System i dystrybucja"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:41
+msgid "Used latest Libadwaita widgets"
+msgstr "Zostały użyte najnowsze widgety Libadwaita"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:42
+msgid "Updated runtime to 46"
+msgstr "Zaktualizowano środowisko uruchomieniowe do wersji 46"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:43
+msgid "Added Czech translation"
+msgstr "Dodano tłumaczenie ma język czeski"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:44
+msgid "Added Italian translation"
+msgstr "Dodano tłumaczenie ma język włoski"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:45
+msgid "Added Brazilian translation"
+msgstr "Dodano tłumaczenie na język portugalski (brazylijski)"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:46
+msgid "Added Hindi translation"
+msgstr "Dodano tłumaczenie na język hinduski"
+
+#: src/main.py:82
+msgid "translator-credits"
+msgstr ""
+
+#: src/window.py:111
+msgid "Error executing command"
+msgstr "Błąd przy uruchamianiu komendy"
+
+#: src/window.py:113
+#, python-brace-format
+msgid "The command {0} returned empty."
+msgstr "Komenda {0} nic nie zwróciła."
+
+#: src/window.py:125
+msgid "Distribution"
+msgstr "Dystrybucja"
+
+#: src/window.py:156
+msgid "System"
+msgstr "System"
+
+#: src/window.py:156
+msgid "Command: uname"
+msgstr "Komenda: uname"
+
+#: src/window.py:161
+msgid "Kernel Name"
+msgstr "Nazwa jądra"
+
+#: src/window.py:166
+msgid "Network Node Hostname"
+msgstr "Nazwa hosta węzła"
+
+#: src/window.py:171
+msgid "Kernel Release"
+msgstr "Wydanie jądra"
+
+#: src/window.py:176
+msgid "Kernel Version"
+msgstr "Wersja jądra"
+
+#: src/window.py:181
+msgid "Machine Hardware Name"
+msgstr "Nazwa sprzętowa urządzenia"
+
+#: src/window.py:186
+msgid "Processor Type"
+msgstr "Typ procesora"
+
+#: src/window.py:191
+msgid "Hardware Platform"
+msgstr "Platforma sprzętowa"
+
+#: src/window.py:196
+msgid "Operating System"
+msgstr "System operacyjny"
+
+#: src/window.py:226 src/window.py:236 src/window.py:243
+msgid "Command: lsblk"
+msgstr "Komenda: lsblk"
+
+#: src/window.py:228 src/window.py:238
+msgid "Total size: "
+msgstr "Całkowity rozmiar: "
+
+#: src/window.py:243
+msgid "Loop devices"
+msgstr "Urządzenia pętlowe (loop)"
+
+#: src/window.py:245
+#, python-format
+msgid "Device Count: %s"
+msgid_plural "Devices Count: %s"
+msgstr[0] "Ilość urządzeń: %s"
+msgstr[1] "Ilość urządzeń: %s"
+
+#: src/window.py:301
+msgid "Ranges"
+msgstr "Zakresy"
+
+#: src/window.py:301
+msgid "Command: lsmem"
+msgstr "Komenda: lsmem"
+
+#: src/window.py:324
+msgid "Memory"
+msgstr "Pamięć"
+
+#: src/window.py:338
+msgid "PCIs"
+msgstr "PCI"
+
+#: src/window.py:338
+msgid "Command: lspci"
+msgstr "Komenda: lspci"
+
+#: src/window.py:358
+msgid "USB"
+msgstr "USB"
+
+#: src/window.py:358
+msgid "Command: lsusb"
+msgstr "Komenda: lsusb"
+
+#: src/window.py:379
+msgid "Bus"
+msgstr "Magistrala"
+
+#: src/window.py:396
+msgid "Command: ip address"
+msgstr "Komenda: ip address"
+
+#: src/window.py:404
+msgid "Address info, ip"
+msgstr "Informacje o adresie"
+
+#: src/window.py:447
+msgid "CPU"
+msgstr "CPU"
+
+#: src/window.py:447
+msgid "Command: lscpu"
+msgstr "Komenda: lscpu"
+
+#: src/window.py:479
+msgid "BIOS Date"
+msgstr "Data BIOS-u"
+
+#: src/window.py:480
+msgid "BIOS Release"
+msgstr "Wydanie BIOS-u"
+
+#: src/window.py:481
+msgid "BIOS Vendor"
+msgstr "Dostawca BIOS-u"
+
+#: src/window.py:482
+msgid "BIOS Version"
+msgstr "Wersja BIOS-u"
+
+#: src/window.py:483
+msgid "Board Asset Tag"
+msgstr "Identyfikator płyty"
+
+#: src/window.py:484
+msgid "Board Name"
+msgstr "Nazwa płyty"
+
+#: src/window.py:485
+msgid "Board Serial Number"
+msgstr "Numer seryjny płyty"
+
+#: src/window.py:486
+msgid "Board Vendor"
+msgstr "Dostawca płyty"
+
+#: src/window.py:487
+msgid "Board Version"
+msgstr "Wersja płyty"
+
+#: src/window.py:488
+msgid "Chassis Asset Tag"
+msgstr "Identyfikator obudowy"
+
+#: src/window.py:489
+msgid "Chassis Serial Number"
+msgstr "Numer seryjny obudowy"
+
+#: src/window.py:490
+msgid "Chassis Type"
+msgstr "Typ obudowy"
+
+#: src/window.py:491
+msgid "Chassis Vendor"
+msgstr "Dostawca obudowy"
+
+#: src/window.py:492
+msgid "Chassis Version"
+msgstr "Wersja obudowy"
+
+#: src/window.py:493
+msgid "Product Family"
+msgstr "Rodzina produktu"
+
+#: src/window.py:494
+msgid "Product Name"
+msgstr "Nazwa produktu"
+
+#: src/window.py:495
+msgid "Product Serial Number"
+msgstr "Numer seryjny produktu"
+
+#: src/window.py:496
+msgid "Product SKU"
+msgstr "Numer SKU produktu"
+
+#: src/window.py:497
+msgid "Product UUID"
+msgstr "UUID produktu"
+
+#: src/window.py:498
+msgid "Product Version"
+msgstr "Wersja produktu"
+
+#: src/window.py:499
+msgid "Power"
+msgstr "Zasilanie"
+
+#: src/window.py:501
+msgid "System Vendor"
+msgstr "Dostawca systemu"
+
+#: src/window.py:505
+msgid "Control"
+msgstr "Kontrola"
+
+#: src/window.py:506
+msgid "Runtime Active Time"
+msgstr "Czas aktywności"
+
+#: src/window.py:507
+msgid "Runtime Status"
+msgstr "Czas działania"
+
+#: src/window.py:508
+msgid "Runtime Suspended Time"
+msgstr "Czas wstrzymania"
+
+#: src/window.py:512
+msgid "Motherboard"
+msgstr "Płyta główna"
+
+#: src/window.py:512
+msgid "Details from /sys/devices/virtual/dmi/id"
+msgstr "Szczegóły z /sys/devices/virtual/dmi/id"
