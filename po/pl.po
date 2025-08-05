@@ -1,4 +1,4 @@
-# Italian translation for Inspector.
+# Polish translation for Inspector.
 # Copyright (C) 2023 Inspector's COPYRIGHT HOLDER
 # This file is distributed under the same license as the Inspector package.
 #
