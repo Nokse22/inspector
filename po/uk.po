@@ -1,0 +1,306 @@
+# Ukrainian translation for Inspector.
+# Copyright (C) 2023 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Taras Svitlychnyi <svtlichnijj@gmail.com>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-25 15:13+0200\n"
+"PO-Revision-Date: 2025-08-23 15:57+0300\n"
+"Last-Translator: Taras Svitlychnyi <svtlichnijj@gmail.com>\n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.6\n"
+
+#: data/io.github.nokse22.inspector.desktop.in:3
+#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:72
+msgid "Inspector"
+msgstr "Інспектор"
+
+#: data/io.github.nokse22.inspector.desktop.in:4
+#: data/io.github.nokse22.inspector.appdata.xml.in:8
+msgid "View information about your system"
+msgstr "Показати інформацію про вашу систему"
+
+#: data/io.github.nokse22.inspector.desktop.in:10
+msgid "System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
+msgstr ""
+"Система;Інформація;Диск;Пам'ять;Пристрої;Мережа;Процесор;Материнська "
+"плата;BIOS;bios;"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:11
+msgid ""
+"View information about: Usb devices, Disk, Memory, PCI devices, Network, CPU, "
+"Motherboard and bios, System and distro"
+msgstr ""
+"Переглянути інформацію про: USB-пристрої, Диск, Пам'ять, PCI-пристрої, Мережа, "
+"Процесор, Материнська плата та BIOS, Система та дистрибутив"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:41
+msgid "Used latest Libadwaita widgets"
+msgstr "Використані найновіші віджети Libadwaita"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:42
+msgid "Updated runtime to 46"
+msgstr "Оновлено середовище виконання до 46"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:43
+msgid "Added Czech translation"
+msgstr "Додано чеський переклад"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:44
+msgid "Added Italian translation"
+msgstr "Додано переклад італійською мовою"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:45
+msgid "Added Brazilian translation"
+msgstr "Додано бразильський переклад"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:46
+msgid "Added Hindi translation"
+msgstr "Додано переклад на хінді"
+
+#: src/main.py:82
+msgid "translator-credits"
+msgstr "Тарас Світличний - https://github.com/svtlichnijj"
+
+#: src/window.py:111
+msgid "Error executing command"
+msgstr "Помилка виконання команди"
+
+#: src/window.py:113
+#, python-brace-format
+msgid "The command {0} returned empty."
+msgstr "Команда {0} повернула порожній результат."
+
+#: src/window.py:125
+msgid "Distribution"
+msgstr "Дистрибутив"
+
+#: src/window.py:156
+msgid "System"
+msgstr "Система"
+
+#: src/window.py:156
+msgid "Command: uname"
+msgstr "Команда: uname"
+
+#: src/window.py:161
+msgid "Kernel Name"
+msgstr "Назва ядра"
+
+#: src/window.py:166
+msgid "Network Node Hostname"
+msgstr "Ім'я мережевого вузла"
+
+#: src/window.py:171
+msgid "Kernel Release"
+msgstr "Випуск ядра"
+
+#: src/window.py:176
+msgid "Kernel Version"
+msgstr "Версія ядра"
+
+#: src/window.py:181
+msgid "Machine Hardware Name"
+msgstr "Назва апаратного забезпечення"
+
+#: src/window.py:186
+msgid "Processor Type"
+msgstr "Тип процесора"
+
+#: src/window.py:191
+msgid "Hardware Platform"
+msgstr "Апаратна платформа"
+
+#: src/window.py:196
+msgid "Operating System"
+msgstr "Операційна система"
+
+#: src/window.py:226 src/window.py:236 src/window.py:243
+msgid "Command: lsblk"
+msgstr "Команда: lsblk"
+
+#: src/window.py:228 src/window.py:238
+msgid "Total size: "
+msgstr "Загальний розмір: "
+
+#: src/window.py:243
+msgid "Loop devices"
+msgstr "Loop-пристрої"
+
+#: src/window.py:245
+#, python-format
+msgid "Device Count: %s"
+msgid_plural "Devices Count: %s"
+msgstr[0] "Кількість пристроїв: %s"
+msgstr[1] "Кількість пристроїв: %s"
+msgstr[2] "Кількість пристроїв: %s"
+
+#: src/window.py:301
+msgid "Ranges"
+msgstr "Діапазони"
+
+#: src/window.py:301
+msgid "Command: lsmem"
+msgstr "Команда: lsmem"
+
+#: src/window.py:324
+msgid "Memory"
+msgstr "Памʼять"
+
+#: src/window.py:338
+msgid "PCIs"
+msgstr "PCI-пристрої"
+
+#: src/window.py:338
+msgid "Command: lspci"
+msgstr "Команда: lspci"
+
+#: src/window.py:358
+msgid "USB"
+msgstr "USB"
+
+#: src/window.py:358
+msgid "Command: lsusb"
+msgstr "Команда: lsusb"
+
+#: src/window.py:379
+msgid "Bus"
+msgstr "Шина"
+
+#: src/window.py:396
+msgid "Command: ip address"
+msgstr "Команда: ip address"
+
+#: src/window.py:404
+msgid "Address info, ip"
+msgstr "Інформація про адресу, IP-адресу"
+
+#: src/window.py:447
+msgid "CPU"
+msgstr "Процесор"
+
+#: src/window.py:447
+msgid "Command: lscpu"
+msgstr "Команда: lscpu"
+
+#: src/window.py:479
+msgid "BIOS Date"
+msgstr "Дата BIOS"
+
+#: src/window.py:480
+msgid "BIOS Release"
+msgstr "Випуск BIOS"
+
+#: src/window.py:481
+msgid "BIOS Vendor"
+msgstr "Виробник BIOS"
+
+#: src/window.py:482
+msgid "BIOS Version"
+msgstr "Версія BIOS"
+
+#: src/window.py:483
+msgid "Board Asset Tag"
+msgstr "Тег ресурсу плати"
+
+#: src/window.py:484
+msgid "Board Name"
+msgstr "Назва плати"
+
+#: src/window.py:485
+msgid "Board Serial Number"
+msgstr "Серійний номер плати"
+
+#: src/window.py:486
+msgid "Board Vendor"
+msgstr "Виробник плати"
+
+#: src/window.py:487
+msgid "Board Version"
+msgstr "Версія плати"
+
+#: src/window.py:488
+msgid "Chassis Asset Tag"
+msgstr "Тег ресурсу шасі"
+
+#: src/window.py:489
+msgid "Chassis Serial Number"
+msgstr "Серійний номер шасі"
+
+#: src/window.py:490
+msgid "Chassis Type"
+msgstr "Тип шасі"
+
+#: src/window.py:491
+msgid "Chassis Vendor"
+msgstr "Виробник шасі"
+
+#: src/window.py:492
+msgid "Chassis Version"
+msgstr "Версія шасі"
+
+#: src/window.py:493
+msgid "Product Family"
+msgstr "Сімейство продукту"
+
+#: src/window.py:494
+msgid "Product Name"
+msgstr "Назва продукту"
+
+#: src/window.py:495
+msgid "Product Serial Number"
+msgstr "Серійний номер продукту"
+
+#: src/window.py:496
+msgid "Product SKU"
+msgstr "Артикул продукту"
+
+#: src/window.py:497
+msgid "Product UUID"
+msgstr "UUID продукту"
+
+#: src/window.py:498
+msgid "Product Version"
+msgstr "Версія продукту"
+
+#: src/window.py:499
+msgid "Power"
+msgstr "Живлення"
+
+#: src/window.py:501
+msgid "System Vendor"
+msgstr "Виробник системи"
+
+#: src/window.py:505
+msgid "Control"
+msgstr "Управління"
+
+#: src/window.py:506
+msgid "Runtime Active Time"
+msgstr "Час активний виконання"
+
+#: src/window.py:507
+msgid "Runtime Status"
+msgstr "Стан виконання"
+
+#: src/window.py:508
+msgid "Runtime Suspended Time"
+msgstr "Час призупиненого виконання"
+
+#: src/window.py:512
+msgid "Motherboard"
+msgstr "Материнська плата"
+
+#: src/window.py:512
+msgid "Details from /sys/devices/virtual/dmi/id"
+msgstr "Деталі з /sys/devices/virtual/dmi/id"
