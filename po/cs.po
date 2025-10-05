@@ -1,4 +1,4 @@
-# Turkish translation for Inspector.
+# Czech translation for Inspector.
 # Copyright (C) 2023 Inspector's COPYRIGHT HOLDER
 # This file is distributed under the same license as the Inspector package.
 #
@@ -8,333 +8,354 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inspector\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-27 15:18+0300\n"
-"PO-Revision-Date: 2023-11-27 15:22+0300\n"
-"Last-Translator: vikdevelop https://github.com/vikdevelop\n"
+"POT-Creation-Date: 2024-05-25 15:13+0200\n"
+"PO-Revision-Date: 2025-10-05 13:46+0200\n"
+"Last-Translator: p-bo\n"
 "Language-Team: Czech\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.2\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.7\n"
 
 #: data/io.github.nokse22.inspector.desktop.in:3
-#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:68
-#: src/window.py:57
+#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:72
 msgid "Inspector"
 msgstr "Inspektor"
 
 #: data/io.github.nokse22.inspector.desktop.in:4
 #: data/io.github.nokse22.inspector.appdata.xml.in:8
 msgid "View information about your system"
-msgstr "Zobrazit informace o vašem systému"
+msgstr "Zobrazit informace o systému"
 
 #: data/io.github.nokse22.inspector.desktop.in:10
-msgid ""
-"System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
+msgid "System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
 msgstr ""
-"System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
+"Systém;Informace;Disk;Paměť;Zařízení;Síť;Procesor;CPU;Základní deska;bios;efi;"
 
 #: data/io.github.nokse22.inspector.appdata.xml.in:11
 msgid ""
-"View information about: Usb devices, Disk, Memory, PCI devices, Network, "
-"CPU, Motherboard and bios, System and distro"
+"View information about: Usb devices, Disk, Memory, PCI devices, Network, CPU, "
+"Motherboard and bios, System and distro"
 msgstr ""
-"Zobrazte si informace o zařízeních USB, disku, paměti, zařízeních PCI, síti, "
-"procesoru, základní desce a BIOSu, systému a distribuci"
+"Zobrazte si informace o zařízeních USB, úložiště, operační paměti, PCI(e), "
+"síťových a dále procesoru, základní desce (a jejím firmwaru) o operačním "
+"systému (a jeho distribuci)"
 
-#: data/io.github.nokse22.inspector.appdata.xml.in:15
-msgid "Nokse"
-msgstr "Nox"
+#: data/io.github.nokse22.inspector.appdata.xml.in:41
+msgid "Used latest Libadwaita widgets"
+msgstr "Použity nejnovější prvky z knihovny Libadwaita"
 
-#: src/main.py:78
+#: data/io.github.nokse22.inspector.appdata.xml.in:42
+msgid "Updated runtime to 46"
+msgstr "Běhové prostředí zaktualizováno na verzi 46"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:43
+msgid "Added Czech translation"
+msgstr "Přidán překlad do češtiny"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:44
+msgid "Added Italian translation"
+msgstr "Přidán překlad do italštiny"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:45
+msgid "Added Brazilian translation"
+msgstr "Přidán překlad do brazilské portugalštiny"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:46
+msgid "Added Hindi translation"
+msgstr "Přidán překlad do hindštiny"
+
+#: src/main.py:82
 msgid "translator-credits"
 msgstr "vikdevelop https://github.com/vikdevelop"
 
-#: src/window.py:77
-msgid "Reload"
-msgstr "Načíst znovu"
+#: src/window.py:111
+msgid "Error executing command"
+msgstr "Chyba při vykonávání příkazu"
 
-#: src/window.py:78
-msgid "Keyboard shortcuts"
-msgstr "Klávesové zkratky"
+#: src/window.py:113
+#, python-brace-format
+msgid "The command {0} returned empty."
+msgstr "Příkaz {0} vrátil prázdnou hodnotu."
 
-#: src/window.py:79
-msgid "About Inspector"
-msgstr "O aplikaci"
-
-#: src/window.py:103 src/window.py:638
-msgid "Motherboard"
-msgstr "Základní deska"
-
-#: src/window.py:106
-msgid "Processor"
-msgstr "Procesor"
-
-#: src/window.py:109 src/window.py:452
-msgid "Memory"
-msgstr "Paměť"
-
-#: src/window.py:112
-msgid "Disk Drives"
-msgstr "Disková zařízení"
-
-#: src/window.py:115
-msgid "PCI Devices"
-msgstr "Zařízení PCI"
-
-#: src/window.py:118
-#| msgid "Loop devices"
-msgid "USB Devices"
-msgstr "Zařízení USB"
-
-#: src/window.py:121
-msgid "Network Devices"
-msgstr "Síťová zařízení"
-
-#: src/window.py:124
-msgid "Kernel"
-msgstr "Jádro"
-
-#: src/window.py:127 src/window.py:238 src/window.py:315
+#: src/window.py:125
 msgid "Distribution"
 msgstr "Distribuce"
 
-#: src/window.py:222
-msgid "The command is not supported"
-msgstr "Příkaz není podporován"
-
-#: src/window.py:224
-#, python-brace-format
-msgid ""
-"The command {0} returned empty.\n"
-"Try running it on your terminal, it should prompt you to install the package "
-"on your system."
-msgstr ""
-"Příkaz {0} vrátil prázdnou hodnotu.\n"
-"Zkuste jej spustit ve vašem terminálu, měl by vás požádat o instalaci balíčku "
-"na vašem systému."
-
-#: src/window.py:269
+#: src/window.py:156
 msgid "System"
 msgstr "Systém"
 
-#: src/window.py:269
+#: src/window.py:156
 msgid "Command: uname"
 msgstr "Příkaz: uname"
 
-#: src/window.py:274
+#: src/window.py:161
 msgid "Kernel Name"
 msgstr "Název jádra"
 
-#: src/window.py:279
+#: src/window.py:166
 msgid "Network Node Hostname"
-msgstr "Hostitelský název síťového uzlu"
+msgstr "Název hostitele – síťového uzlu"
 
-#: src/window.py:284
+#: src/window.py:171
 msgid "Kernel Release"
 msgstr "Vydání jádra"
 
-#: src/window.py:289
+#: src/window.py:176
 msgid "Kernel Version"
 msgstr "Verze jádra"
 
-#: src/window.py:294
+#: src/window.py:181
 msgid "Machine Hardware Name"
-msgstr "Název počítačového hardwaru"
+msgstr "Název architektury hardware"
 
-#: src/window.py:299
+#: src/window.py:186
 msgid "Processor Type"
 msgstr "Typ procesoru"
 
-#: src/window.py:304
+#: src/window.py:191
 msgid "Hardware Platform"
 msgstr "Platforma hardwaru"
 
-#: src/window.py:309
+#: src/window.py:196
 msgid "Operating System"
 msgstr "Operační systém"
 
-#: src/window.py:315
-msgid "Command: cat /etc/os-release"
-msgstr "Příkaz: cat /etc/os-release"
-
-#: src/window.py:364 src/window.py:371
+#: src/window.py:226 src/window.py:236 src/window.py:243
 msgid "Command: lsblk"
 msgstr "Příkaz: lsblk"
 
-#: src/window.py:366
+#: src/window.py:228 src/window.py:238
 msgid "Total size: "
 msgstr "Celková velikost: "
 
-#: src/window.py:371
+#: src/window.py:243
 msgid "Loop devices"
 msgstr "Zařízení ve smyčce"
 
-#: src/window.py:373
+#: src/window.py:245
 #, python-format
 msgid "Device Count: %s"
 msgid_plural "Devices Count: %s"
 msgstr[0] "Počet zařízení: %s"
+msgstr[1] "Počet zařízení: %s"
+msgstr[2] "Počet zařízení: %s"
 
-#: src/window.py:429
+#: src/window.py:301
 msgid "Ranges"
 msgstr "Rozsahy"
 
-#: src/window.py:429
+#: src/window.py:301
 msgid "Command: lsmem"
 msgstr "Příkaz: lsmem"
 
-#: src/window.py:466
-msgid "PCIs"
-msgstr "PCI"
+#: src/window.py:324
+msgid "Memory"
+msgstr "Paměť"
 
-#: src/window.py:466
+#: src/window.py:338
+msgid "PCIs"
+msgstr "PCI(e) zařízení"
+
+#: src/window.py:338
 msgid "Command: lspci"
 msgstr "Příkaz: lspci"
 
-#: src/window.py:486
+#: src/window.py:358
 msgid "USB"
 msgstr "USB"
 
-#: src/window.py:486
+#: src/window.py:358
 msgid "Command: lsusb"
 msgstr "Příkaz: lsusb"
 
-#: src/window.py:507
+#: src/window.py:379
 msgid "Bus"
 msgstr "Sběrnice"
 
-#: src/window.py:524
+#: src/window.py:396
 msgid "Command: ip address"
 msgstr "Příkaz: ip address"
 
-#: src/window.py:532
+#: src/window.py:404
 msgid "Address info, ip"
 msgstr "Informace o adrese, ip"
 
-#: src/window.py:574
+#: src/window.py:447
 msgid "CPU"
-msgstr "CPU"
+msgstr "Procesor"
 
-#: src/window.py:574
-msgid "Command: lshw -c cpu"
-msgstr "Příkaz: lshw -c cpu"
+#: src/window.py:447
+msgid "Command: lscpu"
+msgstr "Příkaz: lscpu"
 
-#: src/window.py:605
+#: src/window.py:479
 msgid "BIOS Date"
-msgstr "Datum BIOSu"
+msgstr "Datum BIOS/(U)EFI"
 
-#: src/window.py:606
+#: src/window.py:480
 msgid "BIOS Release"
-msgstr "Vydání BIOSu"
+msgstr "Vydání (dtto)"
 
-#: src/window.py:607
+#: src/window.py:481
 msgid "BIOS Vendor"
-msgstr "Vydavatel BIOSu"
+msgstr "Výrobce (dtto)"
 
-#: src/window.py:608
+#: src/window.py:482
 msgid "BIOS Version"
-msgstr "Verze BIOSu"
+msgstr "Verze (dtto)"
 
-#: src/window.py:609
+#: src/window.py:483
 msgid "Board Asset Tag"
-msgstr "Štítek majetku desky"
+msgstr "Inventární štítek desky"
 
-#: src/window.py:610
+#: src/window.py:484
 msgid "Board Name"
 msgstr "Název desky"
 
-#: src/window.py:611
+#: src/window.py:485
 msgid "Board Serial Number"
 msgstr "Sériové číslo desky"
 
-#: src/window.py:612
+#: src/window.py:486
 msgid "Board Vendor"
 msgstr "Výrobce desky"
 
-#: src/window.py:613
+#: src/window.py:487
 msgid "Board Version"
 msgstr "Verze desky"
 
-#: src/window.py:614
+#: src/window.py:488
 msgid "Chassis Asset Tag"
-msgstr "Štítek majetku podvozku"
+msgstr "Inventární štítek šasi"
 
-#: src/window.py:615
+#: src/window.py:489
 msgid "Chassis Serial Number"
-msgstr "Sériové číslo podvozku"
+msgstr "Sériové číslo šasi"
 
-#: src/window.py:616
+#: src/window.py:490
 msgid "Chassis Type"
-msgstr "Typ podvozku"
+msgstr "Typ šasi"
 
-#: src/window.py:617
+#: src/window.py:491
 msgid "Chassis Vendor"
-msgstr "Výrobce podvozku"
+msgstr "Výrobce šasi"
 
-#: src/window.py:618
+#: src/window.py:492
 msgid "Chassis Version"
-msgstr "Verze podvozku"
+msgstr "Verze šasi"
 
-#: src/window.py:619
+#: src/window.py:493
 msgid "Product Family"
-msgstr "Rodina produktu"
+msgstr "Produktová řada"
 
-#: src/window.py:620
+#: src/window.py:494
 msgid "Product Name"
 msgstr "Název produktu"
 
-#: src/window.py:621
+#: src/window.py:495
 msgid "Product Serial Number"
 msgstr "Sériové číslo produktu"
 
-#: src/window.py:622
+#: src/window.py:496
 msgid "Product SKU"
-msgstr "SKU produktu"
+msgstr "Skladové číslo (SKU) produktu"
 
-#: src/window.py:623
+#: src/window.py:497
 msgid "Product UUID"
-msgstr "UUID produktu"
+msgstr "Univerzálně unikátní identifikátor (UUID) produktu"
 
-#: src/window.py:624
+#: src/window.py:498
 msgid "Product Version"
 msgstr "Verze produktu"
 
-#: src/window.py:625
+#: src/window.py:499
 msgid "Power"
-msgstr "Energie"
+msgstr "Napájení"
 
-#: src/window.py:627
+#: src/window.py:501
 msgid "System Vendor"
 msgstr "Výrobce systému"
 
-#: src/window.py:631
+#: src/window.py:505
 msgid "Control"
 msgstr "Ovládání"
 
-#: src/window.py:632
+#: src/window.py:506
 msgid "Runtime Active Time"
-msgstr "Aktivní čas běhového prostředí"
+msgstr "Doba aktivity běhového prostředí"
 
-#: src/window.py:633
+#: src/window.py:507
 msgid "Runtime Status"
 msgstr "Stav běhového prostředí"
 
-#: src/window.py:634
+#: src/window.py:508
 msgid "Runtime Suspended Time"
-msgstr "Čas pozastavení běhového prostředí"
+msgstr "Doba pozastavení běhového prostředí"
 
-#: src/window.py:638
+#: src/window.py:512
+msgid "Motherboard"
+msgstr "Základní deska"
+
+#: src/window.py:512
 msgid "Details from /sys/devices/virtual/dmi/id"
 msgstr "Podrobnosti z: /sys/devices/virtual/dmi/id"
+
+#~ msgid "Nokse"
+#~ msgstr "Nox"
+
+#~ msgid "Reload"
+#~ msgstr "Načíst znovu"
+
+#~ msgid "Keyboard shortcuts"
+#~ msgstr "Klávesové zkratky"
+
+#~ msgid "About Inspector"
+#~ msgstr "O aplikaci"
+
+#~ msgid "Processor"
+#~ msgstr "Procesor"
+
+#~ msgid "Disk Drives"
+#~ msgstr "Disková zařízení"
+
+#~ msgid "PCI Devices"
+#~ msgstr "PCI(e) zařízení"
+
+#~| msgid "Loop devices"
+#~ msgid "USB Devices"
+#~ msgstr "USB zařízení"
+
+#~ msgid "Network Devices"
+#~ msgstr "Síťová zařízení"
+
+#~ msgid "Kernel"
+#~ msgstr "Jádro systému"
+
+#, python-brace-format
+#~ msgid ""
+#~ "The command {0} returned empty.\n"
+#~ "Try running it on your terminal, it should prompt you to install the "
+#~ "package on your system."
+#~ msgstr ""
+#~ "Příkaz {0} vrátil prázdnou hodnotu.\n"
+#~ "Zkuste ho spustit v terminálu – měli byste být požádáni o instalaci balíčku "
+#~ "do vašeho systému."
+
+#~ msgid "Command: cat /etc/os-release"
+#~ msgstr "Příkaz: cat /etc/os-release"
+
+#~ msgid "Command: lshw -c cpu"
+#~ msgstr "Příkaz: lshw -c cpu"
 
 #~ msgid "Disk"
 #~ msgstr "Disk"
 
 #~ msgid "PCI"
-#~ msgstr "PCI"
+#~ msgstr "PCI(e)"
 
 #~ msgid "Refresh"
 #~ msgstr "Obnovit"
