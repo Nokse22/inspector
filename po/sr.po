@@ -1,0 +1,304 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-25 15:13+0200\n"
+"PO-Revision-Date: 2026-03-22 23:01+0100\n"
+"Last-Translator: Radoš Milićev <https://github.com/rammba>\n"
+"Language-Team: \n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.8\n"
+
+#: data/io.github.nokse22.inspector.desktop.in:3
+#: data/io.github.nokse22.inspector.appdata.xml.in:6 src/main.py:72
+msgid "Inspector"
+msgstr "Inspector"
+
+#: data/io.github.nokse22.inspector.desktop.in:4
+#: data/io.github.nokse22.inspector.appdata.xml.in:8
+msgid "View information about your system"
+msgstr "Погледајте информације о Вашем систему"
+
+#: data/io.github.nokse22.inspector.desktop.in:10
+msgid "System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
+msgstr "System;Information;Disk;Memory;Devices;Network;CPU;Motherboard;BIOS;bios;"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:11
+msgid ""
+"View information about: Usb devices, Disk, Memory, PCI devices, Network, CPU, "
+"Motherboard and bios, System and distro"
+msgstr ""
+"Погледајте информације о: Usb уређајима, диску, меморији, PCI уређајима, "
+"мрежи, процесору, матичној плочи и BIOS-у, систему и distro-у"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:41
+msgid "Used latest Libadwaita widgets"
+msgstr "Користе се најновији Libadwaita widget-и"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:42
+msgid "Updated runtime to 46"
+msgstr "Време извршавања ажурирано на верзију 46"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:43
+msgid "Added Czech translation"
+msgstr "Додат чешки превод"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:44
+msgid "Added Italian translation"
+msgstr "Додат италијански превод"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:45
+msgid "Added Brazilian translation"
+msgstr "Додат бразилски превод"
+
+#: data/io.github.nokse22.inspector.appdata.xml.in:46
+msgid "Added Hindi translation"
+msgstr "Додат хинди превод"
+
+#: src/main.py:82
+msgid "translator-credits"
+msgstr "Radoš Milićev: https://github.com/rammba"
+
+#: src/window.py:111
+msgid "Error executing command"
+msgstr "Грешка при извршавању команде"
+
+#: src/window.py:113
+#, python-brace-format
+msgid "The command {0} returned empty."
+msgstr "Команда {0} није вратила ништа."
+
+#: src/window.py:125
+msgid "Distribution"
+msgstr "Дистрибуција"
+
+#: src/window.py:156
+msgid "System"
+msgstr "Систем"
+
+#: src/window.py:156
+msgid "Command: uname"
+msgstr "Команда: uname"
+
+#: src/window.py:161
+msgid "Kernel Name"
+msgstr "Назив Кернела"
+
+#: src/window.py:166
+msgid "Network Node Hostname"
+msgstr "Назив хоста мрежног чвора"
+
+#: src/window.py:171
+msgid "Kernel Release"
+msgstr "Издање Кернела"
+
+#: src/window.py:176
+msgid "Kernel Version"
+msgstr "Верзија Кернела"
+
+#: src/window.py:181
+msgid "Machine Hardware Name"
+msgstr "Назив хардвера уређаја"
+
+#: src/window.py:186
+msgid "Processor Type"
+msgstr "Тип процесора"
+
+#: src/window.py:191
+msgid "Hardware Platform"
+msgstr "Хардверска платформа"
+
+#: src/window.py:196
+msgid "Operating System"
+msgstr "Оперативни систем"
+
+#: src/window.py:226 src/window.py:236 src/window.py:243
+msgid "Command: lsblk"
+msgstr "Команда: lsblk"
+
+#: src/window.py:228 src/window.py:238
+msgid "Total size: "
+msgstr "Укупна величина: "
+
+#: src/window.py:243
+msgid "Loop devices"
+msgstr "Loop уређаји"
+
+#: src/window.py:245
+#, python-format
+msgid "Device Count: %s"
+msgid_plural "Devices Count: %s"
+msgstr[0] "Број уређаја: %s"
+msgstr[1] "Број уређаја: %s"
+msgstr[2] "Број уређаја: %s"
+
+#: src/window.py:301
+msgid "Ranges"
+msgstr "Опсези"
+
+#: src/window.py:301
+msgid "Command: lsmem"
+msgstr "Команда: lsmem"
+
+#: src/window.py:324
+msgid "Memory"
+msgstr "Меморија"
+
+#: src/window.py:338
+msgid "PCIs"
+msgstr "PCI-еви"
+
+#: src/window.py:338
+msgid "Command: lspci"
+msgstr "Команда: lspci"
+
+#: src/window.py:358
+msgid "USB"
+msgstr "USB"
+
+#: src/window.py:358
+msgid "Command: lsusb"
+msgstr "Команда: lsusb"
+
+#: src/window.py:379
+msgid "Bus"
+msgstr "Магистрала"
+
+#: src/window.py:396
+msgid "Command: ip address"
+msgstr "Команда: ip address"
+
+#: src/window.py:404
+msgid "Address info, ip"
+msgstr "Информације о адреси, ip"
+
+#: src/window.py:447
+msgid "CPU"
+msgstr "Процесор"
+
+#: src/window.py:447
+msgid "Command: lscpu"
+msgstr "Команда: lscpu"
+
+#: src/window.py:479
+msgid "BIOS Date"
+msgstr "Датум BIOS-а"
+
+#: src/window.py:480
+msgid "BIOS Release"
+msgstr "Издање BIOS-а"
+
+#: src/window.py:481
+msgid "BIOS Vendor"
+msgstr "Произвођач BIOS-а"
+
+#: src/window.py:482
+msgid "BIOS Version"
+msgstr "Верзија BIOS-а"
+
+#: src/window.py:483
+msgid "Board Asset Tag"
+msgstr "Идентификатор плоче"
+
+#: src/window.py:484
+msgid "Board Name"
+msgstr "Назив плоче"
+
+#: src/window.py:485
+msgid "Board Serial Number"
+msgstr "Серијски број плоче"
+
+#: src/window.py:486
+msgid "Board Vendor"
+msgstr "Произвођач плоче"
+
+#: src/window.py:487
+msgid "Board Version"
+msgstr "Верзија плоче"
+
+#: src/window.py:488
+msgid "Chassis Asset Tag"
+msgstr "Идентификатор шасије"
+
+#: src/window.py:489
+msgid "Chassis Serial Number"
+msgstr "Серијски број шасије"
+
+#: src/window.py:490
+msgid "Chassis Type"
+msgstr "Тип шасије"
+
+#: src/window.py:491
+msgid "Chassis Vendor"
+msgstr "Произвођач шасије"
+
+#: src/window.py:492
+msgid "Chassis Version"
+msgstr "Верзија шасије"
+
+#: src/window.py:493
+msgid "Product Family"
+msgstr "Породица производа"
+
+#: src/window.py:494
+msgid "Product Name"
+msgstr "Назив производа"
+
+#: src/window.py:495
+msgid "Product Serial Number"
+msgstr "Серијски број производа"
+
+#: src/window.py:496
+msgid "Product SKU"
+msgstr "SKU производа"
+
+#: src/window.py:497
+msgid "Product UUID"
+msgstr "UUID производа"
+
+#: src/window.py:498
+msgid "Product Version"
+msgstr "Верзија производа"
+
+#: src/window.py:499
+msgid "Power"
+msgstr "Напајање"
+
+#: src/window.py:501
+msgid "System Vendor"
+msgstr "Произвођач система"
+
+#: src/window.py:505
+msgid "Control"
+msgstr "Контрола"
+
+#: src/window.py:506
+msgid "Runtime Active Time"
+msgstr "Активно време извршавања"
+
+#: src/window.py:507
+msgid "Runtime Status"
+msgstr "Статус извршавања"
+
+#: src/window.py:508
+msgid "Runtime Suspended Time"
+msgstr "Време суспендованог извршавања"
+
+#: src/window.py:512
+msgid "Motherboard"
+msgstr "Матична плоча"
+
+#: src/window.py:512
+msgid "Details from /sys/devices/virtual/dmi/id"
+msgstr "Детаљи из /sys/devices/virtual/dmi/id"
